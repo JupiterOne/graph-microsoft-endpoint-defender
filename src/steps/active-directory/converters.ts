@@ -192,17 +192,6 @@ export function createAccountMachineRelationship(
   });
 }
 
-export function createMachineFindingsRelationship(
-  machine: Entity,
-  finding: Entity,
-): Relationship {
-  return createDirectRelationship({
-    _class: RelationshipClass.IDENTIFIED,
-    from: machine,
-    to: finding,
-  });
-}
-
 export function createFindingsCveRelationship(
   findingEntity: Entity,
 ): Relationship {
@@ -223,5 +212,16 @@ export function createFindingsCveRelationship(
       },
       skipTargetCreation: true,
     },
+  });
+}
+
+export function createMachineFindingsRelationship(
+  machine: Entity,
+  finding: Entity,
+): Relationship {
+  return createDirectRelationship({
+    _class: RelationshipClass.IDENTIFIED,
+    from: machine,
+    to: finding,
   });
 }
