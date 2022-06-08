@@ -1,25 +1,39 @@
-// Providers often supply types with their API libraries.
+import {
+  IntegrationInstanceConfig,
+  IntegrationStepExecutionContext,
+} from '@jupiterone/integration-sdk-core';
 
-export interface AcmeUser {
-  id: string;
-  name: string;
+/**
+ * Properties provided by the `IntegrationInstance.config`. This reflects the
+ * same properties defined by `instanceConfigFields`.
+ */
+export interface IntegrationConfig extends IntegrationInstanceConfig {
+  /**
+   * The Azure application client ID used to identify the program as the
+   * registered app. This will be the same for all tenants since this is a
+   * multi-tenant application.
+   */
+  clientId: string;
+
+  /**
+   * The Azuser application client secret used to authenticate requests.
+   */
+  clientSecret: string;
+
+  /**
+   * The target directory/tenant ID, identified during the admin consent OAuth
+   * flow.
+   */
+  tenant: string;
+
+  /**
+   * This is to differentiate between the azure api vs defender api **/
+  isDefenderApi: boolean;
 }
 
-export interface AcmeGroup {
-  id: string;
-  name: string;
-  users?: Pick<AcmeUser, 'id'>[];
-}
-
-// Those can be useful to a degree, but often they're just full of optional
-// values. Understanding the response data may be more reliably accomplished by
-// reviewing the API response recordings produced by testing the wrapper client
-// (./client.ts). However, when there are no types provided, it is necessary to define
-// opaque types for each resource, to communicate the records that are expected
-// to come from an endpoint and are provided to iterating functions.
-
-/*
-import { Opaque } from 'type-fest';
-export type AcmeUser = Opaque<any, 'AcmeUser'>;
-export type AcmeGroup = Opaque<any, 'AcmeGroup'>;
-*/
+/**
+ * An `IntegrationStepExecutionContext` typed for this integration's
+ * `IntegrationInstanceConfig`.
+ */
+export type IntegrationStepContext =
+  IntegrationStepExecutionContext<IntegrationConfig>;

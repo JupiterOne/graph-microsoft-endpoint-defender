@@ -1,25 +1,13 @@
 import {
   IntegrationExecutionContext,
   IntegrationValidationError,
-  IntegrationInstanceConfigFieldMap,
-  IntegrationInstanceConfig,
 } from '@jupiterone/integration-sdk-core';
-import { createAPIClient } from './client';
 
-/**
- * A type describing the configuration fields required to execute the
- * integration for a specific account in the data provider.
- *
- * When executing the integration in a development environment, these values may
- * be provided in a `.env` file with environment variables. For example:
- *
- * - `CLIENT_ID=123` becomes `instance.config.clientId = '123'`
- * - `CLIENT_SECRET=abc` becomes `instance.config.clientSecret = 'abc'`
- *
- * Environment variables are NOT used when the integration is executing in a
- * managed environment. For example, in JupiterOne, users configure
- * `instance.config` in a UI.
- */
+import { GraphClient } from './ms-graph/client';
+import { IntegrationConfig } from './types';
+
+import { IntegrationInstanceConfigFieldMap } from '@jupiterone/integration-sdk-core';
+
 export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
   clientId: {
     type: 'string',
@@ -28,35 +16,35 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
     type: 'string',
     mask: true,
   },
+  tenant: {
+    type: 'string',
+  },
 };
 
-/**
- * Properties provided by the `IntegrationInstance.config`. This reflects the
- * same properties defined by `instanceConfigFields`.
- */
-export interface IntegrationConfig extends IntegrationInstanceConfig {
-  /**
-   * The provider API client ID used to authenticate requests.
-   */
-  clientId: string;
+export function validateExecutionConfig(
+  executionContext: IntegrationExecutionContext<IntegrationConfig>,
+): void {
+  const { clientId, clientSecret, tenant } = executionContext.instance.config;
 
-  /**
-   * The provider API client secret used to authenticate requests.
-   */
-  clientSecret: string;
+  executionContext.logger.info(
+    {
+      clientId,
+      tenantId: tenant,
+    },
+    'Configured to make Microsoft Graph API calls to tenantId acting as clientId',
+  );
+
+  if (!clientId || !clientSecret || !tenant) {
+    throw new IntegrationValidationError(
+      'Config requires all of {clientId, clientSecret, tenant}',
+    );
+  }
 }
 
 export async function validateInvocation(
   context: IntegrationExecutionContext<IntegrationConfig>,
 ) {
-  const { config } = context.instance;
-
-  if (!config.clientId || !config.clientSecret) {
-    throw new IntegrationValidationError(
-      'Config requires all of {clientId, clientSecret}',
-    );
-  }
-
-  const apiClient = createAPIClient(config);
+  validateExecutionConfig(context);
+  const apiClient = new GraphClient(context.logger, context.instance.config);
   await apiClient.verifyAuthentication();
 }
