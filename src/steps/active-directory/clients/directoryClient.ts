@@ -1,4 +1,4 @@
-import { Finding, Machine, UserLogon } from '../../../model';
+import { Finding, Machine, UserLogon } from '../../../types';
 import { GraphClient } from '../../../ms-graph/client';
 
 export enum MemberType {

@@ -9,7 +9,7 @@ import {
   getTime,
 } from '@jupiterone/integration-sdk-core';
 import { Organization, User } from '@microsoft/microsoft-graph-types';
-import { Finding, Machine, UserLogon } from '../../model';
+import { Finding, Machine, UserLogon } from '../../types';
 import { entities, MappedRelationships, TargetEntities } from './constants';
 
 export function createAccountEntity(instance: IntegrationInstance): Entity {
