@@ -1,7 +1,10 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
 import { activeDirectorySteps } from './steps/active-directory';
-import { IntegrationConfig } from './types';
-import { instanceConfigFields, validateInvocation } from './config';
+import {
+  instanceConfigFields,
+  IntegrationConfig,
+  validateInvocation,
+} from './config';
 
 export const integrationSteps = [...activeDirectorySteps];
 

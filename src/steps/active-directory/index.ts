@@ -4,7 +4,7 @@ import {
   Step,
 } from '@jupiterone/integration-sdk-core';
 
-import { IntegrationConfig, IntegrationStepContext } from '../../types';
+import { IntegrationConfig, IntegrationStepContext } from '../../config';
 import { DirectoryGraphClient } from './clients/directoryClient';
 import {
   DATA_ACCOUNT_ENTITY,
