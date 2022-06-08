@@ -4,9 +4,7 @@ import {
   IntegrationStepExecutionContext,
   IntegrationValidationError,
 } from '@jupiterone/integration-sdk-core';
-
 import { GraphClient } from './ms-graph/client';
-
 import { IntegrationInstanceConfigFieldMap } from '@jupiterone/integration-sdk-core';
 
 export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
