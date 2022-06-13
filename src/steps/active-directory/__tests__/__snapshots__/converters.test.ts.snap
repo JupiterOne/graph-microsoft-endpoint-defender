@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createAccountEntityWithOrganization properties transferred: createAccountEntityWithOrganization 1`] = `
+Object {
+  "_class": Array [
+    "Account",
+  ],
+  "_key": "microsoft_defender_account-",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "intuneConfig": Object {
+          "intuneAccountID": "intuneAccountID",
+          "mobileDeviceManagementAuthority": "mobileDeviceManagementAuthority",
+          "subscriptionState": "subscriptionState",
+        },
+        "organization": Object {},
+      },
+    },
+  ],
+  "_type": "microsoft_defender_account",
+  "createdOn": undefined,
+  "defaultDomain": undefined,
+  "displayName": "",
+  "id": undefined,
+  "intuneAccountId": "intuneAccountID",
+  "intuneSubscriptionState": "subscriptionState",
+  "mobileDeviceManagementAuthority": "mobileDeviceManagementAuthority",
+  "name": undefined,
+  "organizationName": undefined,
+  "verifiedDomains": undefined,
+}
+`;
