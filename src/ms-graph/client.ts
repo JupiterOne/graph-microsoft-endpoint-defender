@@ -14,7 +14,7 @@ import {
   DeviceManagement,
   Organization,
 } from '@microsoft/microsoft-graph-types';
-// import { DeviceManagementSubscriptionState } from '@microsoft/microsoft-graph-types-beta';
+import { DeviceManagementSubscriptionState } from '@microsoft/microsoft-graph-types-beta';
 import 'isomorphic-unfetch';
 
 import { ClientConfig } from './types';
@@ -104,17 +104,17 @@ export class GraphClient {
    * deviceManagement being incorrect on Microsoft's end. This endpoint is how Intune's UI determines
    * this value so it is also we are going to access it. This endpoint is not documented.
    */
-  // public async getIntuneSubscriptionState(): Promise<
-  //   { value: DeviceManagementSubscriptionState } | undefined
-  // > {
-  //   const url =
-  //     'https://graph.microsoft.com/beta/deviceManagement/subscriptionState';
-  //   try {
-  //     return await this.client.api(url).get();
-  //   } catch (error) {
-  //     this.handleApiError(error, url);
-  //   }
-  // }
+  public async getIntuneSubscriptionState(): Promise<
+    { value: DeviceManagementSubscriptionState } | undefined
+  > {
+    const url =
+      'https://graph.microsoft.com/beta/deviceManagement/subscriptionState';
+    try {
+      return await this.client.api(url).get();
+    } catch (error) {
+      this.handleApiError(error, url);
+    }
+  }
 
   /**
    * Fetches the authority that is controlling the mobile device management for this account.
