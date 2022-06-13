@@ -50,15 +50,22 @@ export class DirectoryGraphClient extends GraphClient {
     },
     callback: (user: Finding) => void | Promise<void>,
   ): Promise<void> {
-    const $select = input.select
-      ? Array.isArray(input.select)
-        ? input.select.join(',')
-        : input.select
-      : undefined;
+    let filters, top;
+    if (process.env.FINDING_SEVERITY) {
+      filters =
+        '$filter=severity+eq+' +
+        process.env.FINDING_SEVERITY?.split(',')
+          .map((z) => "'" + z + "'")
+          .join('+or+severity+eq+');
+    }
+    if (process.env.FINDIGS_LIMIT) {
+      top = '$top=' + process.env.FINDIGS_LIMIT;
+      filters = [filters, top].join('&');
+    }
 
+    const url = `${process.env.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?${filters}`;
     return this.iterateResources({
-      resourceUrl: `${process.env.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?$top=${process.env.FINDIGS_LIMIT}&$filter=severity+eq+'${process.env.FINDING_SEVERITY}'`,
-      query: $select ? { $select } : undefined,
+      resourceUrl: url,
       callback,
     });
   }
