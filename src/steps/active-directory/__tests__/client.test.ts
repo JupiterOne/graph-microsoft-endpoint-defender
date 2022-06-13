@@ -34,7 +34,7 @@ describe('iterateMachines', () => {
 
   test('inaccessible', async () => {
     const client = new DirectoryGraphClient(logger, integrationConfig);
-    const infoSpy = jest.spyOn(logger, 'info');
+    // const infoSpy = jest.spyOn(logger, 'info');
 
     const resources: Machine[] = [];
     await client.iterateFindings(
@@ -59,7 +59,7 @@ describe('iterateMachines', () => {
     //This doesn't throw the correct error anymore
 
     const client = new DirectoryGraphClient(logger, integrationConfig);
-    const infoSpy = jest.spyOn(logger, 'info');
+    // const infoSpy = jest.spyOn(logger, 'info');
 
     const resources: Machine[] = [];
     await client.iterateUsers(
