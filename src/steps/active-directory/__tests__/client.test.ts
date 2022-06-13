@@ -1,18 +1,7 @@
-import {
-  createMockIntegrationLogger,
-  Recording,
-} from '@jupiterone/integration-sdk-testing';
-import {
-  DirectoryObject,
-  DirectoryRole,
-  Group,
-  User,
-} from '@microsoft/microsoft-graph-types';
+import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
+import { Group, User } from '@microsoft/microsoft-graph-types';
 
-import {
-  integrationConfig,
-  buildStepTestConfigForStep,
-} from '../../../../test/config';
+import { integrationConfig } from '../../../../test/config';
 import { DirectoryGraphClient } from '../clients/directoryClient';
 
 const logger = createMockIntegrationLogger();
