@@ -1,15 +1,7 @@
-import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
 // import { Group, User } from '@microsoft/microsoft-graph-types';
 
 import { integrationConfig } from '../../../../test/config';
-import {
-  Machine,
-  UserLogon,
-  IpAddress,
-  Vulnerability,
-  Finding,
-  VmMetadata,
-} from '../../../types';
+import { Machine, UserLogon } from '../../../types';
 import { DirectoryGraphClient } from '../clients/directoryClient';
 
 const logger: any = 'https://api.securitycenter.microsoft.com/api';
