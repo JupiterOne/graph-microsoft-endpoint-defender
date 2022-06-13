@@ -5,7 +5,5 @@
     "skipLibCheck": true
   },
   "exclude": ["dist", "node_modules"],
-  "modulePaths": [
-    "<rootDir>"
-  ],
+  "modulePaths": ["<rootDir>"]
 }
