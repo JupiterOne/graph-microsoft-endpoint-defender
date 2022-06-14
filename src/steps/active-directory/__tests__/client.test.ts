@@ -1,13 +1,23 @@
-// import { Group, User } from '@microsoft/microsoft-graph-types';
-
 import { integrationConfig } from '../../../../test/config';
+import { Recording, setupProjectRecording } from '../../../../test/recording';
 import { Machine, UserLogon } from '../../../types';
 import { DirectoryGraphClient } from '../clients/directoryClient';
 
 const logger: any = 'https://api.securitycenter.microsoft.com/api';
 
+// See test/README.md for details
+let recording: Recording;
+afterEach(async () => {
+  recording ? await recording.stop() : null;
+});
+
 describe('iterateMachines', () => {
   test('accessible', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateMachines',
+    });
+
     const client = new DirectoryGraphClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
@@ -63,11 +73,15 @@ describe('iterateUsers', () => {
   });
 
   test('single selected property', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateUsers_single_properties',
+    });
+
     const resources: UserLogon[] = [];
     await client.iterateUsers(
       {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: 'id',
+        machineId: 'f8c2d6c26063babf52bc76979ef22f423387f3b2',
       },
       (e) => {
         resources.push(e);
@@ -76,18 +90,22 @@ describe('iterateUsers', () => {
   });
 
   test('multiple selected properties', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateUsers_multiple_properties',
+    });
+
     const resources: UserLogon[] = [];
     await client.iterateUsers(
       {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: ['id', 'displayName'],
+        machineId: 'f8c2d6c26063babf52bc76979ef22f423387f3b2',
       },
       (e) => {
         resources.push(e);
       },
     );
 
-    expect(resources.length).toBe(0);
+    expect(resources.length).toBe(1);
   });
 });
 
@@ -99,11 +117,15 @@ describe('iterateFindings', () => {
   });
 
   test('single selected property', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateFindings_single_properties',
+    });
+
     const resources: UserLogon[] = [];
     await client.iterateFindings(
       {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: 'id',
+        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
       },
       (e) => {
         resources.push();
@@ -112,11 +134,15 @@ describe('iterateFindings', () => {
   });
 
   test('multiple selected properties', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateFindings_multiple_properties',
+    });
+
     const resources: UserLogon[] = [];
     await client.iterateFindings(
       {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: ['id', 'displayName'],
+        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
       },
       (e) => {
         resources.push();
