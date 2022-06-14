@@ -1,7 +1,7 @@
 {
-  "name": "@jupiterone/graph-microsoft-defender",
+  "name": "@jupiterone/graph-microsoft-endpoint-defender",
   "version": "0.0.0",
-  "description": "A JupiterOne Integration for Microsoft Defender",
+  "description": "A JupiterOne Integration for Microsoft Defender for Endpoint",
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
@@ -20,7 +20,7 @@
     "format:check": "prettier --check **/*.{ts,js,json,css,md,yml}",
     "type-check": "tsc",
     "test": "jest",
-    "test:env": "LOAD_CONFIG=1 jest",
+    "test:env": "LOAD_ENV=1 jest",
     "test:ci": "yarn format:check && yarn lint && yarn type-check && yarn test",
     "build": "tsc -p tsconfig.dist.json --declaration && cp README.md dist/README.md && cp -r jupiterone/ dist/jupiterone/",
     "prepush": "yarn format:check && yarn lint && yarn type-check && jest --changedSince main",

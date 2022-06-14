@@ -13,9 +13,9 @@ Please reference any SDKs or API docs used to help build the integration here.
   the Active Directory tenants defined in the Azure account holding the App
   Registration. Multi-tenant App Registrations that have not undergone
   [Publisher Verification][publisher-verification] cannot access other tenants.
-- A microsoft defender for endpoint account to create devices, run attacks via
-  simulation technique. Can track vulnerabilities data, user groups creation and
-  mapping users to devices.
+- A Microsoft Defender for Endpoint account to create devices and run attacks
+  via simulation technique. Can track vulnerabilities data, user groups creation
+  and mapping users to devices.
 
 A JupiterOne staff developer can provide credentials for an existing development
 Azure account with an App Registration and tenants that tests are written
@@ -28,12 +28,8 @@ need to be improved to avoid specific account information.
 
 In Ms Defender portal:
 
-1. Create ms defender account using this
-   [link](https://www.microsoft.com/en-us/security/business/threat-protection/endpoint-defender)
-2. Access home page of ms defender app via this
-   [link](https://security.microsoft.com/homepage)
-3. To setup lab and add devices follow these
-   [steps](#add-devices-and-simulations)
+1. [Create a Microsoft Defender for Endpoint account](https://www.microsoft.com/en-us/security/business/threat-protection/endpoint-defender)
+2. [Set up the lab and add devices](#add-devices-and-simulations)
 
 In the Azure portal:
 
@@ -41,22 +37,23 @@ In the Azure portal:
 2. Configure the required [API permissions](#api-permissions)
 3. Add a 2-year secret
 
-## Add devices and Simulations
+## Add Devices and Simulations
 
-Go to Evaluations from left navigation
+In the [Defender portal](https://security.microsoft.com/homepage), navigate to
+**Evaluations**.
 
 1. Setup Lab
 
-   1. Choose no of devices
+   1. Choose number of devices
    2. Accept terms and provide consent by checking the check box
    3. Setup lab
 
 2. Add devices
    1. Available Tools
-   2. Refresh the page to see the device status.
+   2. Refresh the page to see the device status
 
 It should be Status → Active and Simulator status → Completed . (It will take
-some time to set up the device). After device setup is completed,
+some time to set up the device). After device setup is completed:
 
 3. Go to Simulation tab and create simulation Select simulator → All Select
    simulation → SafeBreach: Credential Theft Select device → testmachine1
@@ -81,10 +78,10 @@ Need to setup API permissions under two containers (one for
 
 1. `Machine.Read.All`
    1. Read machine information
-   2. Needed for creating the `Device/Machine` entity
+   2. Needed for creating `Device` and `HostAgent` entities
 2. `User.Read.All`
    1. Read user profiles
-   2. Needed for creating the `LogOn User` entity
+   2. Needed for creating `User` entities
 3. `Vulnerability.Read.All`
    1. Read Threat and Vulnerability Management vulnerability information
    2. Needed for creating `Finding` entity
