@@ -37,7 +37,6 @@ test('fetchMetadata', async () => {
   const client = new GraphClient(logger, config);
 
   const metadata = await client.fetchMetadata();
-  console.log(metadata);
   expect(metadata).toMatchObject({
     '@odata.context': 'https://graph.microsoft.com/v1.0/$metadata',
   });
