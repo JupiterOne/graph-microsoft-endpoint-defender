@@ -121,13 +121,13 @@ describe('createMachinesDeviceRelationship', () => {
   test('properties transferred', () => {
     expect(createMachinesDeviceRelationship(exampleAccountEntity)).toEqual({
       _class: 'MANAGES',
-      _key: 'microsoft_defender_account_id|manages|FORWARD:_type=user_endPoint:_class=Device/Host:hostname=undefined',
+      _key: 'microsoft_defender_account_id|manages|FORWARD:_type=user_endPoint:_class=Device,Host:hostname=undefined',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
         sourceEntityKey: 'microsoft_defender_account_id',
         targetEntity: {
-          _class: ['Device/Host'],
+          _class: ['Device', 'Host'],
           _type: 'user_endPoint',
           category: 'endpoint',
           displayName: undefined,
@@ -173,24 +173,39 @@ describe('createFindingEntity', () => {
   });
 });
 const machine: Entity = {
-  _class: 'Account',
-  _key: 'microsoft_defender_account_id',
-  _type: 'microsoft_defender_account',
+  _class: 'Machine',
+  _key: 'microsoft_defender_machine_id',
+  _type: 'microsoft_defender_machine',
   displayName: 'name',
 };
 const user: Entity = {
+  _class: 'User',
+  _key: 'microsoft_defender_user_id',
+  _type: 'microsoft_defender_user',
+  displayName: 'name',
+};
+
+const finding: Entity = {
+  _class: 'Finding',
+  _key: 'microsoft_defender_finding_id',
+  _type: 'microsoft_defender_finding',
+  displayName: 'name',
+};
+
+const account: Entity = {
   _class: 'Account',
   _key: 'microsoft_defender_account_id',
   _type: 'microsoft_defender_account',
   displayName: 'name',
 };
+
 describe('createMachineUserRelationship', () => {
   test('properties transferred for users', () => {
     expect(createMachineUserRelationship(machine, user)).toEqual({
-      _fromEntityKey: 'microsoft_defender_account_id',
-      _key: 'microsoft_defender_account_id|has|microsoft_defender_account_id',
-      _toEntityKey: 'microsoft_defender_account_id',
-      _type: 'microsoft_defender_account_has_account',
+      _fromEntityKey: 'microsoft_defender_machine_id',
+      _key: 'microsoft_defender_machine_id|has|microsoft_defender_user_id',
+      _toEntityKey: 'microsoft_defender_user_id',
+      _type: 'microsoft_defender_machine_has_user',
       displayName: 'HAS',
       _class: 'HAS',
     });
@@ -199,11 +214,11 @@ describe('createMachineUserRelationship', () => {
 
 describe('createAccountMachineRelationship', () => {
   test('properties transferred for users', () => {
-    expect(createAccountMachineRelationship(machine, user)).toEqual({
-      _fromEntityKey: 'microsoft_defender_account_id',
-      _key: 'microsoft_defender_account_id|has|microsoft_defender_account_id',
+    expect(createAccountMachineRelationship(machine, account)).toEqual({
+      _fromEntityKey: 'microsoft_defender_machine_id',
+      _key: 'microsoft_defender_machine_id|has|microsoft_defender_account_id',
       _toEntityKey: 'microsoft_defender_account_id',
-      _type: 'microsoft_defender_account_has_account',
+      _type: 'microsoft_defender_machine_has_account',
       displayName: 'HAS',
       _class: 'HAS',
     });
@@ -214,15 +229,15 @@ describe('createFindingsCveRelationship', () => {
   test('properties transferred for users', () => {
     expect(createFindingsCveRelationship(machine)).toEqual({
       _class: 'IS',
-      _key: 'microsoft_defender_account_id|is|cve_microsoft_defender_account_id',
+      _key: 'microsoft_defender_machine_id|is|cve_microsoft_defender_machine_id',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
-        sourceEntityKey: 'microsoft_defender_account_id',
+        sourceEntityKey: 'microsoft_defender_machine_id',
         targetEntity: {
           Resource: 'CVE',
           _class: ['Vulnerability'],
-          _key: 'cve_microsoft_defender_account_id',
+          _key: 'cve_microsoft_defender_machine_id',
           _type: 'cve',
           displayName: 'name',
         },
@@ -236,13 +251,13 @@ describe('createFindingsCveRelationship', () => {
 
 describe('createMachineFindingsRelationship', () => {
   test('properties transferred for users', () => {
-    expect(createMachineFindingsRelationship(machine, user)).toEqual({
-      _key: 'microsoft_defender_account_id|identified|microsoft_defender_account_id',
-      _type: 'microsoft_defender_account_identified_account',
+    expect(createMachineFindingsRelationship(machine, finding)).toEqual({
+      _key: 'microsoft_defender_machine_id|identified|microsoft_defender_finding_id',
+      _type: 'microsoft_defender_machine_identified_finding',
       displayName: 'IDENTIFIED',
       _class: 'IDENTIFIED',
-      _fromEntityKey: 'microsoft_defender_account_id',
-      _toEntityKey: 'microsoft_defender_account_id',
+      _fromEntityKey: 'microsoft_defender_machine_id',
+      _toEntityKey: 'microsoft_defender_finding_id',
     });
   });
 });

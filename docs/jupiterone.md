@@ -96,14 +96,14 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources     | Entity `_type`                     | Entity `_class` |
-| ------------- | ---------------------------------- | --------------- |
-| Account       | `microsoft_defender_account`       | `Account`       |
-| CVE           | `cve`                              | `Vulnerability` |
-| Device        | `user_endPoint`                    | `Device/Host`   |
-| Machine       | `microsoft_defender_machine`       | `HostAgent`     |
-| User          | `microsoft_defender_logon_user`    | `User`          |
-| Vulnerability | `microsoft_defender_vulnerability` | `Finding`       |
+| Resources     | Entity `_type`                     | Entity `_class`  |
+| ------------- | ---------------------------------- | ---------------- |
+| Account       | `microsoft_defender_account`       | `Account`        |
+| CVE           | `cve`                              | `Vulnerability`  |
+| Device        | `user_endPoint`                    | `Device`, `Host` |
+| Machine       | `microsoft_defender_machine`       | `HostAgent`      |
+| User          | `microsoft_defender_logon_user`    | `User`           |
+| Vulnerability | `microsoft_defender_vulnerability` | `Finding`        |
 
 ### Relationships
 

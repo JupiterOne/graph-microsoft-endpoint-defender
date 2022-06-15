@@ -45,7 +45,7 @@ export const TargetEntities = {
   DEVICE: {
     resourceName: 'Device',
     _type: 'user_endPoint',
-    _class: ['Device/Host'],
+    _class: ['Device', 'Host'],
   },
 };
 
