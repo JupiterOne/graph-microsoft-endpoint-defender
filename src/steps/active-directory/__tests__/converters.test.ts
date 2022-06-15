@@ -27,6 +27,7 @@ const exampleAccountEntity: Entity = {
   _key: 'microsoft_defender_account_id',
   _type: 'microsoft_defender_account',
   displayName: 'name',
+  id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
 };
 describe('createAccountEntityWithOrganization', () => {
   test('properties transferred', () => {
@@ -133,7 +134,7 @@ describe('createMachinesDeviceRelationship', () => {
           displayName: undefined,
           fqdn: undefined,
           hostname: undefined,
-          id: undefined,
+          id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
           name: 'name',
           osName: undefined,
           osVersion: undefined,
