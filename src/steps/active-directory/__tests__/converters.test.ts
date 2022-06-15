@@ -16,7 +16,7 @@ import { Entity, IntegrationInstance } from '@jupiterone/integration-sdk-core';
 import { integrationConfig } from '../../../../test/config';
 const exampleOrganization: Organization = {};
 const instance: IntegrationInstance = {
-  id: '',
+  id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
   accountId: '',
   name: '',
   integrationDefinitionId: '',
@@ -50,7 +50,7 @@ describe('createAccountEntity', () => {
   test('properties transferred', () => {
     expect(createAccountEntity(instance)).toEqual({
       _class: ['Account'],
-      _key: 'microsoft_defender_account-',
+      _key: 'microsoft_defender_account-5a721b05-53ed-4ed9-be02-aed28f11edbd',
       _type: 'microsoft_defender_account',
       createdOn: undefined,
       displayName: '',
@@ -69,7 +69,7 @@ describe('createMachineEntity', () => {
       subscriptionId: 'string',
     };
     const rawData: Machine = {
-      id: 'string',
+      id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
       computerDnsName: 'string',
       firstSeen: 'string',
       lastSeen: 'string',
@@ -101,7 +101,7 @@ describe('createMachineEntity', () => {
     };
     expect(createMachineEntity(rawData)).toEqual({
       _class: ['HostAgent'],
-      _key: 'string',
+      _key: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
       _rawData: [],
       _type: 'microsoft_defender_machine',
       agentVersion: 'string',
@@ -110,7 +110,7 @@ describe('createMachineEntity', () => {
       defenderAvStatus: 'string',
       displayName: 'string',
       function: ['endpoint-protection', 'vulnerability-detection'],
-      id: 'string',
+      id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
       name: 'string',
       riskScore: 'string',
     });
