@@ -18,7 +18,7 @@ const exampleOrganization: Organization = {};
 const instance: IntegrationInstance = {
   id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
   accountId: '',
-  name: '',
+  name: 'DefenderAccount',
   integrationDefinitionId: '',
   config: integrationConfig,
 };
@@ -54,8 +54,8 @@ describe('createAccountEntity', () => {
       _key: 'microsoft_defender_account-5a721b05-53ed-4ed9-be02-aed28f11edbd',
       _type: 'microsoft_defender_account',
       createdOn: undefined,
-      displayName: '',
-      name: '',
+      displayName: 'DefenderAccount',
+      name: 'DefenderAccount',
       _rawData: [],
     });
   });

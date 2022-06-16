@@ -22,7 +22,7 @@ Object {
   "_type": "microsoft_defender_account",
   "createdOn": undefined,
   "defaultDomain": undefined,
-  "displayName": "",
+  "displayName": "DefenderAccount",
   "id": undefined,
   "intuneAccountId": "intuneAccountID",
   "intuneSubscriptionState": "subscriptionState",
