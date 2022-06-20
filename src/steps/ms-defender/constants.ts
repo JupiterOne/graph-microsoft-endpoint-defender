@@ -3,6 +3,8 @@ import {
   RelationshipDirection,
 } from '@jupiterone/integration-sdk-core';
 
+import { entities as adEntities } from '../active-directory';
+
 export const steps: Record<string, string> = {
   FETCH_MACHINE: 'Fetch machine',
   MACHINE_DEVICE_RELATIONSHIP: 'Map machine to device',
@@ -12,11 +14,6 @@ export const steps: Record<string, string> = {
 };
 
 export const entities = {
-  ACCOUNT: {
-    resourceName: 'Account',
-    _type: 'microsoft_defender_account',
-    _class: ['Account'],
-  },
   MACHINE: {
     resourceName: 'Machine',
     _type: 'microsoft_defender_machine',
@@ -52,7 +49,7 @@ export const TargetEntities = {
 export const relationships = {
   ACCOUNT_HAS_MACHINE: {
     _type: 'microsoft_defender_account_has_machine',
-    sourceType: entities.ACCOUNT._type,
+    sourceType: adEntities.ACCOUNT._type,
     _class: RelationshipClass.HAS,
     targetType: entities.MACHINE._type,
   },
@@ -86,6 +83,6 @@ export const MappedRelationships = {
     direction: RelationshipDirection.FORWARD,
   },
 };
-export const DATA_ACCOUNT_ENTITY = entities.ACCOUNT._type;
+export const DATA_ACCOUNT_ENTITY = adEntities.ACCOUNT._type;
 export const DATA_MACHINE_ENTITY = entities.MACHINE._type;
 export const DATA_FINDING_ENTITY = entities.FINDING._type;

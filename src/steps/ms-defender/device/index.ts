@@ -22,7 +22,7 @@ import {
   createAccountMachineRelationship,
 } from './converters';
 
-export * from '../constants';
+import { steps as activeDirectorySteps } from '../../active-directory/constants';
 
 export async function fetchMachines(
   executionContext: IntegrationStepContext,
@@ -75,7 +75,7 @@ export const deviceSteps: Step<
     name: 'Microsoft Defender Machines',
     entities: [entities.MACHINE],
     relationships: [relationships.ACCOUNT_HAS_MACHINE],
-    dependsOn: [steps.FETCH_ACCOUNT],
+    dependsOn: [activeDirectorySteps.FETCH_ACCOUNT],
     executionHandler: fetchMachines,
   },
   {

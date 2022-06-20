@@ -5,8 +5,9 @@ import {
   IntegrationConfig,
   validateInvocation,
 } from './config';
+import { msDefenderSteps } from './steps/ms-defender';
 
-export const integrationSteps = [...activeDirectorySteps];
+export const integrationSteps = [...activeDirectorySteps, ...msDefenderSteps];
 
 export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> =
   {

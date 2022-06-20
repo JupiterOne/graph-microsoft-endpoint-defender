@@ -50,17 +50,21 @@ export class DirectoryGraphClient extends GraphClient {
     },
     callback: (user: Finding) => void | Promise<void>,
   ): Promise<void> {
-    let filters, top;
+    let filters: any = [];
     if (process.env.FINDING_SEVERITY) {
-      filters =
+      filters.push(
         '$filter=severity+eq+' +
-        process.env.FINDING_SEVERITY?.split(',')
-          .map((z) => "'" + z + "'")
-          .join('+or+severity+eq+');
+          process.env.FINDING_SEVERITY?.split(',')
+            .map((z) => "'" + z + "'")
+            .join('+or+severity+eq+'),
+      );
     }
     if (process.env.FINDIGS_LIMIT) {
-      top = '$top=' + process.env.FINDIGS_LIMIT;
-      filters = [filters, top].join('&');
+      filters.push('$top=' + process.env.FINDIGS_LIMIT);
+    }
+
+    if (filters && filters.length) {
+      filters = filters.join('&');
     }
 
     const url = `${process.env.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?${filters}`;
