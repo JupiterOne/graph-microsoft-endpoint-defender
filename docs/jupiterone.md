@@ -100,7 +100,7 @@ The following entities are created:
 | ------------- | ---------------------------------- | ---------------- |
 | Account       | `microsoft_defender_account`       | `Account`        |
 | CVE           | `cve`                              | `Vulnerability`  |
-| Device        | `user_endPoint`                    | `Device`, `Host` |
+| Device        | `user_endpoint`                    | `Device`, `Host` |
 | Machine       | `microsoft_defender_machine`       | `HostAgent`      |
 | User          | `microsoft_defender_logon_user`    | `User`           |
 | Vulnerability | `microsoft_defender_vulnerability` | `Finding`        |
@@ -121,7 +121,7 @@ The following mapped relationships are created:
 
 | Source Entity `_type`              | Relationship `_class` | Target Entity `_type` | Direction |
 | ---------------------------------- | --------------------- | --------------------- | --------- |
-| `microsoft_defender_machine`       | **MANAGES**           | `*user_endPoint*`     | FORWARD   |
+| `microsoft_defender_machine`       | **MANAGES**           | `*user_endpoint*`     | FORWARD   |
 | `microsoft_defender_vulnerability` | **IS**                | `*cve*`               | FORWARD   |
 
 <!--
