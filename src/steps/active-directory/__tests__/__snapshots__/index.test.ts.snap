@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CveRelationshipsFindings Should create a Vulnerability finding entity correctly when there is a CVE relationship: cveFindingEntitiesSuccessful 1`] = `Array []`;
-
 exports[`fetchAccount Should create an account entity correctly when the account has the correct permissions: accountEntitiesSuccessful 1`] = `
 Array [
   Object {
@@ -135,11 +133,3 @@ Array [
   },
 ]
 `;
-
-exports[`fetchFindings Should create a Vulnerability finding entity correctly when user has the correct permissions: vulnerabilityFindingEntitiesSuccessful 1`] = `Array []`;
-
-exports[`fetchLogonUsers Should create an User entity correctly when log on User has the correct permissions: logOnUserEntitiesSuccessful 1`] = `Array []`;
-
-exports[`fetchMachines Should create an account entity correctly when the machine has the correct permissions: machineEntitiesSuccessful 1`] = `Array []`;
-
-exports[`machineManagesDevicesRelationships Should create an machine entity correctly when  machine manages devices relationships has the correct permissions: machineDeviceEntitiesSuccessful 1`] = `Array []`;
