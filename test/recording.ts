@@ -18,7 +18,7 @@ export function setupProjectRecording(
 }
 
 function mutateRecordingEntry(entry: RecordingEntry): void {
-  let responseText = entry.response.content.text;
+  const responseText = entry.response.content.text;
   if (!responseText) {
     return;
   }
