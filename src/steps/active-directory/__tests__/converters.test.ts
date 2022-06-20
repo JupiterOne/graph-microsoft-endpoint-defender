@@ -31,11 +31,6 @@ const exampleAccountEntity: Entity = {
 };
 describe('createAccountEntityWithOrganization', () => {
   test('properties transferred', () => {
-    const exampleIntuneConfig = {
-      mobileDeviceManagementAuthority: 'mobileDeviceManagementAuthority',
-      subscriptionState: 'subscriptionState',
-      intuneAccountID: 'intuneAccountID',
-    };
     const accountEntity = createAccountEntityWithOrganization(
       instance,
       exampleOrganization,
