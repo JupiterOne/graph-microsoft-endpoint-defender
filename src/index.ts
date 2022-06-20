@@ -1,6 +1,5 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
 import { activeDirectorySteps } from './steps/active-directory';
-import { msDefenderSteps } from './steps/ms-defender-steps';
 import {
   instanceConfigFields,
   IntegrationConfig,

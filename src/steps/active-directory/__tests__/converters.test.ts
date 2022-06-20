@@ -1,4 +1,3 @@
-import { Machine, Finding } from '../../../types';
 import {
   createAccountEntityWithOrganization,
   createAccountEntity,
@@ -11,7 +10,7 @@ import {
   // createFindingsCveRelationship,
   // createMachineFindingsRelationship,
 } from '../converters';
-import { Organization, User } from '@microsoft/microsoft-graph-types';
+import { Organization } from '@microsoft/microsoft-graph-types';
 import { Entity, IntegrationInstance } from '@jupiterone/integration-sdk-core';
 import { integrationConfig } from '../../../../test/config';
 const exampleOrganization: Organization = {};
@@ -22,13 +21,13 @@ const instance: IntegrationInstance = {
   integrationDefinitionId: '',
   config: integrationConfig,
 };
-const exampleAccountEntity: Entity = {
-  _class: 'Account',
-  _key: 'microsoft_defender_account_id',
-  _type: 'microsoft_defender_account',
-  displayName: 'name',
-  id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
-};
+// const exampleAccountEntity: Entity = {
+//   _class: 'Account',
+//   _key: 'microsoft_defender_account_id',
+//   _type: 'microsoft_defender_account',
+//   displayName: 'name',
+//   id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+// };
 describe('createAccountEntityWithOrganization', () => {
   test('properties transferred', () => {
     const accountEntity = createAccountEntityWithOrganization(
