@@ -132,23 +132,4 @@ describe('iterateFindings', () => {
       },
     );
   });
-
-  test('multiple selected properties', async () => {
-    recording = setupProjectRecording({
-      directory: __dirname,
-      name: 'iterateFindings_multiple_properties',
-    });
-
-    const resources: UserLogon[] = [];
-    await client.iterateFindings(
-      {
-        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
-      },
-      (e) => {
-        resources.push();
-      },
-    );
-
-    expect(resources.length).toBe(0);
-  });
 });
