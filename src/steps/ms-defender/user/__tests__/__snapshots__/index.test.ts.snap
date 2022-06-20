@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchLogonUsers Should create an User entity correctly when log on User has the correct permissions: logOnUserEntitiesSuccessful 1`] = `Array []`;

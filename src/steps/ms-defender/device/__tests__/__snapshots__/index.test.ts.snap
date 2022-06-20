@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchMachines Should create an account entity correctly when the machine has the correct permissions: machineEntitiesSuccessful 1`] = `Array []`;
+
+exports[`machineManagesDevicesRelationships Should create an machine entity correctly when  machine manages devices relationships has the correct permissions: machineDeviceEntitiesSuccessful 1`] = `Array []`;

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CveRelationshipsFindings Should create a Vulnerability finding entity correctly when there is a CVE relationship: cveFindingEntitiesSuccessful 1`] = `Array []`;
+
+exports[`fetchFindings Should create a Vulnerability finding entity correctly when user has the correct permissions: vulnerabilityFindingEntitiesSuccessful 1`] = `Array []`;
