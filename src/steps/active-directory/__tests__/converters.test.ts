@@ -39,7 +39,6 @@ describe('createAccountEntityWithOrganization', () => {
     const accountEntity = createAccountEntityWithOrganization(
       instance,
       exampleOrganization,
-      exampleIntuneConfig,
     );
     expect(accountEntity).toMatchSnapshot(
       'createAccountEntityWithOrganization',
