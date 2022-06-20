@@ -13,11 +13,6 @@ Array [
       Object {
         "name": "default",
         "rawData": Object {
-          "intuneConfig": Object {
-            "intuneAccountID": undefined,
-            "mobileDeviceManagementAuthority": undefined,
-            "subscriptionState": undefined,
-          },
           "organization": Object {
             "assignedPlans": Array [
               Object {
@@ -132,9 +127,6 @@ Array [
     "defaultDomain": "defendertest1.onmicrosoft.com",
     "displayName": "Local Integration",
     "id": "5a721b05-53ed-4ed9-be02-aed28f11edbd",
-    "intuneAccountId": undefined,
-    "intuneSubscriptionState": undefined,
-    "mobileDeviceManagementAuthority": undefined,
     "name": "learning",
     "organizationName": "learning",
     "verifiedDomains": Array [

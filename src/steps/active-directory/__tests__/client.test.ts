@@ -88,6 +88,25 @@ describe('iterateUsers', () => {
       },
     );
   });
+
+  test('multiple selected properties', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateUsers_multiple_properties',
+    });
+
+    const resources: UserLogon[] = [];
+    await client.iterateUsers(
+      {
+        machineId: 'f8c2d6c26063babf52bc76979ef22f423387f3b2',
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
+
+    expect(resources.length).toBe(1);
+  });
 });
 
 describe('iterateFindings', () => {
@@ -112,5 +131,24 @@ describe('iterateFindings', () => {
         resources.push();
       },
     );
+  });
+
+  test('multiple selected properties', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateFindings_multiple_properties',
+    });
+
+    const resources: UserLogon[] = [];
+    await client.iterateFindings(
+      {
+        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
+      },
+      (e) => {
+        resources.push();
+      },
+    );
+
+    expect(resources.length).toBe(0);
   });
 });

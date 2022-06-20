@@ -10,11 +10,6 @@ Object {
     Object {
       "name": "default",
       "rawData": Object {
-        "intuneConfig": Object {
-          "intuneAccountID": "intuneAccountID",
-          "mobileDeviceManagementAuthority": "mobileDeviceManagementAuthority",
-          "subscriptionState": "subscriptionState",
-        },
         "organization": Object {},
       },
     },
@@ -24,9 +19,6 @@ Object {
   "defaultDomain": undefined,
   "displayName": "DefenderAccount",
   "id": undefined,
-  "intuneAccountId": "intuneAccountID",
-  "intuneSubscriptionState": "subscriptionState",
-  "mobileDeviceManagementAuthority": "mobileDeviceManagementAuthority",
   "name": undefined,
   "organizationName": undefined,
   "verifiedDomains": undefined,
