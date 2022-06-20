@@ -18,14 +18,14 @@ export function createUserEntity(data: UserLogon): Entity {
     entityData: {
       source: {}, // removed due to size
       assign: {
-        _key: generateUserKey(data),
+        _key: data.id,
         _class: entities.USER._class,
         _type: entities.USER._type,
         id: data.id,
         name: data.accountName,
         domain: data.accountDomain,
         username: data.accountName,
-        displayName: data.accountName as string | undefined,
+        displayName: data.accountName as string,
         firstSeen: data.firstSeen,
         lastSeen: data.lastSeen,
         logonTypes: data.logonTypes,
