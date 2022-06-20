@@ -126,21 +126,6 @@ Admin consent is granted to JupiterOne by:
    target/ingest
 4. Review the requested permissions and grant consent
 
-To exercise the grant flow:
-
-1. Log in as a global administrator to the Active Directory Tenant you intend to
-   target/ingest
-1. Follow the url returned from the J1
-   `/integration-microsoft-365/v1/generate-auth-url` endpoint.
-1. After being redirected to something like
-   `https://localhost/microsoft-365/oauth-microsoft-365/v1/authorize?admin_consent=True&tenant=tenant-id&state=12345`,
-   capture the `tenant` query param.
-   1. You may need to check your network history for this query param as you
-      will likelybe redirected back to your instance configuration page faster
-      than you can pull the the tenant param.
-   1. This will be the same tenant id that you are logged into when you granted
-      concent.
-
 Use this `tenant` ID and information from the App Registration to create an
 `.env` file for local execution of the daemon/server application (this
 repository):
@@ -176,3 +161,14 @@ Client Credentials oAuth flow Overview
 - https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#application-permissions
 
 [msgraph-api]: https://docs.microsoft.com/en-us/graph/overview
+
+#### APIs used for data ingestion :
+
+To fetch machines :
+https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machines?view=o365-worldwide
+
+To fetch Logon users :
+https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
+
+To fetch vulnerabilities :
+https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-discovered-vulnerabilities?view=o365-worldwide
