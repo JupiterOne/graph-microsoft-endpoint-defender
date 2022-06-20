@@ -37,20 +37,10 @@ export async function fetchAccount(
   const graphClient = new DirectoryGraphClient(logger, instance.config);
 
   const organization = await graphClient.fetchOrganization();
-  const intuneAccountID = (await graphClient.getIntuneAccountId())
-    ?.intuneAccountId;
-  const subscriptionState = (await graphClient.getIntuneSubscriptionState())
-    ?.value;
-  const mobileDeviceManagementAuthority = (
-    await graphClient.getMobileDeviceManagementAuthority(
-      organization.id as string,
-    )
-  )?.mobileDeviceManagementAuthority;
 
   const accountEntity = createAccountEntityWithOrganization(
     instance,
     organization,
-    { intuneAccountID, subscriptionState, mobileDeviceManagementAuthority },
   );
   await jobState.addEntity(accountEntity);
   await jobState.setData(DATA_ACCOUNT_ENTITY, accountEntity);
