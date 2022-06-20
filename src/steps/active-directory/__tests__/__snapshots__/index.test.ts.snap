@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CveRelationshipsFindings Should create a Vulnerability finding entity correctly when there is a CVE relationship: cveFindingEntitiesSuccessful 1`] = `Array []`;
+
+exports[`fetchAccount Should create an account entity correctly when the account has the correct permissions: accountEntitiesSuccessful 1`] = `
+Array [
+  Object {
+    "_class": Array [
+      "Account",
+    ],
+    "_key": "microsoft_defender_account-local-integration-instance",
+    "_rawData": Array [
+      Object {
+        "name": "default",
+        "rawData": Object {
+          "organization": Object {
+            "assignedPlans": Array [
+              Object {
+                "assignedDateTime": "2022-05-25T15:17:24Z",
+                "capabilityStatus": "Enabled",
+                "service": "Adallom",
+                "servicePlanId": "932ad362-64a8-4783-9106-97849a1a30b9",
+              },
+              Object {
+                "assignedDateTime": "2022-05-25T15:17:25Z",
+                "capabilityStatus": "Enabled",
+                "service": "AADPremiumService",
+                "servicePlanId": "41781fb2-bc02-4b7c-bd55-b576c07bb09d",
+              },
+              Object {
+                "assignedDateTime": "2022-05-25T15:17:25Z",
+                "capabilityStatus": "Enabled",
+                "service": "AADPremiumService",
+                "servicePlanId": "eec0eb4f-6444-4f95-aba0-50c24d67f998",
+              },
+              Object {
+                "assignedDateTime": "2022-05-25T15:17:24Z",
+                "capabilityStatus": "Enabled",
+                "service": "MultiFactorService",
+                "servicePlanId": "8a256a2b-b617-496d-b51b-e76466e88db0",
+              },
+              Object {
+                "assignedDateTime": "2022-05-17T07:50:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "SCO",
+                "servicePlanId": "1689aade-3d6a-4bfc-b017-46d2672df5ad",
+              },
+              Object {
+                "assignedDateTime": "2022-05-17T07:50:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "exchange",
+                "servicePlanId": "113feb6c-3fe4-4440-bddc-54d774bf0318",
+              },
+              Object {
+                "assignedDateTime": "2022-05-17T07:50:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "WindowsDefenderATP",
+                "servicePlanId": "871d91ec-ec1a-452b-a83f-bd76c7d770ef",
+              },
+            ],
+            "businessPhones": Array [
+              "9493457906",
+            ],
+            "city": "hyderabad",
+            "country": null,
+            "countryLetterCode": "IN",
+            "createdDateTime": "2022-05-17T07:48:01Z",
+            "deletedDateTime": null,
+            "directorySizeQuota": Object {
+              "total": 50000,
+              "used": 185,
+            },
+            "displayName": "learning",
+            "id": "5a721b05-53ed-4ed9-be02-aed28f11edbd",
+            "isMultipleDataLocationsForServicesEnabled": null,
+            "marketingNotificationEmails": Array [],
+            "onPremisesLastSyncDateTime": null,
+            "onPremisesSyncEnabled": null,
+            "postalCode": "502032",
+            "preferredLanguage": "en",
+            "privacyProfile": null,
+            "provisionedPlans": Array [
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "Adallom",
+              },
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SCO",
+              },
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange",
+              },
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange",
+              },
+            ],
+            "securityComplianceNotificationMails": Array [],
+            "securityComplianceNotificationPhones": Array [],
+            "state": "telangana",
+            "street": "test",
+            "technicalNotificationMails": Array [
+              "sacumentest@Learning232.onmicrosoft.com",
+            ],
+            "tenantType": "AAD",
+            "verifiedDomains": Array [
+              Object {
+                "capabilities": "Email, OfficeCommunicationsOnline",
+                "isDefault": true,
+                "isInitial": true,
+                "name": "defendertest1.onmicrosoft.com",
+                "type": "Managed",
+              },
+            ],
+          },
+        },
+      },
+    ],
+    "_type": "microsoft_defender_account",
+    "createdOn": undefined,
+    "defaultDomain": "defendertest1.onmicrosoft.com",
+    "displayName": "Local Integration",
+    "id": "5a721b05-53ed-4ed9-be02-aed28f11edbd",
+    "name": "learning",
+    "organizationName": "learning",
+    "verifiedDomains": Array [
+      "defendertest1.onmicrosoft.com",
+    ],
+  },
+]
+`;
+
+exports[`fetchFindings Should create a Vulnerability finding entity correctly when user has the correct permissions: vulnerabilityFindingEntitiesSuccessful 1`] = `Array []`;
+
+exports[`fetchLogonUsers Should create an User entity correctly when log on User has the correct permissions: logOnUserEntitiesSuccessful 1`] = `Array []`;
+
+exports[`fetchMachines Should create an account entity correctly when the machine has the correct permissions: machineEntitiesSuccessful 1`] = `Array []`;
+
+exports[`machineManagesDevicesRelationships Should create an machine entity correctly when  machine manages devices relationships has the correct permissions: machineDeviceEntitiesSuccessful 1`] = `Array []`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createAccountEntityWithOrganization properties transferred: createAccountEntityWithOrganization 1`] = `
+Object {
+  "_class": Array [
+    "Account",
+  ],
+  "_key": "microsoft_defender_account-5a721b05-53ed-4ed9-be02-aed28f11edbd",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "organization": Object {},
+      },
+    },
+  ],
+  "_type": "microsoft_defender_account",
+  "createdOn": undefined,
+  "defaultDomain": undefined,
+  "displayName": "DefenderAccount",
+  "id": undefined,
+  "name": undefined,
+  "organizationName": undefined,
+  "verifiedDomains": undefined,
+}
+`;
