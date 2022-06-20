@@ -42,7 +42,7 @@ export function createMachineEntity(data: Machine): Entity {
 
 export function createMachinesDeviceRelationship(data: Entity): Relationship {
   return createMappedRelationship({
-    // source: data,
+    source: data,
     _class: RelationshipClass.MANAGES,
     _type: MappedRelationships.MACHINE_MANAGES_DEVICE._type,
     _mapping: {
