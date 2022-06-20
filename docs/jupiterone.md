@@ -96,33 +96,9 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources     | Entity `_type`                     | Entity `_class`  |
-| ------------- | ---------------------------------- | ---------------- |
-| Account       | `microsoft_defender_account`       | `Account`        |
-| CVE           | `cve`                              | `Vulnerability`  |
-| Device        | `user_endpoint`                    | `Device`, `Host` |
-| Machine       | `microsoft_defender_machine`       | `HostAgent`      |
-| User          | `microsoft_defender_logon_user`    | `User`           |
-| Vulnerability | `microsoft_defender_vulnerability` | `Finding`        |
-
-### Relationships
-
-The following relationships are created:
-
-| Source Entity `_type`        | Relationship `_class` | Target Entity `_type`              |
-| ---------------------------- | --------------------- | ---------------------------------- |
-| `microsoft_defender_account` | **HAS**               | `microsoft_defender_machine`       |
-| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_logon_user`    |
-| `microsoft_defender_machine` | **IDENTIFIED**        | `microsoft_defender_vulnerability` |
-
-### Mapped Relationships
-
-The following mapped relationships are created:
-
-| Source Entity `_type`              | Relationship `_class` | Target Entity `_type` | Direction |
-| ---------------------------------- | --------------------- | --------------------- | --------- |
-| `microsoft_defender_machine`       | **MANAGES**           | `*user_endpoint*`     | FORWARD   |
-| `microsoft_defender_vulnerability` | **IS**                | `*cve*`               | FORWARD   |
+| Resources | Entity `_type`               | Entity `_class` |
+| --------- | ---------------------------- | --------------- |
+| Account   | `microsoft_defender_account` | `Account`       |
 
 <!--
 ********************************************************************************
