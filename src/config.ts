@@ -57,8 +57,6 @@ export interface IntegrationConfig extends IntegrationInstanceConfig {
    * flow.
    */
   tenant: string;
-
-  isDefenderApi?: boolean;
 }
 
 /**

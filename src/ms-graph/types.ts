@@ -20,5 +20,9 @@ export type ClientConfig = {
    */
   tenant: string;
 
-  isDefenderApi?: boolean;
+  /**
+   * The flag to required to check if its a defender api or azure api which is required
+   * to set scope for api calls
+   */
+  isDefenderApi?: boolean | undefined;
 };
