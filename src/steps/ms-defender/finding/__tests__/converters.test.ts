@@ -35,9 +35,23 @@ const findingMock: Finding = {
   exploitUris: [],
 };
 
+const machineMock = {
+  _class: ['HostAgent'],
+  _type: 'microsoft_defender_machine',
+  _key: 'f8c2d6c26063babf52bc76979ef22f423387f3b2',
+  id: 'f8c2d6c26063babf52bc76979ef22f423387f3b2',
+  agentVersion: '10.8040.19041.1682',
+  defenderAvStatus: 'Unknown',
+  riskScore: 'High',
+  name: 'testmachine1',
+  computerDnsName: 'testmachine1',
+  displayName: 'testmachine1',
+  function: ['endpoint-protection', 'vulnerability-detection'],
+};
+
 describe('createFindingEntity', () => {
   test('properties transferred', () => {
-    expect(createFindingEntity(findingMock)).toBeTruthy();
+    expect(createFindingEntity(findingMock, machineMock)).toBeTruthy();
   });
 });
 
