@@ -10,18 +10,20 @@ import {
 import { Finding } from '../../../types';
 import { entities, MappedRelationships, TargetEntities } from '../constants';
 
-const SEVERITY_MAPPINGS = {
-  none: 0,
-  low: 2,
-  medium: 3,
-  high: 4,
-  critical: 5,
-};
+const SEVERITY_TO_NUMERIC_SEVERITY_MAP = new Map<string, number>([
+  ['low', 2],
+  ['medium', 5],
+  ['high', 7],
+  ['critical', 10],
+]);
 
-function getNumericSeverity(severity: string): number {
-  const normalizedSeverity = severity.toLowerCase();
+export function getNumericSeverityFromIssueSeverity(
+  issueSeverity?: 'low' | 'medium' | 'high' | 'critical',
+): number {
+  if (!issueSeverity) return 0;
 
-  return SEVERITY_MAPPINGS[normalizedSeverity] || SEVERITY_MAPPINGS['none'];
+  const numericSeverity = SEVERITY_TO_NUMERIC_SEVERITY_MAP.get(issueSeverity);
+  return numericSeverity === undefined ? 0 : numericSeverity;
 }
 
 export function createFindingEntity(
@@ -41,7 +43,9 @@ export function createFindingEntity(
         description: defenderFinding.description,
         severity: defenderFinding.severity,
         score: defenderFinding.cvssV3,
-        numericSeverity: getNumericSeverity(defenderFinding.severity),
+        numericSeverity: getNumericSeverityFromIssueSeverity(
+          defenderFinding.severity.toLowerCase(),
+        ),
         publishedOn: defenderFinding.publishedOn,
         updatedOn: getTime(defenderFinding.updatedOn),
         category: '',

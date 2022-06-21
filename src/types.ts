@@ -81,7 +81,7 @@ export interface Finding {
   id: any;
   name: string;
   description: string;
-  severity: string;
+  severity: any;
   cvssV3: any;
   exposedMachines: string;
   publishedOn: any;
