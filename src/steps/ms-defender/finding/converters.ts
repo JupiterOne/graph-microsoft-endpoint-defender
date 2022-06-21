@@ -24,7 +24,11 @@ function getNumericSeverity(severity: string): number {
   return SEVERITY_MAPPINGS[normalizedSeverity] || SEVERITY_MAPPINGS['none'];
 }
 
-export function createFindingEntity(defenderFinding: Finding): Entity {
+export function createFindingEntity(
+  defenderFinding: Finding,
+  machineEntity,
+): Entity {
+  console.log(machineEntity);
   return createIntegrationEntity({
     entityData: {
       source: {},
@@ -32,7 +36,7 @@ export function createFindingEntity(defenderFinding: Finding): Entity {
         id: defenderFinding.id,
         _type: entities.FINDING._type,
         _class: entities.FINDING._class,
-        _key: defenderFinding.id + '_' + Math.random() * 1000000,
+        _key: defenderFinding.id + '_' + machineEntity.id,
         name: defenderFinding.name,
         displayName: defenderFinding.name,
         description: defenderFinding.description,

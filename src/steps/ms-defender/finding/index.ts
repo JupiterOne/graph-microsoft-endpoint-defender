@@ -43,7 +43,7 @@ export async function fetchFindings(
       await graphClient.iterateFindings(
         { machineId: machineEntity.id as string },
         async (finding) => {
-          const findingEntity = createFindingEntity(finding);
+          const findingEntity = createFindingEntity(finding, machineEntity);
           await jobState.addEntity(findingEntity);
           await jobState.setData(DATA_FINDING_ENTITY, findingEntity);
           return await jobState.addRelationship(
