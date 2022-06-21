@@ -28,7 +28,6 @@ export function createFindingEntity(
   defenderFinding: Finding,
   machineEntity,
 ): Entity {
-  console.log(machineEntity);
   return createIntegrationEntity({
     entityData: {
       source: {},
