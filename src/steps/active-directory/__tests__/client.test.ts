@@ -1,7 +1,7 @@
 import { integrationConfig } from '../../../../test/config';
 import { Recording, setupProjectRecording } from '../../../../test/recording';
 import { Machine, UserLogon } from '../../../types';
-import { DirectoryGraphClient } from '../clients/directoryClient';
+import { DefenderClient } from '../../ms-defender/clients/defenderClient';
 
 const logger: any = 'https://api.securitycenter.microsoft.com/api';
 
@@ -18,7 +18,7 @@ describe('iterateMachines', () => {
       name: 'iterateMachines',
     });
 
-    const client = new DirectoryGraphClient(logger, integrationConfig);
+    const client = new DefenderClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
     await client.iterateMachines((e) => {
@@ -29,7 +29,7 @@ describe('iterateMachines', () => {
   });
 
   test('inaccessible', async () => {
-    const client = new DirectoryGraphClient(logger, integrationConfig);
+    const client = new DefenderClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
     await client.iterateFindings(
@@ -48,7 +48,7 @@ describe('iterateMachines', () => {
   test('insufficient permissions', async () => {
     //This doesn't throw the correct error anymore
 
-    const client = new DirectoryGraphClient(logger, integrationConfig);
+    const client = new DefenderClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
     await client.iterateUsers(
@@ -66,10 +66,10 @@ describe('iterateMachines', () => {
 });
 
 describe('iterateUsers', () => {
-  let client: DirectoryGraphClient;
+  let client: DefenderClient;
 
   beforeEach(() => {
-    client = new DirectoryGraphClient(logger, integrationConfig);
+    client = new DefenderClient(logger, integrationConfig);
   });
 
   test('single selected property', async () => {
@@ -110,10 +110,10 @@ describe('iterateUsers', () => {
 });
 
 describe('iterateFindings', () => {
-  let client: DirectoryGraphClient;
+  let client: DefenderClient;
 
   beforeEach(() => {
-    client = new DirectoryGraphClient(logger, integrationConfig);
+    client = new DefenderClient(logger, integrationConfig);
   });
 
   test('single selected property', async () => {

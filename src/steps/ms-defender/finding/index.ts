@@ -1,20 +1,18 @@
 import {
-  Entity,
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig, IntegrationStepContext } from '../../../config';
-import { DirectoryGraphClient } from '../../active-directory/clients/directoryClient';
+import { Finding } from '../../../types';
+import { DefenderClient } from '../clients/defenderClient';
 
 import {
-  DATA_MACHINE_ENTITY,
   entities,
   MappedRelationships,
   relationships,
   steps,
   TargetEntities,
-  DATA_FINDING_ENTITY,
 } from '../constants';
 import {
   createFindingsCveRelationship,
@@ -28,14 +26,7 @@ export async function fetchFindings(
   executionContext: IntegrationStepContext,
 ): Promise<void> {
   const { logger, instance, jobState } = executionContext;
-  instance.config.isDefenderApi = true;
-  const graphClient = new DirectoryGraphClient(logger, instance.config);
-
-  const dataMachineEntity = await jobState.getData<Entity>(DATA_MACHINE_ENTITY);
-  if (!dataMachineEntity) {
-    logger.warn('Error fetching findings: machineEntity does not exist');
-    return;
-  }
+  const graphClient = new DefenderClient(logger, instance.config);
 
   await jobState.iterateEntities(
     { _type: entities.MACHINE._type },
@@ -45,7 +36,6 @@ export async function fetchFindings(
         async (finding) => {
           const findingEntity = createFindingEntity(finding, machineEntity);
           await jobState.addEntity(findingEntity);
-          await jobState.setData(DATA_FINDING_ENTITY, findingEntity);
           return await jobState.addRelationship(
             createMachineFindingsRelationship(machineEntity, findingEntity),
           );
@@ -60,18 +50,12 @@ export async function fetchFindings(
 export async function buildFindingIsCveRelationships(
   executionContext: IntegrationStepContext,
 ): Promise<void> {
-  const { logger, jobState } = executionContext;
+  const { jobState } = executionContext;
 
-  const dataFindingEntity = await jobState.getData<Entity>(DATA_FINDING_ENTITY);
-  if (!dataFindingEntity) {
-    logger.warn('Error mapping finding to CVE: FindingEntity does not exist');
-    return;
-  }
-
-  await jobState.iterateEntities(
+  await jobState.iterateEntities<Finding>(
     { _type: entities.FINDING._type },
-    async (findingEntity: any) => {
-      if (findingEntity.id?.toString().toLowerCase().indexOf('cve') > -1) {
+    async (findingEntity: Finding) => {
+      if (findingEntity.id.toString().toLowerCase().indexOf('cve') > -1) {
         await jobState.addRelationship(
           createFindingsCveRelationship(findingEntity),
         );

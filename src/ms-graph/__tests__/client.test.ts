@@ -10,7 +10,6 @@ const config: IntegrationConfig = {
   clientSecret:
     process.env.CLIENT_SECRET || 'L3X8Q~BO57QkoAsXMSkevrmVR2qiNh.qKEuzucAt',
   tenant: process.env.TENANT || '5a721b05-53ed-4ed9-be02-aed28f11edbd',
-  isDefenderApi: false,
 };
 const logger = createMockIntegrationLogger();
 
@@ -33,7 +32,10 @@ describe('verifyAuthentication', () => {
   });
 
   test('inaccesible', async () => {
-    const client = new GraphClient(logger, integrationConfig);
+    const client = new GraphClient(logger, {
+      ...integrationConfig,
+      isDefenderApi: true,
+    });
 
     await expect(client.verifyAuthentication()).rejects.toThrow(
       'Provider authentication failed at /organization: 401 InvalidAuthenticationToken',
@@ -72,7 +74,10 @@ describe('fetchOrganization', () => {
   });
 
   test('inaccessible', async () => {
-    const client = new GraphClient(logger, integrationConfig);
+    const client = new GraphClient(logger, {
+      ...integrationConfig,
+      isDefenderApi: true,
+    });
 
     await expect(client.fetchOrganization()).rejects.toThrow(
       'Provider authorization failed at /organization: 401 InvalidAuthenticationToken',

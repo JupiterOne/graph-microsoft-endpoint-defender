@@ -1,3 +1,5 @@
+import { Entity } from '@jupiterone/integration-sdk-core';
+
 export interface Machine {
   id: string;
   computerDnsName: string;
@@ -11,7 +13,7 @@ export interface Machine {
   defenderAvStatus: string;
   riskScore: string;
   osPlatform: string;
-  osVersion: any;
+  osVersion?: string | null;
   osProcessor: string;
   version: string;
   lastIpAddress: string;
@@ -21,7 +23,7 @@ export interface Machine {
   rbacGroupName: string;
   exposureLevel: string;
   isAadJoined: boolean;
-  aadDeviceId: any;
+  aadDeviceId: string | null;
   machineTags: Array<string>;
   osArchitecture: string;
   managedBy: string;
@@ -77,7 +79,7 @@ export interface Vulnerability {
   exploitUris: Array<string>;
 }
 
-export interface Finding {
+export interface Finding extends Entity {
   id: any;
   name: string;
   description: string;

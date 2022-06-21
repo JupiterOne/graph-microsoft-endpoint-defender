@@ -58,9 +58,7 @@ export interface IntegrationConfig extends IntegrationInstanceConfig {
    */
   tenant: string;
 
-  /**
-   * This is to differentiate between the azure api vs defender api **/
-  isDefenderApi: boolean;
+  isDefenderApi?: boolean;
 }
 
 /**

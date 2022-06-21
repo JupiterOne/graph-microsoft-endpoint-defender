@@ -1,18 +1,12 @@
 import {
-  Entity,
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig, IntegrationStepContext } from '../../../config';
-import { DirectoryGraphClient } from '../../active-directory/clients/directoryClient';
+import { DefenderClient } from '../clients/defenderClient';
 
-import {
-  DATA_MACHINE_ENTITY,
-  entities,
-  relationships,
-  steps,
-} from '../constants';
+import { entities, relationships, steps } from '../constants';
 import { createUserEntity, createMachineUserRelationship } from './converters';
 
 export * from '../constants';
@@ -22,14 +16,7 @@ export async function fetchLogonUsers(
   executionContext: IntegrationStepContext,
 ): Promise<void> {
   const { logger, instance, jobState } = executionContext;
-  instance.config.isDefenderApi = true;
-  const graphClient = new DirectoryGraphClient(logger, instance.config);
-
-  const dataMachineEntity = await jobState.getData<Entity>(DATA_MACHINE_ENTITY);
-  if (!dataMachineEntity) {
-    logger.warn('Error fetching users: machineEntity does not exist');
-    return;
-  }
+  const graphClient = new DefenderClient(logger, instance.config);
 
   await jobState.iterateEntities(
     { _type: entities.MACHINE._type },

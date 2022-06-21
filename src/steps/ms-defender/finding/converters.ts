@@ -37,7 +37,7 @@ export function createFindingEntity(
         id: defenderFinding.id,
         _type: entities.FINDING._type,
         _class: entities.FINDING._class,
-        _key: defenderFinding.id + '_' + machineEntity.id,
+        _key: machineEntity.id + '_' + defenderFinding.id,
         name: defenderFinding.name,
         displayName: defenderFinding.name,
         description: defenderFinding.description,
@@ -67,12 +67,11 @@ export function createFindingsCveRelationship(
       sourceEntityKey: findingEntity._key,
       relationshipDirection:
         MappedRelationships.FINDING_IS_CVE_VULNERABILITY.direction,
-      targetFilterKeys: [['Resource', '_type', '_class', '_key']],
+      targetFilterKeys: [['_type', '_key']],
       targetEntity: {
         _class: TargetEntities.CVE._class,
         _type: TargetEntities.CVE._type,
-        _key: `cve_${findingEntity._key}`,
-        Resource: TargetEntities.CVE.resourceName,
+        _key: findingEntity._key.toLowerCase(),
         displayName: findingEntity.displayName,
       },
       skipTargetCreation: true,

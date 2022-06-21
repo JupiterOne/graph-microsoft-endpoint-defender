@@ -84,5 +84,3 @@ export const MappedRelationships = {
   },
 };
 export const DATA_ACCOUNT_ENTITY = adEntities.ACCOUNT._type;
-export const DATA_MACHINE_ENTITY = entities.MACHINE._type;
-export const DATA_FINDING_ENTITY = entities.FINDING._type;

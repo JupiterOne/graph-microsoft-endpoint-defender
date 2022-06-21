@@ -11,7 +11,6 @@ const config: IntegrationConfig = {
   clientId: 'a8626c1e-191d-4e8f-9cbc-a4a6e85104ac',
   clientSecret: 'L3X8Q~BO57QkoAsXMSkevrmVR2qiNh.qKEuzucAt',
   tenant: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
-  isDefenderApi: false,
 };
 
 // See test/README.md for details

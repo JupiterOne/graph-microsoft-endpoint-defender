@@ -33,6 +33,9 @@ const findingMock: Finding = {
   exploitInKit: false,
   exploitTypes: [],
   exploitUris: [],
+  _class: 'Finding',
+  _key: 'microsoft_defender_finding_id',
+  _type: 'microsoft_defender_finding',
 };
 
 const machineMock = {
@@ -59,19 +62,18 @@ describe('createFindingsCveRelationship', () => {
   test('properties transferred for users', () => {
     expect(createFindingsCveRelationship(machine)).toEqual({
       _class: 'IS',
-      _key: 'microsoft_defender_machine_id|is|cve_microsoft_defender_machine_id',
+      _key: 'microsoft_defender_machine_id|is|microsoft_defender_machine_id',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
         sourceEntityKey: 'microsoft_defender_machine_id',
         targetEntity: {
-          Resource: 'CVE',
           _class: ['Vulnerability'],
-          _key: 'cve_microsoft_defender_machine_id',
+          _key: 'microsoft_defender_machine_id',
           _type: 'cve',
           displayName: 'name',
         },
-        targetFilterKeys: [['Resource', '_type', '_class', '_key']],
+        targetFilterKeys: [['_type', '_key']],
       },
       _type: 'microsoft_defender_vulnerability_is_cve',
       displayName: 'IS',

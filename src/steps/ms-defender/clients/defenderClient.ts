@@ -1,11 +1,11 @@
 import { Finding, Machine, UserLogon } from '../../../types';
 import { GraphClient } from '../../../ms-graph/client';
 
-export enum MemberType {
-  USER = '#microsoft.graph.user',
-}
+export class DefenderClient extends GraphClient {
+  constructor(logger, config) {
+    super(logger, { ...config, isDefenderApi: true });
+  }
 
-export class DirectoryGraphClient extends GraphClient {
   // https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machines?view=o365-worldwide
   public async iterateMachines(
     callback: (user: Machine) => void | Promise<void>,
