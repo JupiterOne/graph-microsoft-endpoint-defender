@@ -2,9 +2,20 @@ import { integrationConfig } from '../../../../test/config';
 import { Recording, setupProjectRecording } from '../../../../test/recording';
 import { Machine, UserLogon, Finding } from '../../../types';
 import { DefenderClient } from '../../ms-defender/clients/defenderClient';
+
 import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
+import { IntegrationConfig } from '../../../config';
 const logger: any = createMockIntegrationLogger();
 
+const DEFAULT_CLIENT_ID = 'dummy-client-id';
+const DEFAULT_CLIENT_SECRET = 'dummy--client-secret';
+const DEFAULT_TENANT = 'd68d7cbe-a848-4b5a-98d6-d7b3d6f3dfc0';
+
+const invalidMachineConfig: IntegrationConfig = {
+  clientId: DEFAULT_CLIENT_ID,
+  clientSecret: DEFAULT_CLIENT_SECRET,
+  tenant: DEFAULT_TENANT,
+};
 // See test/README.md for details
 let recording: Recording;
 afterEach(async () => {
@@ -29,37 +40,17 @@ describe('iterateMachines', () => {
   });
 
   test('inaccessible', async () => {
-    const client = new DefenderClient(logger, integrationConfig);
-
-    const resources: Machine[] = [];
-    await client.iterateFindings(
-      {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: ['id', 'displayName'],
-      },
-      (e) => {
-        resources.push();
-      },
+    const client = new DefenderClient(logger, invalidMachineConfig);
+    expect(client.iterateMachines(e)).rejects.toThrow(
+      'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
     );
-
-    expect(resources.length).toEqual(0);
   });
 
   test('insufficient permissions', async () => {
-    const client = new DefenderClient(logger, integrationConfig);
-
-    const resources: Machine[] = [];
-    await client.iterateUsers(
-      {
-        machineId: '1c417feb-b04f-46c9-a747-614d6d03f348',
-        select: ['id', 'displayName'],
-      },
-      (e) => {
-        resources.push();
-      },
+    const client = new DefenderClient(logger, invalidMachineConfig);
+    expect(client.iterateMachines(e)).rejects.toThrow(
+      'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
     );
-
-    expect(resources.length).toEqual(0);
   });
 });
 
@@ -128,7 +119,7 @@ describe('iterateFindings', () => {
         select: ['id', 'displayName'],
       },
       (e) => {
-        resources.push();
+        resources.push(e);
       },
     );
     expect(resources.length).toBe(0);
@@ -147,10 +138,13 @@ describe('iterateFindings', () => {
         select: ['id', 'displayName'],
       },
       (e) => {
-        resources.push();
+        resources.push(e);
       },
     );
 
     expect(resources.length).toBe(0);
   });
 });
+function e(e: any): Promise<void> {
+  throw new Error('Function not implemented.');
+}

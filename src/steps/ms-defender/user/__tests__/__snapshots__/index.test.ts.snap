@@ -1,3 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fetchLogonUsers Should create an User entity correctly when log on User has the correct permissions: logOnUserEntitiesSuccessful 1`] = `Array []`;
+exports[`fetchLogonUsers Should create an User entity correctly when log on User has the correct permissions 1`] = `
+Array [
+  Object {
+    "accountDomain": "testmachine5",
+    "accountName": "administrator1",
+    "accountSid": null,
+    "firstSeen": "2022-05-25T11:20:07Z",
+    "id": "testmachine5\\\\administrator1",
+    "isDomainAdmin": true,
+    "isOnlyNetworkUser": null,
+    "lastSeen": "2022-05-25T11:20:14Z",
+    "leastPrevalentMachineId": null,
+    "logOnMachinesCount": null,
+    "logonTypes": "Network, RemoteInteractive",
+    "mostPrevalentMachineId": null,
+  },
+]
+`;

@@ -2,6 +2,9 @@ import { createMockStepExecutionContext } from '@jupiterone/integration-sdk-test
 import { fetchMachines, buildMachineManagesDevicesRelationships } from '..';
 import { entities } from '../../constants';
 import { IntegrationConfig } from '../../../../../src/config';
+import { Machine } from '../../../../types';
+import { DefenderClient } from '../../../ms-defender/clients/defenderClient';
+import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
 import {
   Recording,
   setupProjectRecording,
@@ -21,40 +24,50 @@ let recording: Recording;
 afterEach(async () => {
   recording ? await recording.stop() : null;
 });
-
+const context = createMockStepExecutionContext({ instanceConfig: config });
+const logger: any = createMockIntegrationLogger();
 describe('fetchMachines', () => {
   it('Should create an account entity correctly when the machine has the correct permissions', async () => {
-    recording = setupProjectRecording({
-      directory: __dirname,
-      name: 'fetchMachines',
-    });
+    // recording = setupProjectRecording({
+    //   directory: __dirname,
+    //   name: 'fetchMachines',
+    // });
 
-    const context = createMockStepExecutionContext({ instanceConfig: config });
     await fetchMachines(context);
 
     const machineEntities = context.jobState.collectedEntities;
+    const client = new DefenderClient(logger, config);
+    var machinelist: any;
+    const resources: Machine[] = [];
+    await client.iterateMachines((e) => {
+      machinelist = resources.push(e);
+    });
 
+    expect(resources.length).toBeGreaterThan(0);
     expect(machineEntities.length).toBe(0);
     expect(machineEntities).toMatchGraphObjectSchema({
       _class: entities.MACHINE._class,
     });
-    expect(machineEntities).toMatchSnapshot('machineEntitiesSuccessful');
+    expect(resources).toMatchSnapshot(resources);
   });
 });
 
 describe('machineManagesDevicesRelationships', () => {
+  var machinelist: any;
   it('Should create an machine entity correctly when  machine manages devices relationships has the correct permissions', async () => {
     const context = createMockStepExecutionContext({ instanceConfig: config });
     await buildMachineManagesDevicesRelationships(context);
-
+    const client = new DefenderClient(logger, config);
     const machineDeviceEntities = context.jobState.collectedEntities;
+    const resources: Machine[] = [];
 
+    await client.iterateMachines((e) => {
+      machinelist = resources.push(e);
+    });
     expect(machineDeviceEntities.length).toBe(0);
     expect(machineDeviceEntities).toMatchGraphObjectSchema({
       _class: entities.MACHINE._class,
     });
-    expect(machineDeviceEntities).toMatchSnapshot(
-      'machineDeviceEntitiesSuccessful',
-    );
+    expect(resources).toMatchSnapshot(resources);
   });
 });
