@@ -37,7 +37,7 @@ describe('fetchMachines', () => {
 
     const machineEntities = context.jobState.collectedEntities;
     const client = new DefenderClient(logger, config);
-    var machinelist: any;
+    let machinelist: any;
     const resources: Machine[] = [];
     await client.iterateMachines((e) => {
       machinelist = resources.push(e);
@@ -53,7 +53,7 @@ describe('fetchMachines', () => {
 });
 
 describe('machineManagesDevicesRelationships', () => {
-  var machinelist: any;
+  let machinelist: any;
   it('Should create an machine entity correctly when  machine manages devices relationships has the correct permissions', async () => {
     const context = createMockStepExecutionContext({ instanceConfig: config });
     await buildMachineManagesDevicesRelationships(context);
