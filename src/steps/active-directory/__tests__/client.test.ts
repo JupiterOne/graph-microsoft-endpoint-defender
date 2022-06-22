@@ -1,9 +1,9 @@
 import { integrationConfig } from '../../../../test/config';
 import { Recording, setupProjectRecording } from '../../../../test/recording';
-import { Machine, UserLogon } from '../../../types';
+import { Machine, UserLogon, Finding } from '../../../types';
 import { DefenderClient } from '../../ms-defender/clients/defenderClient';
-
-const logger: any = 'https://api.securitycenter.microsoft.com/api';
+import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
+const logger: any = createMockIntegrationLogger();
 
 // See test/README.md for details
 let recording: Recording;
@@ -46,8 +46,6 @@ describe('iterateMachines', () => {
   });
 
   test('insufficient permissions', async () => {
-    //This doesn't throw the correct error anymore
-
     const client = new DefenderClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
@@ -87,6 +85,7 @@ describe('iterateUsers', () => {
         resources.push(e);
       },
     );
+    expect(resources.length).toBe(1);
   });
 
   test('multiple selected properties', async () => {
@@ -122,15 +121,17 @@ describe('iterateFindings', () => {
       name: 'iterateFindings_single_properties',
     });
 
-    const resources: UserLogon[] = [];
+    const resources: Finding[] = [];
     await client.iterateFindings(
       {
-        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
+        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        select: ['id', 'displayName'],
       },
       (e) => {
         resources.push();
       },
     );
+    expect(resources.length).toBe(0);
   });
 
   test('multiple selected properties', async () => {
@@ -139,10 +140,11 @@ describe('iterateFindings', () => {
       name: 'iterateFindings_multiple_properties',
     });
 
-    const resources: UserLogon[] = [];
+    const resources: Finding[] = [];
     await client.iterateFindings(
       {
         machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
+        select: ['id', 'displayName'],
       },
       (e) => {
         resources.push();
