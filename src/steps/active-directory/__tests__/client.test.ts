@@ -32,12 +32,11 @@ describe('iterateMachines', () => {
     const client = new DefenderClient(logger, integrationConfig);
 
     const resources: Machine[] = [];
-    const machine = async () =>
-      await client.iterateMachines((e) => {
-        resources.push(e);
-      });
+    await client.iterateMachines((e) => {
+      resources.push(e);
+    });
 
-    expect(resources.length).toBe(0);
+    expect(resources.length).toBeGreaterThan(0);
   });
 
   test('inaccessible', async () => {
@@ -69,16 +68,15 @@ describe('iterateUsers', () => {
     });
 
     const resources: UserLogon[] = [];
-    const user = async () =>
-      await client.iterateUsers(
-        {
-          machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
-        },
-        (e) => {
-          resources.push(e);
-        },
-      );
-    expect(resources.length).toBe(0);
+    await client.iterateUsers(
+      {
+        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
+    expect(resources.length).toBe(1);
   });
 
   test('multiple selected properties', async () => {
@@ -88,17 +86,16 @@ describe('iterateUsers', () => {
     });
 
     const resources: UserLogon[] = [];
-    const user = async () =>
-      await client.iterateUsers(
-        {
-          machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
-        },
-        (e) => {
-          resources.push(e);
-        },
-      );
+    await client.iterateUsers(
+      {
+        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
 
-    expect(resources.length).toBe(0);
+    expect(resources.length).toBe(1);
   });
 });
 
@@ -116,16 +113,15 @@ describe('iterateFindings', () => {
     });
 
     const resources: Finding[] = [];
-    const finding = async () =>
-      await client.iterateFindings(
-        {
-          machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
-          select: ['id', 'displayName'],
-        },
-        (e) => {
-          resources.push(e);
-        },
-      );
+    await client.iterateFindings(
+      {
+        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        select: ['id', 'displayName'],
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
     expect(resources.length).toBe(0);
   });
 
@@ -136,16 +132,15 @@ describe('iterateFindings', () => {
     });
 
     const resources: Finding[] = [];
-    const finding = async () =>
-      await client.iterateFindings(
-        {
-          machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
-          select: ['id', 'displayName'],
-        },
-        (e) => {
-          resources.push(e);
-        },
-      );
+    await client.iterateFindings(
+      {
+        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
+        select: ['id', 'displayName'],
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
 
     expect(resources.length).toBe(0);
   });
