@@ -1,7 +1,9 @@
 # Development
 
-Add details here to give a brief overview of how to work with the provider APIs.
-Please reference any SDKs or API docs used to help build the integration here.
+This Readme document provides details on how to leverage MS Defender Graph API
+to access Microsoft defender data such as the Defender agent status,
+Device\Machines data, Users, and associated vulnerabilities. Here we will
+explore how to set up a Microsoft Azure account to access MS defender graph API.
 
 ## Prerequisites
 
@@ -39,8 +41,18 @@ In the Azure portal:
 
 ## Add Devices and Simulations
 
-In the [Defender portal](https://security.microsoft.com/homepage), navigate to
-**Evaluations**.
+To test the integration, we will need some test data, since we are working with
+MS defender, an actual environment is needed. Such an environment will have an
+Organization setup, Multiple Servers running a Defender agent on it, some users
+associated with each machine (Server), and finally some vulnerabilities on some
+of the machines. This kind of live environment setup will be very costly as well
+as a tedious job, fortunately, Microsoft predicted that and provided an option
+to create a testing Lab. You can use this Lab to create virtual test Machines,
+users, Defender agents, and Vulnerabilities. This virtual environment will act
+as a live environment and give you similar results when you hit any MS Defender
+APIs. To create a Lab go to the
+[Defender portal](https://security.microsoft.com/homepage), and navigate
+to **Evaluations**.
 
 1. Setup Lab
 
