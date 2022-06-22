@@ -5,10 +5,7 @@ import { IntegrationConfig } from '../../../../../src/config';
 import { Machine } from '../../../../types';
 import { DefenderClient } from '../../../ms-defender/clients/defenderClient';
 import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
-import {
-  Recording,
-  setupProjectRecording,
-} from '../../../../../test/recording';
+import { Recording } from '../../../../../test/recording';
 const DEFAULT_CLIENT_ID = 'dummy-acme-client-id';
 const DEFAULT_CLIENT_SECRET = 'dummy-acme-client-secret';
 const DEFAULT_TENANT = 'dummy-tenant';

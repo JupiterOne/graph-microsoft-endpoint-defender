@@ -17,7 +17,7 @@ const config: IntegrationConfig = {
   clientSecret: process.env.CLIENT_SECRET || DEFAULT_CLIENT_SECRET,
   tenant: process.env.TENANT || DEFAULT_TENANT,
 };
-const context = createMockStepExecutionContext({ instanceConfig: config });
+
 const logger: any = createMockIntegrationLogger();
 // See test/README.md for details
 let recording: Recording;
