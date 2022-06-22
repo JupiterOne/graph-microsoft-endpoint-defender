@@ -52,16 +52,17 @@ export class DefenderClient extends GraphClient {
     callback: (user: Finding) => void | Promise<void>,
   ): Promise<void> {
     let filters: any = [];
-    if (process.env.FINDING_SEVERITY) {
+    if (this.config.findingSeverity) {
       filters.push(
         '$filter=severity+eq+' +
-          process.env.FINDING_SEVERITY?.split(',')
+          this.config.findingSeverity
+            .split(',')
             .map((z) => "'" + z + "'")
             .join('+or+severity+eq+'),
       );
     }
-    if (process.env.FINDING_LIMIT) {
-      filters.push('$top=' + process.env.FINDING_LIMIT);
+    if (this.config.findingsLimit) {
+      filters.push('$top=' + this.config.findingsLimit);
     }
 
     if (filters && filters.length) {

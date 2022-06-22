@@ -25,4 +25,14 @@ export type ClientConfig = {
    * to set scope for api calls
    */
   isDefenderApi?: boolean | undefined;
+
+  /**
+   * To filter findings based on severity
+   */
+  findingSeverity?: string | undefined;
+
+  /**
+   * To fetch top n findings
+   */
+  findingsLimit?: string | undefined;
 };

@@ -33,6 +33,12 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
   tenant: {
     type: 'string',
   },
+  findingSeverity: {
+    type: 'string',
+  },
+  findingsLimit: {
+    type: 'string',
+  },
 };
 
 /**

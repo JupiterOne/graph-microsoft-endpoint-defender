@@ -18,6 +18,8 @@ export const integrationConfig: IntegrationConfig = {
   clientId: process.env.CLIENT_ID || DEFAULT_CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET || DEFAULT_CLIENT_SECRET,
   tenant: process.env.TENANT || DEFAULT_TENANT,
+  findingSeverity: process.env.FINDING_SEVERITY || '',
+  findingLimit: process.env.FINDING_LIMIT || '',
 };
 
 export function buildStepTestConfigForStep(stepId: string): StepTestConfig {
