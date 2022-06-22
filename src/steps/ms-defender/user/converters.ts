@@ -16,7 +16,7 @@ export function generateUserKey(user: User): string {
 export function createUserEntity(data: UserLogon): Entity {
   return createIntegrationEntity({
     entityData: {
-      source: {}, // removed due to size
+      source: data,
       assign: {
         _key: data.id,
         _class: entities.USER._class,

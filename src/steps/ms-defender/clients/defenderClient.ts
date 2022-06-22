@@ -2,6 +2,7 @@ import { Finding, Machine, UserLogon } from '../../../types';
 import { GraphClient } from '../../../ms-graph/client';
 
 export class DefenderClient extends GraphClient {
+  BASE_URL_API: string = 'https://api.securitycenter.microsoft.com/api';
   constructor(logger, config) {
     super(logger, { ...config, isDefenderApi: true });
   }
@@ -11,7 +12,7 @@ export class DefenderClient extends GraphClient {
     callback: (user: Machine) => void | Promise<void>,
   ): Promise<void> {
     return this.iterateResources({
-      resourceUrl: `${process.env.BASE_URL_API}/machines`,
+      resourceUrl: `${this.BASE_URL_API}/machines`,
       callback,
     });
   }
@@ -33,7 +34,7 @@ export class DefenderClient extends GraphClient {
         : input.select
       : undefined;
     return this.iterateResources({
-      resourceUrl: `${process.env.BASE_URL_API}/machines/${input.machineId}/logonusers`,
+      resourceUrl: `${this.BASE_URL_API}/machines/${input.machineId}/logonusers`,
       query: $select ? { $select } : undefined,
       callback,
     });
@@ -67,7 +68,7 @@ export class DefenderClient extends GraphClient {
       filters = filters.join('&');
     }
 
-    const url = `${process.env.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?${filters}`;
+    const url = `${this.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?${filters}`;
     return this.iterateResources({
       resourceUrl: url,
       callback,
