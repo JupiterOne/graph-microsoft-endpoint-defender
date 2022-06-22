@@ -34,10 +34,10 @@ describe('fetchMachines', () => {
 
     const machineEntities = context.jobState.collectedEntities;
     const client = new DefenderClient(logger, config);
-    let machinelist: any;
+
     const resources: Machine[] = [];
     await client.iterateMachines((e) => {
-      machinelist = resources.push(e);
+      resources.push(e);
     });
 
     expect(resources.length).toBeGreaterThan(0);
@@ -50,7 +50,6 @@ describe('fetchMachines', () => {
 });
 
 describe('machineManagesDevicesRelationships', () => {
-  let machinelist: any;
   it('Should create an machine entity correctly when  machine manages devices relationships has the correct permissions', async () => {
     const context = createMockStepExecutionContext({ instanceConfig: config });
     await buildMachineManagesDevicesRelationships(context);
@@ -59,7 +58,7 @@ describe('machineManagesDevicesRelationships', () => {
     const resources: Machine[] = [];
 
     await client.iterateMachines((e) => {
-      machinelist = resources.push(e);
+      resources.push(e);
     });
     expect(machineDeviceEntities.length).toBe(0);
     expect(machineDeviceEntities).toMatchGraphObjectSchema({
