@@ -7,10 +7,14 @@ import {
 import { IntegrationConfig } from '../../../../src/config';
 import { Recording } from '../../../../test/recording';
 
+const DEFAULT_CLIENT_ID = 'dummy-acme-client-id';
+const DEFAULT_CLIENT_SECRET = 'dummy-acme-client-secret';
+const DEFAULT_TENANT = 'dummy-tenant';
+
 const config: IntegrationConfig = {
-  clientId: 'a8626c1e-191d-4e8f-9cbc-a4a6e85104ac',
-  clientSecret: 'L3X8Q~BO57QkoAsXMSkevrmVR2qiNh.qKEuzucAt',
-  tenant: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+  clientId: process.env.CLIENT_ID || DEFAULT_CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET || DEFAULT_CLIENT_SECRET,
+  tenant: process.env.TENANT || DEFAULT_TENANT,
 };
 
 const insufficientPermissionsDirectoryConfig: IntegrationConfig = {

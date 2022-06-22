@@ -6,7 +6,7 @@ import {
 import { entities as adEntities } from '../active-directory';
 
 export const steps: Record<string, string> = {
-  FETCH_MACHINE: 'Fetch machine',
+  FETCH_MACHINES: 'Fetch machines',
   MACHINE_DEVICE_RELATIONSHIP: 'Map machine to device',
   FETCH_USERS: 'Fetch users',
   FETCH_FINDINGS: 'Fetch findings',
@@ -41,7 +41,7 @@ export const TargetEntities = {
   },
   DEVICE: {
     resourceName: 'Device',
-    _type: 'user_endPoint',
+    _type: 'user_endpoint',
     _class: ['Device', 'Host'],
   },
 };
@@ -76,7 +76,7 @@ export const MappedRelationships = {
     direction: RelationshipDirection.FORWARD,
   },
   MACHINE_MANAGES_DEVICE: {
-    _type: 'microsoft_defender_machine_manages_user_endPoint',
+    _type: 'microsoft_defender_machine_manages_user_endpoint',
     sourceType: entities.MACHINE._type,
     _class: RelationshipClass.MANAGES,
     targetType: TargetEntities.DEVICE._type,

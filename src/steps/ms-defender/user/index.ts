@@ -39,13 +39,13 @@ export const userSteps: Step<
 >[] = [
   {
     id: steps.FETCH_USERS,
-    name: 'Ms defender machine logged in Users',
+    name: 'Fetch Machine Users',
     entities: [entities.USER],
     relationships: [
       relationships.ACCOUNT_HAS_MACHINE,
       relationships.MACHINE_HAS_USER,
     ],
-    dependsOn: [steps.FETCH_MACHINE],
+    dependsOn: [steps.FETCH_MACHINES],
     executionHandler: fetchLogonUsers,
   },
 ];

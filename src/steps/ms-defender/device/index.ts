@@ -60,8 +60,8 @@ export const deviceSteps: Step<
   IntegrationStepExecutionContext<IntegrationConfig>
 >[] = [
   {
-    id: steps.FETCH_MACHINE,
-    name: 'Microsoft Defender Machines',
+    id: steps.FETCH_MACHINES,
+    name: 'Fetch Machines',
     entities: [entities.MACHINE],
     relationships: [relationships.ACCOUNT_HAS_MACHINE],
     dependsOn: [activeDirectorySteps.FETCH_ACCOUNT],
@@ -69,11 +69,11 @@ export const deviceSteps: Step<
   },
   {
     id: steps.MACHINE_DEVICE_RELATIONSHIP,
-    name: 'Machine manages devices relationship',
+    name: 'Build Device relationship',
     entities: [TargetEntities.DEVICE],
     relationships: [],
     mappedRelationships: [MappedRelationships.MACHINE_MANAGES_DEVICE],
-    dependsOn: [steps.FETCH_MACHINE],
+    dependsOn: [steps.FETCH_MACHINES],
     executionHandler: buildMachineManagesDevicesRelationships,
   },
 ];

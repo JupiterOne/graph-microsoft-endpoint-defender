@@ -74,14 +74,14 @@ describe('createMachinesDeviceRelationship', () => {
   test('properties transferred', () => {
     expect(createMachinesDeviceRelationship(exampleAccountEntity)).toEqual({
       _class: 'MANAGES',
-      _key: 'microsoft_defender_account_id|manages|FORWARD:_type=user_endPoint:_class=Device,Host:hostname=undefined',
+      _key: 'microsoft_defender_account_id|manages|FORWARD:_type=user_endpoint:_class=Device,Host:hostname=undefined',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
         sourceEntityKey: 'microsoft_defender_account_id',
         targetEntity: {
           _class: ['Device', 'Host'],
-          _type: 'user_endPoint',
+          _type: 'user_endpoint',
           category: 'endpoint',
           displayName: undefined,
           fqdn: undefined,
@@ -94,7 +94,7 @@ describe('createMachinesDeviceRelationship', () => {
         },
         targetFilterKeys: [['_type', '_class', 'hostname']],
       },
-      _type: 'microsoft_defender_machine_manages_user_endPoint',
+      _type: 'microsoft_defender_machine_manages_user_endpoint',
       displayName: 'MANAGES',
     });
   });

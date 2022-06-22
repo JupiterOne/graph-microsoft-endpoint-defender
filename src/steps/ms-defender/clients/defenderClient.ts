@@ -59,8 +59,8 @@ export class DefenderClient extends GraphClient {
             .join('+or+severity+eq+'),
       );
     }
-    if (process.env.FINDIGS_LIMIT) {
-      filters.push('$top=' + process.env.FINDIGS_LIMIT);
+    if (process.env.FINDING_LIMIT) {
+      filters.push('$top=' + process.env.FINDING_LIMIT);
     }
 
     if (filters && filters.length) {

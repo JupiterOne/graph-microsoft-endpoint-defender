@@ -68,18 +68,18 @@ export const findingSteps: Step<
 >[] = [
   {
     id: steps.FETCH_FINDINGS,
-    name: 'Ms defender machine findings',
+    name: 'Fetch Vulnerability Findings',
     entities: [entities.FINDING],
     relationships: [
       relationships.ACCOUNT_HAS_MACHINE,
       relationships.MACHINE_IDENTIFIED_FINDING,
     ],
-    dependsOn: [steps.FETCH_MACHINE],
+    dependsOn: [steps.FETCH_MACHINES],
     executionHandler: fetchFindings,
   },
   {
     id: steps.FINDING_VULNERABILITY_RELATIONSHIP,
-    name: 'Defender finding Is CVE Vulnerability Relationships',
+    name: 'Build Finding CVE Relationships',
     entities: [TargetEntities.CVE],
     relationships: [],
     mappedRelationships: [MappedRelationships.FINDING_IS_CVE_VULNERABILITY],
