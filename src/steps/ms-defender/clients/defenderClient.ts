@@ -61,8 +61,8 @@ export class DefenderClient extends GraphClient {
             .join('+or+severity+eq+'),
       );
     }
-    if (this.config.findingsLimit) {
-      filters.push('$top=' + this.config.findingsLimit);
+    if (this.config.findingLimit) {
+      filters.push('$top=' + this.config.findingLimit);
     }
 
     if (filters && filters.length) {

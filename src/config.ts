@@ -36,7 +36,7 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
   findingSeverity: {
     type: 'string',
   },
-  findingsLimit: {
+  findingLimit: {
     type: 'string',
   },
 };

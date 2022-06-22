@@ -34,5 +34,5 @@ export type ClientConfig = {
   /**
    * To fetch top n findings
    */
-  findingsLimit?: string | undefined;
+  findingLimit?: string | undefined;
 };
