@@ -4,18 +4,18 @@ import { Machine, UserLogon, Finding } from '../../../types';
 import { DefenderClient } from '../../ms-defender/clients/defenderClient';
 
 import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
-import { IntegrationConfig } from '../../../config';
+// import { IntegrationConfig } from '../../../config';
 const logger: any = createMockIntegrationLogger();
 
-const DEFAULT_CLIENT_ID = 'dummy-client-id';
-const DEFAULT_CLIENT_SECRET = 'dummy--client-secret';
-const DEFAULT_TENANT = 'd68d7cbe-a848-4b5a-98d6-d7b3d6f3dfc0';
+// const DEFAULT_CLIENT_ID = 'dummy-client-id';
+// const DEFAULT_CLIENT_SECRET = 'dummy--client-secret';
+// const DEFAULT_TENANT = 'd68d7cbe-a848-4b5a-98d6-d7b3d6f3dfc0';
 
-const invalidMachineConfig: IntegrationConfig = {
-  clientId: DEFAULT_CLIENT_ID,
-  clientSecret: DEFAULT_CLIENT_SECRET,
-  tenant: DEFAULT_TENANT,
-};
+// const invalidMachineConfig: IntegrationConfig = {
+//   clientId: DEFAULT_CLIENT_ID,
+//   clientSecret: DEFAULT_CLIENT_SECRET,
+//   tenant: DEFAULT_TENANT,
+// };
 // See test/README.md for details
 let recording: Recording;
 afterEach(async () => {
@@ -146,6 +146,3 @@ describe('iterateFindings', () => {
     expect(resources.length).toBe(0);
   });
 });
-function e(e: any): Promise<void> {
-  throw new Error('Function not implemented.');
-}

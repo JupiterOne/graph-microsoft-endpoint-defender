@@ -50,7 +50,7 @@ describe('fetchMachines', () => {
 });
 
 describe('machineManagesDevicesRelationships', () => {
-  let machinelist: any;
+  // let machinelist: any;
   it('Should create an machine entity correctly when  machine manages devices relationships has the correct permissions', async () => {
     const context = createMockStepExecutionContext({ instanceConfig: config });
     await buildMachineManagesDevicesRelationships(context);
