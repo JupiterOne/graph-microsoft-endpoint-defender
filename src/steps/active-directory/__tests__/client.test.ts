@@ -39,14 +39,14 @@ describe('iterateMachines', () => {
     expect(resources.length).toBeGreaterThan(0);
   });
 
-  test('inaccessible', () => {
+  test('inaccessible', (): void => {
     const client = new DefenderClient(logger, invalidMachineConfig);
     expect(client.iterateMachines(e)).rejects.toThrow(
       'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
     );
   });
 
-  test('insufficient permissions', () => {
+  test('insufficient permissions', (): void => {
     const client = new DefenderClient(logger, invalidMachineConfig);
     expect(client.iterateMachines(e)).rejects.toThrow(
       'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
