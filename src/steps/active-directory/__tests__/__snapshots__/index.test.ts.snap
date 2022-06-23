@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchAccount Should create an account entity correctly when the account has the correct permissions: accountEntitiesSuccessful 1`] = `
+Array [
+  Object {
+    "_class": Array [
+      "Account",
+    ],
+    "_key": "microsoft_defender_account-local-integration-instance",
+    "_rawData": Array [
+      Object {
+        "name": "default",
+        "rawData": Object {
+          "organization": Object {
+            "assignedPlans": Array [
+              Object {
+                "assignedDateTime": "2022-06-10T05:24:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "SCO",
+                "servicePlanId": "1689aade-3d6a-4bfc-b017-46d2672df5ad",
+              },
+              Object {
+                "assignedDateTime": "2022-06-10T05:24:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "WindowsDefenderATP",
+                "servicePlanId": "871d91ec-ec1a-452b-a83f-bd76c7d770ef",
+              },
+              Object {
+                "assignedDateTime": "2022-06-10T05:24:29Z",
+                "capabilityStatus": "Enabled",
+                "service": "exchange",
+                "servicePlanId": "113feb6c-3fe4-4440-bddc-54d774bf0318",
+              },
+            ],
+            "businessPhones": Array [
+              "6361905773",
+            ],
+            "city": "Shimoga",
+            "country": null,
+            "countryLetterCode": "IN",
+            "createdDateTime": "2022-06-10T05:20:45Z",
+            "deletedDateTime": null,
+            "directorySizeQuota": Object {
+              "total": 50000,
+              "used": 132,
+            },
+            "displayName": "Sacumen",
+            "id": "384c3195-931e-4755-8a97-62b3202609d8",
+            "isMultipleDataLocationsForServicesEnabled": null,
+            "marketingNotificationEmails": Array [],
+            "onPremisesLastSyncDateTime": null,
+            "onPremisesSyncEnabled": null,
+            "postalCode": "577204",
+            "preferredLanguage": "en",
+            "privacyProfile": null,
+            "provisionedPlans": Array [
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "SCO",
+              },
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange",
+              },
+              Object {
+                "capabilityStatus": "Enabled",
+                "provisioningStatus": "Success",
+                "service": "exchange",
+              },
+            ],
+            "securityComplianceNotificationMails": Array [],
+            "securityComplianceNotificationPhones": Array [],
+            "state": "karnataka",
+            "street": "Vinobanagar",
+            "technicalNotificationMails": Array [
+              "chetanav.patil@sacumen.com",
+            ],
+            "tenantType": "AAD",
+            "verifiedDomains": Array [
+              Object {
+                "capabilities": "Email, OfficeCommunicationsOnline",
+                "isDefault": true,
+                "isInitial": true,
+                "name": "Sacumen22.onmicrosoft.com",
+                "type": "Managed",
+              },
+            ],
+          },
+        },
+      },
+    ],
+    "_type": "microsoft_defender_account",
+    "createdOn": undefined,
+    "defaultDomain": "Sacumen22.onmicrosoft.com",
+    "displayName": "Local Integration",
+    "id": "384c3195-931e-4755-8a97-62b3202609d8",
+    "name": "Sacumen",
+    "organizationName": "Sacumen",
+    "verifiedDomains": Array [
+      "Sacumen22.onmicrosoft.com",
+    ],
+  },
+]
+`;

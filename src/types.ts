@@ -1,25 +1,96 @@
-// Providers often supply types with their API libraries.
+import { Entity } from '@jupiterone/integration-sdk-core';
 
-export interface AcmeUser {
+export interface Machine {
   id: string;
-  name: string;
+  computerDnsName: string;
+  firstSeen: string;
+  lastSeen: string;
+  classification: string;
+  onboardingStatus: string;
+  healthStatus: string;
+  deviceValue: string;
+  agentVersion: string;
+  defenderAvStatus: string;
+  riskScore: string;
+  osPlatform: string;
+  osVersion?: string | null;
+  osProcessor: string;
+  version: string;
+  lastIpAddress: string;
+  lastExternalIpAddress: string;
+  osBuild: number;
+  rbacGroupId: number;
+  rbacGroupName: string;
+  exposureLevel: string;
+  isAadJoined: boolean;
+  aadDeviceId: string | null;
+  machineTags: Array<string>;
+  osArchitecture: string;
+  managedBy: string;
+  managedByStatus: string;
+  ipAddresses: Array<IpAddress>;
+  vmMetadata: VmMetadata;
 }
 
-export interface AcmeGroup {
-  id: string;
-  name: string;
-  users?: Pick<AcmeUser, 'id'>[];
+export interface IpAddress {
+  ipAddress: string;
+  macAddress: string;
+  type: string;
+  operationalStatus: string;
 }
 
-// Those can be useful to a degree, but often they're just full of optional
-// values. Understanding the response data may be more reliably accomplished by
-// reviewing the API response recordings produced by testing the wrapper client
-// (./client.ts). However, when there are no types provided, it is necessary to define
-// opaque types for each resource, to communicate the records that are expected
-// to come from an endpoint and are provided to iterating functions.
+export interface VmMetadata {
+  vmId: string;
+  cloudProvider: string;
+  resourceId: string;
+  subscriptionId: string;
+}
 
-/*
-import { Opaque } from 'type-fest';
-export type AcmeUser = Opaque<any, 'AcmeUser'>;
-export type AcmeGroup = Opaque<any, 'AcmeGroup'>;
-*/
+export interface UserLogon {
+  id: string;
+  accountName: string;
+  accountDomain: string;
+  firstSeen: string;
+  lastSeen: string;
+  logonTypes: string;
+  healthStatus: string;
+  deviceValue: string;
+  agentVersion: string;
+  defenderAvStatus: string;
+  isDomainAdmin: boolean;
+  logOnMachinesCount: any;
+  isOnlyNetworkUser: any;
+  accountSid: any;
+}
+
+export interface Vulnerability {
+  id: any;
+  name: string;
+  description: string;
+  severity: string;
+  cvssV3: any;
+  exposedMachines: string;
+  publishedOn: any;
+  updatedOn: any;
+  publicExploit: boolean;
+  exploitVerified: boolean;
+  exploitInKit: false;
+  exploitTypes: Array<string>;
+  exploitUris: Array<string>;
+}
+
+export interface Finding extends Entity {
+  id: any;
+  name: string;
+  description: string;
+  severity: any;
+  cvssV3: any;
+  exposedMachines: string;
+  publishedOn: any;
+  updatedOn: any;
+  publicExploit: boolean;
+  exploitVerified: boolean;
+  exploitInKit: false;
+  exploitTypes: Array<string>;
+  exploitUris: Array<string>;
+}
