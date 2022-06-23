@@ -5,7 +5,7 @@ import { DefenderClient } from '../../ms-defender/clients/defenderClient';
 
 import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing';
 import { IntegrationConfig } from '../../../config';
-// import { IntegrationConfig } from '../../../config';
+
 const logger: any = createMockIntegrationLogger();
 
 const DEFAULT_CLIENT_ID = '4195c8d3-7f61-4120-b930-e98f66ed1fa7';
