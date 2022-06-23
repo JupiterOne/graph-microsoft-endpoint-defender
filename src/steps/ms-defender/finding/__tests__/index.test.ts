@@ -46,14 +46,14 @@ describe('fetchFindings', () => {
     const resources: Finding[] = [];
     await client.iterateFindings(
       {
-        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        machineId: '0c4ccbde5e82eded51a533de002894276ce0617d',
         select: ['id', 'displayName'],
       },
       (e) => {
         resources.push(e);
       },
     );
-    expect(resources.length).toBe(0);
+    expect(resources.length).toBeGreaterThan(0);
     expect(vulnerabilityFindingEntities.length).toBe(0);
     expect(vulnerabilityFindingEntities).toMatchGraphObjectSchema({
       _class: entities.FINDING._class,
@@ -68,11 +68,21 @@ describe('CveRelationshipsFindings', () => {
     await buildFindingIsCveRelationships(context);
 
     const cveFindingEntities = context.jobState.collectedEntities;
-
+    const client = new DefenderClient(logger, config);
+    const resources: Finding[] = [];
+    await client.iterateFindings(
+      {
+        machineId: '0c4ccbde5e82eded51a533de002894276ce0617d',
+        select: ['id', 'displayName'],
+      },
+      (e) => {
+        resources.push(e);
+      },
+    );
     expect(cveFindingEntities.length).toBe(0);
     expect(cveFindingEntities).toMatchGraphObjectSchema({
       _class: TargetEntities.CVE._class,
     });
-    expect(cveFindingEntities).toMatchSnapshot('cveFindingEntitiesSuccessful');
+    expect(resources).toMatchSnapshot(resources);
   });
 });

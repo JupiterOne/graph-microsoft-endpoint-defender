@@ -37,7 +37,7 @@ describe('fetchLogonUsers', () => {
     const resources: UserLogon[] = [];
     await client.iterateUsers(
       {
-        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        machineId: '0c4ccbde5e82eded51a533de002894276ce0617d',
       },
       (e) => {
         resources.push(e);

@@ -20,6 +20,7 @@ export function createAccountMachineRelationship(
   });
 }
 export function createMachineEntity(data: Machine): Entity {
+  console.log('machine data', data);
   return createIntegrationEntity({
     entityData: {
       source: data,

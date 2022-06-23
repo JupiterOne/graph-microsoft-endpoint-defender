@@ -8,7 +8,7 @@ import { IntegrationConfig } from '../../../config';
 const logger: any = createMockIntegrationLogger();
 
 const DEFAULT_CLIENT_ID = '4195c8d3-7f61-4120-b930-e98f66ed1fa7';
-const DEFAULT_CLIENT_SECRET = 'InS8Q~xhr5ZXXalbVS3M.qz2X.6gynhah6WdkaJ~';
+const DEFAULT_CLIENT_SECRET = 'InS8Q~xhr5ZXXalbVS3M.qz2X.6gynhah6WdkaJ~'; // Dummy key to fail the API call
 const DEFAULT_TENANT = '9c48d2a3-ec56-411a-96b4-af7c7b445514';
 
 const invalidMachineConfig: IntegrationConfig = {
@@ -100,7 +100,7 @@ describe('iterateUsers', () => {
     const resources: UserLogon[] = [];
     await client.iterateUsers(
       {
-        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        machineId: '0c4ccbde5e82eded51a533de002894276ce0617d',
       },
       (e) => {
         resources.push(e);
@@ -126,7 +126,7 @@ describe('iterateFindings', () => {
     const resources: Finding[] = [];
     await client.iterateFindings(
       {
-        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
+        machineId: '0c4ccbde5e82eded51a533de002894276ce0617d',
         select: ['id', 'displayName'],
       },
       (e) => {
