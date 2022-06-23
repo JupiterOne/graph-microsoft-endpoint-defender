@@ -22,7 +22,7 @@ export function createAccountMachineRelationship(
 export function createMachineEntity(data: Machine): Entity {
   return createIntegrationEntity({
     entityData: {
-      source: {}, // removed due to size
+      source: data,
       assign: {
         _class: entities.MACHINE._class,
         _type: entities.MACHINE._type,

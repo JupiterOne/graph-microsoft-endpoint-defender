@@ -7,9 +7,9 @@ import { createMockIntegrationLogger } from '@jupiterone/integration-sdk-testing
 import { IntegrationConfig } from '../../../config';
 const logger: any = createMockIntegrationLogger();
 
-const DEFAULT_CLIENT_ID = 'dummy-client-id';
-const DEFAULT_CLIENT_SECRET = 'dummy--client-secret';
-const DEFAULT_TENANT = 'd68d7cbe-a848-4b5a-98d6-d7b3d6f3dfc0';
+const DEFAULT_CLIENT_ID = '4195c8d3-7f61-4120-b930-e98f66ed1fa7';
+const DEFAULT_CLIENT_SECRET = 'InS8Q~xhr5ZXXalbVS3M.qz2X.6gynhah6WdkaJ~';
+const DEFAULT_TENANT = '9c48d2a3-ec56-411a-96b4-af7c7b445514';
 
 const invalidMachineConfig: IntegrationConfig = {
   clientId: DEFAULT_CLIENT_ID,
@@ -39,17 +39,47 @@ describe('iterateMachines', () => {
     expect(resources.length).toBeGreaterThan(0);
   });
 
-  test('inaccessible', async (): Promise<void> => {
+  test('inaccessible', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateMachinesInaccessible',
+      options: { recordFailedRequests: true },
+    });
+
     const client = new DefenderClient(logger, invalidMachineConfig);
-    expect(client.iterateMachines(e)).rejects.toThrow(
-      'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
+    const infoSpy = jest.spyOn(logger, 'info');
+
+    const resources: Machine[] = [];
+    await client.iterateMachines((e) => {
+      resources.push(e);
+    });
+
+    expect(resources.length).toEqual(0);
+    expect(infoSpy).toHaveBeenCalledTimes(1);
+    expect(infoSpy).toHaveBeenCalledWith(
+      { resourceUrl: 'https://api.securitycenter.microsoft.com/api/machines' },
+      'Unauthorized',
     );
   });
 
-  test('insufficient permissions', async (): Promise<void> => {
+  test('insufficient permissions', async () => {
+    recording = setupProjectRecording({
+      directory: __dirname,
+      name: 'iterateMachinesInsufficientPermissions',
+      options: { recordFailedRequests: true },
+    });
+
     const client = new DefenderClient(logger, invalidMachineConfig);
-    expect(client.iterateMachines(e)).rejects.toThrow(
-      'Provider API failed at https://api.securitycenter.microsoft.com/api/machines: -1 AuthenticationError',
+    const infoSpy = jest.spyOn(logger, 'info');
+    const resources: Machine[] = [];
+    await client.iterateMachines((e) => {
+      resources.push(e);
+    });
+    expect(resources.length).toEqual(0);
+    expect(infoSpy).toHaveBeenCalledTimes(1);
+    expect(infoSpy).toHaveBeenCalledWith(
+      { resourceUrl: 'https://api.securitycenter.microsoft.com/api/machines' },
+      'Unauthorized',
     );
   });
 });
@@ -78,25 +108,6 @@ describe('iterateUsers', () => {
     );
     expect(resources.length).toBe(1);
   });
-
-  test('multiple selected properties', async () => {
-    recording = setupProjectRecording({
-      directory: __dirname,
-      name: 'iterateUsers_multiple_properties',
-    });
-
-    const resources: UserLogon[] = [];
-    await client.iterateUsers(
-      {
-        machineId: 'e76b865d4bc0c2622547459464020e9e24f51f75',
-      },
-      (e) => {
-        resources.push(e);
-      },
-    );
-
-    expect(resources.length).toBe(1);
-  });
 });
 
 describe('iterateFindings', () => {
@@ -122,26 +133,6 @@ describe('iterateFindings', () => {
         resources.push(e);
       },
     );
-    expect(resources.length).toBe(0);
-  });
-
-  test('multiple selected properties', async () => {
-    recording = setupProjectRecording({
-      directory: __dirname,
-      name: 'iterateFindings_multiple_properties',
-    });
-
-    const resources: Finding[] = [];
-    await client.iterateFindings(
-      {
-        machineId: '660688d26b586b005a90cc148bfb78ed8e55b32b',
-        select: ['id', 'displayName'],
-      },
-      (e) => {
-        resources.push(e);
-      },
-    );
-
     expect(resources.length).toBe(0);
   });
 });

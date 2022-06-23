@@ -27,7 +27,6 @@ export async function fetchFindings(
 ): Promise<void> {
   const { logger, instance, jobState } = executionContext;
   const graphClient = new DefenderClient(logger, instance.config);
-
   await jobState.iterateEntities(
     { _type: entities.MACHINE._type },
     async (machineEntity) => {

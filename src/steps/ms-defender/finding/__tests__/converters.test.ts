@@ -60,16 +60,16 @@ describe('createFindingEntity', () => {
 
 describe('createFindingsCveRelationship', () => {
   test('properties transferred for users', () => {
-    expect(createFindingsCveRelationship(machine)).toEqual({
+    expect(createFindingsCveRelationship(finding)).toEqual({
       _class: 'IS',
-      _key: 'microsoft_defender_machine_id|is|microsoft_defender_machine_id',
+      _key: 'microsoft_defender_finding_id|is|microsoft_defender_finding_id',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
-        sourceEntityKey: 'microsoft_defender_machine_id',
+        sourceEntityKey: 'microsoft_defender_finding_id',
         targetEntity: {
           _class: ['Vulnerability'],
-          _key: 'microsoft_defender_machine_id',
+          _key: 'microsoft_defender_finding_id',
           _type: 'cve',
           displayName: 'name',
         },

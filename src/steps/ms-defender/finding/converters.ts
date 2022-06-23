@@ -32,7 +32,7 @@ export function createFindingEntity(
 ): Entity {
   return createIntegrationEntity({
     entityData: {
-      source: {},
+      source: defenderFinding,
       assign: {
         id: defenderFinding.id,
         _type: entities.FINDING._type,
