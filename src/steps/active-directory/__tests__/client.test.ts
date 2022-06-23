@@ -136,6 +136,3 @@ describe('iterateFindings', () => {
     expect(resources.length).toBe(0);
   });
 });
-function e(e: any): Promise<void> {
-  throw new Error('Function not implemented.');
-}
