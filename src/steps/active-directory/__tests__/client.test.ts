@@ -9,7 +9,7 @@ import { IntegrationConfig } from '../../../config';
 const logger: any = createMockIntegrationLogger();
 
 const DEFAULT_CLIENT_ID = '4195c8d3-7f61-4120-b930-e98f66ed1fa7';
-const DEFAULT_CLIENT_SECRET = 'InS8Q~xhr5ZXXalbVS3M.qz2X.6gynhah6WdkaJ~';
+const DEFAULT_CLIENT_SECRET = 'InS8Q~xhr5ZXXalbVS3M.qz2X.6gynhah6WdkaJ~'; // Dummy key to fail the API call
 const DEFAULT_TENANT = '9c48d2a3-ec56-411a-96b4-af7c7b445514';
 
 const invalidMachineConfig: IntegrationConfig = {
