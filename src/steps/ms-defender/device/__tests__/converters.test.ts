@@ -6,11 +6,11 @@ import {
 import { Entity } from '@jupiterone/integration-sdk-core';
 import { Machine } from '../../../../types';
 const exampleAccountEntity: Entity = {
-  _class: 'Account',
-  _key: 'microsoft_defender_account_id',
-  _type: 'microsoft_defender_account',
+  _class: 'Machine',
+  _key: 'microsoft_defender_machine_id',
+  _type: 'microsoft_defender_machine',
   displayName: 'name',
-  id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+  id: '0c4ccbde5e82eded51a533de002894276ce0617d',
 };
 
 describe('createMachineEntity', () => {
@@ -22,7 +22,7 @@ describe('createMachineEntity', () => {
       subscriptionId: 'string',
     };
     const rawData: Machine = {
-      id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+      id: '0c4ccbde5e82eded51a533de002894276ce0617d',
       computerDnsName: 'Machine List',
       firstSeen: '8/5/2018',
       lastSeen: '22/01/2022',
@@ -54,7 +54,7 @@ describe('createMachineEntity', () => {
     };
     expect(createMachineEntity(rawData)).toEqual({
       _class: ['HostAgent'],
-      _key: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+      _key: '0c4ccbde5e82eded51a533de002894276ce0617d',
       _rawData: [
         {
           name: 'default',
@@ -68,7 +68,7 @@ describe('createMachineEntity', () => {
             exposureLevel: 'high',
             firstSeen: '8/5/2018',
             healthStatus: 'High',
-            id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+            id: '0c4ccbde5e82eded51a533de002894276ce0617d',
             ipAddresses: [],
             isAadJoined: true,
             lastExternalIpAddress: '10.0.10.5',
@@ -104,7 +104,7 @@ describe('createMachineEntity', () => {
       defenderAvStatus: 'valid',
       displayName: 'Machine List',
       function: ['endpoint-protection', 'vulnerability-detection'],
-      id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+      id: '0c4ccbde5e82eded51a533de002894276ce0617d',
       name: 'Machine List',
       riskScore: 'none',
     });
@@ -115,11 +115,11 @@ describe('createMachinesDeviceRelationship', () => {
   test('properties transferred', () => {
     expect(createMachinesDeviceRelationship(exampleAccountEntity)).toEqual({
       _class: 'MANAGES',
-      _key: 'microsoft_defender_account_id|manages|FORWARD:_type=user_endpoint:_class=Device,Host:hostname=undefined',
+      _key: 'microsoft_defender_machine_id|manages|FORWARD:_type=user_endpoint:_class=Device,Host:hostname=undefined',
       _mapping: {
         relationshipDirection: 'FORWARD',
         skipTargetCreation: true,
-        sourceEntityKey: 'microsoft_defender_account_id',
+        sourceEntityKey: 'microsoft_defender_machine_id',
         targetEntity: {
           _class: ['Device', 'Host'],
           _type: 'user_endpoint',
@@ -127,7 +127,7 @@ describe('createMachinesDeviceRelationship', () => {
           displayName: undefined,
           fqdn: undefined,
           hostname: undefined,
-          id: '5a721b05-53ed-4ed9-be02-aed28f11edbd',
+          id: '0c4ccbde5e82eded51a533de002894276ce0617d',
           name: 'name',
           osName: undefined,
           osVersion: undefined,
@@ -157,11 +157,11 @@ const account: Entity = {
 
 describe('createAccountMachineRelationship', () => {
   test('properties transferred for users', () => {
-    expect(createAccountMachineRelationship(machine, account)).toEqual({
-      _fromEntityKey: 'microsoft_defender_machine_id',
-      _key: 'microsoft_defender_machine_id|has|microsoft_defender_account_id',
-      _toEntityKey: 'microsoft_defender_account_id',
-      _type: 'microsoft_defender_machine_has_account',
+    expect(createAccountMachineRelationship(account, machine)).toEqual({
+      _fromEntityKey: 'microsoft_defender_account_id',
+      _key: 'microsoft_defender_account_id|has|microsoft_defender_machine_id',
+      _toEntityKey: 'microsoft_defender_machine_id',
+      _type: 'microsoft_defender_account_has_machine',
       displayName: 'HAS',
       _class: 'HAS',
     });

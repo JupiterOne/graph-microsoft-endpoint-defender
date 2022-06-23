@@ -58,9 +58,17 @@ describe('createFindingEntity', () => {
   });
 });
 
+const findingmock = {
+  _class: 'Finding',
+  _key: 'microsoft_defender_finding_id',
+  _type: 'microsoft_defender_finding',
+  displayName: 'name',
+  id: '0c4ccbde5e82eded51a533de002894276ce0617d',
+};
+
 describe('createFindingsCveRelationship', () => {
   test('properties transferred for users', () => {
-    expect(createFindingsCveRelationship(finding)).toEqual({
+    expect(createFindingsCveRelationship(findingmock)).toEqual({
       _class: 'IS',
       _key: 'microsoft_defender_finding_id|is|microsoft_defender_finding_id',
       _mapping: {
