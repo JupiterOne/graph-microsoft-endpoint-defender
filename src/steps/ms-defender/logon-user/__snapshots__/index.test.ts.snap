@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#fetchLogonUsers 1`] = `
+Object {
+  "collectedData": Object {},
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "microsoft_defender_logon_user:testmachine1\\\\administrator1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "accountDomain": "testmachine1",
+            "accountName": "administrator1",
+            "accountSid": null,
+            "firstSeen": "2022-09-13T09:00:15Z",
+            "id": "testmachine1\\\\administrator1",
+            "isDomainAdmin": true,
+            "isOnlyNetworkUser": null,
+            "lastSeen": "2022-09-13T09:00:22Z",
+            "leastPrevalentMachineId": null,
+            "logOnMachinesCount": null,
+            "logonTypes": "Network, RemoteInteractive",
+            "mostPrevalentMachineId": null,
+          },
+        },
+      ],
+      "_type": "microsoft_defender_logon_user",
+      "active": true,
+      "createdOn": undefined,
+      "displayName": "administrator1",
+      "domain": "testmachine1",
+      "firstSeenOn": 1663059615000,
+      "id": "testmachine1\\\\administrator1",
+      "lastSeenOn": 1663059622000,
+      "logonTypes": "Network, RemoteInteractive",
+      "name": "administrator1",
+      "username": "administrator1",
+    },
+  ],
+  "collectedRelationships": Array [
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3",
+      "_key": "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3|has|microsoft_defender_logon_user:testmachine1\\\\administrator1",
+      "_toEntityKey": "microsoft_defender_logon_user:testmachine1\\\\administrator1",
+      "_type": "microsoft_defender_machine_has_logon_user",
+      "displayName": "HAS",
+    },
+  ],
+  "encounteredEntityKeys": Set {
+    "microsoft_defender_logon_user:testmachine1\\\\administrator1",
+    "microsoft_defender_account:local-integration-instance",
+    "microsoft_defender_machine:595967ce83eb04bfddedaa7f29c8d10142a5bd30",
+    "microsoft_defender_machine:614f81ab67349d2e017f7f8bee5764e1f4a6397d",
+    "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3",
+  },
+  "encounteredTypes": Array [
+    "microsoft_defender_account",
+    "microsoft_defender_machine",
+    "microsoft_defender_account_has_machine",
+    "microsoft_defender_logon_user",
+    "microsoft_defender_machine_has_logon_user",
+  ],
+}
+`;

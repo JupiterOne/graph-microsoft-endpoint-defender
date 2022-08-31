@@ -1,0 +1,349 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#fetchAccount 1`] = `
+Object {
+  "collectedData": Object {
+    "entity:account": Object {
+      "_class": Array [
+        "Account",
+      ],
+      "_key": "microsoft_defender_account:local-integration-instance",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "organization": Object {
+              "assignedPlans": Array [
+                Object {
+                  "assignedDateTime": "2022-09-13T09:30:34Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "WindowsDefenderATP",
+                  "servicePlanId": "36810a13-b903-490a-aa45-afbeb7540832",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "exchange",
+                  "servicePlanId": "113feb6c-3fe4-4440-bddc-54d774bf0318",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "WindowsDefenderATP",
+                  "servicePlanId": "871d91ec-ec1a-452b-a83f-bd76c7d770ef",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "SCO",
+                  "servicePlanId": "1689aade-3d6a-4bfc-b017-46d2672df5ad",
+                },
+              ],
+              "businessPhones": Array [
+                "5859430080",
+              ],
+              "city": null,
+              "country": null,
+              "countryLetterCode": "US",
+              "createdDateTime": "2022-09-12T12:14:35Z",
+              "deletedDateTime": null,
+              "directorySizeQuota": Object {
+                "total": 50000,
+                "used": 112,
+              },
+              "displayName": "JupiterOne",
+              "id": "ca1b195a-d414-4b2f-8193-34959da8ad09",
+              "isMultipleDataLocationsForServicesEnabled": null,
+              "marketingNotificationEmails": Array [],
+              "onPremisesLastSyncDateTime": null,
+              "onPremisesSyncEnabled": null,
+              "postalCode": null,
+              "preferredLanguage": "en",
+              "privacyProfile": null,
+              "provisionedPlans": Array [
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "SCO",
+                },
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "exchange",
+                },
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "exchange",
+                },
+              ],
+              "securityComplianceNotificationMails": Array [],
+              "securityComplianceNotificationPhones": Array [],
+              "state": null,
+              "street": null,
+              "technicalNotificationMails": Array [
+                "austin.kelleher@jupiterone.dev",
+              ],
+              "tenantType": "AAD",
+              "verifiedDomains": Array [
+                Object {
+                  "capabilities": "Email, OfficeCommunicationsOnline",
+                  "isDefault": true,
+                  "isInitial": true,
+                  "name": "jupiteroneintdev.onmicrosoft.com",
+                  "type": "Managed",
+                },
+              ],
+            },
+          },
+        },
+      ],
+      "_type": "microsoft_defender_account",
+      "createdOn": undefined,
+      "defaultDomain": "jupiteroneintdev.onmicrosoft.com",
+      "displayName": "Local Integration",
+      "id": "ca1b195a-d414-4b2f-8193-34959da8ad09",
+      "name": "JupiterOne",
+      "organizationName": "JupiterOne",
+      "verifiedDomains": Array [
+        "jupiteroneintdev.onmicrosoft.com",
+      ],
+    },
+  },
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "Account",
+      ],
+      "_key": "microsoft_defender_account:local-integration-instance",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "organization": Object {
+              "assignedPlans": Array [
+                Object {
+                  "assignedDateTime": "2022-09-13T09:30:34Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "WindowsDefenderATP",
+                  "servicePlanId": "36810a13-b903-490a-aa45-afbeb7540832",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "exchange",
+                  "servicePlanId": "113feb6c-3fe4-4440-bddc-54d774bf0318",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "WindowsDefenderATP",
+                  "servicePlanId": "871d91ec-ec1a-452b-a83f-bd76c7d770ef",
+                },
+                Object {
+                  "assignedDateTime": "2022-09-12T12:14:50Z",
+                  "capabilityStatus": "Enabled",
+                  "service": "SCO",
+                  "servicePlanId": "1689aade-3d6a-4bfc-b017-46d2672df5ad",
+                },
+              ],
+              "businessPhones": Array [
+                "5859430080",
+              ],
+              "city": null,
+              "country": null,
+              "countryLetterCode": "US",
+              "createdDateTime": "2022-09-12T12:14:35Z",
+              "deletedDateTime": null,
+              "directorySizeQuota": Object {
+                "total": 50000,
+                "used": 112,
+              },
+              "displayName": "JupiterOne",
+              "id": "ca1b195a-d414-4b2f-8193-34959da8ad09",
+              "isMultipleDataLocationsForServicesEnabled": null,
+              "marketingNotificationEmails": Array [],
+              "onPremisesLastSyncDateTime": null,
+              "onPremisesSyncEnabled": null,
+              "postalCode": null,
+              "preferredLanguage": "en",
+              "privacyProfile": null,
+              "provisionedPlans": Array [
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "SCO",
+                },
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "exchange",
+                },
+                Object {
+                  "capabilityStatus": "Enabled",
+                  "provisioningStatus": "Success",
+                  "service": "exchange",
+                },
+              ],
+              "securityComplianceNotificationMails": Array [],
+              "securityComplianceNotificationPhones": Array [],
+              "state": null,
+              "street": null,
+              "technicalNotificationMails": Array [
+                "austin.kelleher@jupiterone.dev",
+              ],
+              "tenantType": "AAD",
+              "verifiedDomains": Array [
+                Object {
+                  "capabilities": "Email, OfficeCommunicationsOnline",
+                  "isDefault": true,
+                  "isInitial": true,
+                  "name": "jupiteroneintdev.onmicrosoft.com",
+                  "type": "Managed",
+                },
+              ],
+            },
+          },
+        },
+      ],
+      "_type": "microsoft_defender_account",
+      "createdOn": undefined,
+      "defaultDomain": "jupiteroneintdev.onmicrosoft.com",
+      "displayName": "Local Integration",
+      "id": "ca1b195a-d414-4b2f-8193-34959da8ad09",
+      "name": "JupiterOne",
+      "organizationName": "JupiterOne",
+      "verifiedDomains": Array [
+        "jupiteroneintdev.onmicrosoft.com",
+      ],
+    },
+  ],
+  "collectedRelationships": Array [],
+  "encounteredEntityKeys": Set {
+    "microsoft_defender_account:local-integration-instance",
+  },
+  "encounteredTypes": Array [
+    "microsoft_defender_account",
+  ],
+}
+`;
+
+exports[`#fetchUsers 1`] = `
+Object {
+  "collectedData": Object {},
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "microsoft_defender_user:53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "businessPhones": Array [
+              "5859430080",
+            ],
+            "displayName": "Austin Kelleher",
+            "givenName": "Austin",
+            "id": "53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+            "jobTitle": null,
+            "mail": null,
+            "mobilePhone": null,
+            "officeLocation": null,
+            "preferredLanguage": null,
+            "surname": "Kelleher",
+            "userPrincipalName": "austin.kelleher@jupiteroneintdev.onmicrosoft.com",
+          },
+        },
+      ],
+      "_type": "microsoft_defender_user",
+      "active": true,
+      "businessPhones": Array [
+        "5859430080",
+      ],
+      "createdOn": undefined,
+      "displayName": "Austin Kelleher",
+      "givenName": "Austin",
+      "id": "53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+      "jobTitle": null,
+      "mail": null,
+      "mobilePhone": null,
+      "name": "Austin Kelleher",
+      "officeLocation": null,
+      "preferredLanguage": null,
+      "surname": "Kelleher",
+      "userPrincipalName": "austin.kelleher@jupiteroneintdev.onmicrosoft.com",
+      "username": "austin.kelleher@jupiteroneintdev.onmicrosoft.com",
+    },
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "microsoft_defender_user:e92080d6-6611-48dc-8241-3046f8f20a43",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "businessPhones": Array [],
+            "displayName": "Stefan Virag",
+            "givenName": "Stefan",
+            "id": "e92080d6-6611-48dc-8241-3046f8f20a43",
+            "jobTitle": null,
+            "mail": null,
+            "mobilePhone": null,
+            "officeLocation": null,
+            "preferredLanguage": null,
+            "surname": "Virag",
+            "userPrincipalName": "stefan.virag@jupiteroneintdev.onmicrosoft.com",
+          },
+        },
+      ],
+      "_type": "microsoft_defender_user",
+      "active": true,
+      "businessPhones": Array [],
+      "createdOn": undefined,
+      "displayName": "Stefan Virag",
+      "givenName": "Stefan",
+      "id": "e92080d6-6611-48dc-8241-3046f8f20a43",
+      "jobTitle": null,
+      "mail": null,
+      "mobilePhone": null,
+      "name": "Stefan Virag",
+      "officeLocation": null,
+      "preferredLanguage": null,
+      "surname": "Virag",
+      "userPrincipalName": "stefan.virag@jupiteroneintdev.onmicrosoft.com",
+      "username": "stefan.virag@jupiteroneintdev.onmicrosoft.com",
+    },
+  ],
+  "collectedRelationships": Array [
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "microsoft_defender_account:local-integration-instance",
+      "_key": "microsoft_defender_account:local-integration-instance|has|microsoft_defender_user:53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+      "_toEntityKey": "microsoft_defender_user:53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+      "_type": "microsoft_defender_account_has_user",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "microsoft_defender_account:local-integration-instance",
+      "_key": "microsoft_defender_account:local-integration-instance|has|microsoft_defender_user:e92080d6-6611-48dc-8241-3046f8f20a43",
+      "_toEntityKey": "microsoft_defender_user:e92080d6-6611-48dc-8241-3046f8f20a43",
+      "_type": "microsoft_defender_account_has_user",
+      "displayName": "HAS",
+    },
+  ],
+  "encounteredEntityKeys": Set {
+    "microsoft_defender_user:53c5938b-5d0f-4861-9f54-268fc6f28b1b",
+    "microsoft_defender_user:e92080d6-6611-48dc-8241-3046f8f20a43",
+    "microsoft_defender_account:local-integration-instance",
+  },
+  "encounteredTypes": Array [
+    "microsoft_defender_account",
+    "microsoft_defender_user",
+    "microsoft_defender_account_has_user",
+  ],
+}
+`;
