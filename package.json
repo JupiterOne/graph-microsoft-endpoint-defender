@@ -1,7 +1,7 @@
 {
-  "name": "@jupiterone/integration-template",
+  "name": "@jupiterone/graph-microsoft-endpoint-defender",
   "version": "0.0.0",
-  "description": "A JupiterOne Integration",
+  "description": "A JupiterOne Integration for Microsoft Defender for Endpoint",
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
@@ -30,11 +30,17 @@
     "prepush": "yarn format:check && yarn lint && yarn type-check && jest --changedSince main"
   },
   "peerDependencies": {
-    "@jupiterone/integration-sdk-core": "^8.8.0"
+    "@jupiterone/integration-sdk-core": "^8.24.0"
   },
   "devDependencies": {
-    "@jupiterone/integration-sdk-core": "^8.8.0",
-    "@jupiterone/integration-sdk-dev-tools": "^8.8.0",
-    "@jupiterone/integration-sdk-testing": "^8.8.0"
+    "@jupiterone/integration-sdk-core": "^8.24.0",
+    "@jupiterone/integration-sdk-dev-tools": "^8.24.0",
+    "@jupiterone/integration-sdk-testing": "^8.24.0"
+  },
+  "dependencies": {
+    "@azure/identity": "^2.1.0",
+    "@microsoft/microsoft-graph-client": "^2.0.0",
+    "@microsoft/microsoft-graph-types": "^1.10.0",
+    "isomorphic-fetch": "^3.0.0"
   }
 }

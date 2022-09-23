@@ -1,10 +1,13 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
-import { integrationSteps } from './steps';
+import { activeDirectorySteps } from './steps/active-directory';
 import {
-  validateInvocation,
-  IntegrationConfig,
   instanceConfigFields,
+  IntegrationConfig,
+  validateInvocation,
 } from './config';
+import { msDefenderSteps } from './steps/ms-defender';
+
+export const integrationSteps = [...activeDirectorySteps, ...msDefenderSteps];
 
 export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> =
   {

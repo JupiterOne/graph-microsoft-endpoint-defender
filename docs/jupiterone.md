@@ -1,20 +1,16 @@
-# {{provider}} Integration with JupiterOne
+# Microsoft Defender for Endpoint Integration with JupiterOne
 
-## {{provider}} + JupiterOne Integration Benefits
+## Microsoft Defender for Endpoint + JupiterOne Integration Benefits
 
-TODO: Iterate the benefits of ingesting data from the provider into JupiterOne.
-Consider the following examples:
-
-- Visualize {{provider}} services, teams, and users in the JupiterOne graph.
-- Map {{provider}} users to employees in your JupiterOne account.
-- Monitor changes to {{provider}} users using JupiterOne alerts.
+- Visualize Microsoft Defender for Endpoint resources in the JupiterOne graph.
+- Map Microsoft Defender for Endpoint users to employees in your JupiterOne
+  account.
+- Monitor changes to Microsoft Defender for Endpoint users using JupiterOne
+  alerts.
 
 ## How it Works
 
-TODO: Iterate significant activities the integration enables. Consider the
-following examples:
-
-- JupiterOne periodically fetches services, teams, and users from {{provider}}
+- JupiterOne periodically fetches resources from Microsoft Defender for Endpoint
   to update the graph.
 - Write JupiterOne queries to review and monitor updates to the graph, or
   leverage existing queries.
@@ -23,14 +19,16 @@ following examples:
 
 ## Requirements
 
-TODO: Iterate requirements for setting up the integration. Consider the
-following examples:
-
-- {{provider}} supports the OAuth2 Client Credential flow. You must have a
-  Administrator user account.
-- JupiterOne requires a REST API key. You need permission to create a user in
-  {{provider}} that will be used to obtain the API key.
-- You must have permission in JupiterOne to install new integrations.
+- An Azure account with an App Registration that will provide credentials for
+  the integration to authenticate with Microsoft Graph APIs. The App
+  Registration also defines the permissions the integration requires and which
+  the target tenant must authorize.
+- An Active Directory tenant to target for ingestion. It is possible to target
+  the Active Directory tenants defined in the Azure account holding the App
+  Registration.
+- A Microsoft Defender for Endpoint account to create devices and run attacks
+  via simulation technique. Can track vulnerabilities data, user groups creation
+  and mapping users to devices.
 
 ## Support
 
@@ -39,42 +37,68 @@ If you need help with this integration, please contact
 
 ## Integration Walkthrough
 
-### In {{provider}}
+### In Microsoft Defender for Endpoint
 
-TODO: List specific actions that must be taken in the provider. Remove this
-section when there are no actions to take in the provider.
+1. [Create a Microsoft Defender for Endpoint account](https://www.microsoft.com/en-us/security/business/threat-protection/endpoint-defender)
+2. Add devices
 
-1. [Generate a REST API key](https://example.com/docs/generating-api-keys)
+In the Azure portal:
+
+1. Create an App Registration
+2. Configure the required [API permissions](#api-permissions)
+3. Add a 2-year secret
 
 ### In JupiterOne
 
-TODO: List specific actions that must be taken in JupiterOne. Many of the
-following steps will be reusable; take care to be sure they remain accurate.
-
 1. From the configuration **Gear Icon**, select **Integrations**.
-2. Scroll to the **{{provider}}** integration tile and click it.
+2. Scroll to the **Microsoft Defender for Endpoint** integration tile and click
+   it.
 3. Click the **Add Configuration** button and configure the following settings:
 
-- Enter the **Account Name** by which you'd like to identify this {{provider}}
-  account in JupiterOne. Ingested entities will have this value stored in
-  `tag.AccountName` when **Tag with Account Name** is checked.
+- Enter the **Account Name** by which you'd like to identify this Microsoft
+  Defender for Endpoint account in JupiterOne. Ingested entities will have this
+  value stored in `tag.AccountName` when **Tag with Account Name** is checked.
 - Enter a **Description** that will further assist your team when identifying
   the integration instance.
 - Select a **Polling Interval** that you feel is sufficient for your monitoring
   needs. You may leave this as `DISABLED` and manually execute the integration.
-- {{additional provider-specific settings}} Enter the **{{provider}} API Key**
-  generated for use by JupiterOne.
+- Enter the **Client ID**, **Client Secret**, and **Tenant** generated for use
+  by JupiterOne.
 
 4. Click **Create Configuration** once all values are provided.
 
+## API Permissions
+
+Need to setup API permissions under two containers (one for
+[azure account data](#microsoft-graph) and one for
+[defender account data](#windowsdefenderatp))
+
+### Microsoft Graph
+
+1. `Organization.Read.All`
+   1. Read organization information
+   2. Needed for creating the `Account` entity
+2. `Directory.Read.All`
+   1. Read directory data
+   2. Needed for creating `User`, `Group`, and `GroupUser` entities
+
+### WindowsDefenderATP
+
+1. `Machine.Read.All`
+   1. Read machine information
+   2. Needed for creating `Device` and `HostAgent` entities
+2. `User.Read.All`
+   1. Read user profiles
+   2. Needed for creating `User` entities
+3. `Vulnerability.Read.All`
+   1. Read Threat and Vulnerability Management vulnerability information
+   2. Needed for creating `Vulnerability` entity
+
 # How to Uninstall
 
-TODO: List specific actions that must be taken to uninstall the integration.
-Many of the following steps will be reusable; take care to be sure they remain
-accurate.
-
 1. From the configuration **Gear Icon**, select **Integrations**.
-2. Scroll to the **{{provider}}** integration tile and click it.
+2. Scroll to the **Microsoft Defender for Endpoint** integration tile and click
+   it.
 3. Identify and click the **integration to delete**.
 4. Click the **trash can** icon.
 5. Click the **Remove** button to delete the integration.
@@ -96,21 +120,32 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources | Entity `_type` | Entity `_class` |
-| --------- | -------------- | --------------- |
-| Account   | `acme_account` | `Account`       |
-| User      | `acme_user`    | `User`          |
-| UserGroup | `acme_group`   | `UserGroup`     |
+| Resources  | Entity `_type`                  | Entity `_class` |
+| ---------- | ------------------------------- | --------------- |
+| Account    | `microsoft_defender_account`    | `Account`       |
+| Finding    | `microsoft_defender_finding`    | `Finding`       |
+| Logon User | `microsoft_defender_logon_user` | `User`          |
+| Machine    | `microsoft_defender_machine`    | `Device`        |
+| User       | `microsoft_defender_user`       | `User`          |
 
 ### Relationships
 
 The following relationships are created:
 
-| Source Entity `_type` | Relationship `_class` | Target Entity `_type` |
-| --------------------- | --------------------- | --------------------- |
-| `acme_account`        | **HAS**               | `acme_group`          |
-| `acme_account`        | **HAS**               | `acme_user`           |
-| `acme_group`          | **HAS**               | `acme_user`           |
+| Source Entity `_type`        | Relationship `_class` | Target Entity `_type`           |
+| ---------------------------- | --------------------- | ------------------------------- |
+| `microsoft_defender_account` | **HAS**               | `microsoft_defender_machine`    |
+| `microsoft_defender_account` | **HAS**               | `microsoft_defender_user`       |
+| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_finding`    |
+| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_logon_user` |
+
+### Mapped Relationships
+
+The following mapped relationships are created:
+
+| Source Entity `_type`        | Relationship `_class` | Target Entity `_type` | Direction |
+| ---------------------------- | --------------------- | --------------------- | --------- |
+| `microsoft_defender_finding` | **IS**                | `*cve*`               | FORWARD   |
 
 <!--
 ********************************************************************************
