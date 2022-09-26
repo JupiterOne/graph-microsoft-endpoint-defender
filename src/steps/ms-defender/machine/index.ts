@@ -42,7 +42,7 @@ export async function fetchMachines({
   });
 }
 
-export async function fetchEndpoint({
+export async function fetchEndpoints({
   instance,
   jobState,
   logger,
@@ -95,6 +95,6 @@ export const machineSteps: Step<
     entities: [Entities.ENDPOINT],
     relationships: [Relationships.MACHINE_MANAGES_ENDPOINT],
     dependsOn: [Steps.FETCH_MACHINES.id],
-    executionHandler: fetchEndpoint,
+    executionHandler: fetchEndpoints,
   },
 ];

@@ -89,7 +89,7 @@ Object {
       "deviceValue": "Normal",
       "displayName": "testmachine3",
       "exposureLevel": "None",
-      "firstSeen": 1663065976911,
+      "firstSeenOn": 1663065976911,
       "healthStatus": "Inactive",
       "id": "595967ce83eb04bfddedaa7f29c8d10142a5bd30",
       "ipAddresses": Array [
@@ -101,7 +101,7 @@ Object {
       "isAadJoined": false,
       "lastExternalIpAddress": "20.12.71.218",
       "lastIpAddress": "10.1.1.196",
-      "lastSeen": 1663259654130,
+      "lastSeenOn": 1663259654130,
       "machineTags": Array [
         "evaluation",
       ],
@@ -205,7 +205,7 @@ Object {
       "deviceValue": "Normal",
       "displayName": "testserver2",
       "exposureLevel": "None",
-      "firstSeen": 1663059471994,
+      "firstSeenOn": 1663059471994,
       "healthStatus": "Inactive",
       "id": "614f81ab67349d2e017f7f8bee5764e1f4a6397d",
       "ipAddresses": Array [
@@ -217,7 +217,7 @@ Object {
       "isAadJoined": false,
       "lastExternalIpAddress": "20.122.85.11",
       "lastIpAddress": "10.1.1.132",
-      "lastSeen": 1663318709425,
+      "lastSeenOn": 1663318709425,
       "machineTags": Array [
         "evaluation",
       ],
@@ -326,7 +326,7 @@ Object {
       "deviceValue": "Normal",
       "displayName": "testmachine1",
       "exposureLevel": "None",
-      "firstSeen": 1663058568607,
+      "firstSeenOn": 1663058568607,
       "healthStatus": "Inactive",
       "id": "f39177bfecabebc12576671381d1f95c68492ae3",
       "ipAddresses": Array [
@@ -338,7 +338,7 @@ Object {
       "isAadJoined": false,
       "lastExternalIpAddress": "10.14.19.12",
       "lastIpAddress": "10.1.1.68",
-      "lastSeen": 1663059221095,
+      "lastSeenOn": 1663059221095,
       "machineTags": Array [
         "evaluation",
       ],
