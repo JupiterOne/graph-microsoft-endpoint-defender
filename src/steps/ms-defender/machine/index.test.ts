@@ -30,4 +30,4 @@ test('#fetchEndpoints', async () => {
   const stepResult = await executeStepWithDependencies(stepConfig);
   expect(stepResult).toMatchStepMetadata(stepConfig);
   expect(stepResult).toMatchSnapshot();
-}, 5000000);
+});

@@ -10,8 +10,6 @@ afterEach(async () => {
   await recording.stop();
 });
 
-jest.setTimeout(50000000);
-
 test('#fetchVulnerabilities', async () => {
   recording = setupProjectRecording({
     directory: __dirname,
