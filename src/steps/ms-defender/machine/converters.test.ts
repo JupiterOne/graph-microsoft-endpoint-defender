@@ -3,7 +3,7 @@ import { getMockMachine } from '../../../../test/mocks';
 
 test('#createMachineEntity', () => {
   expect(createMachineEntity(getMockMachine())).toMatchGraphObjectSchema({
-    _class: ['Device'],
+    _class: ['HostAgent'],
     schema: {
       properties: {
         _type: { const: 'microsoft_defender_machine' },

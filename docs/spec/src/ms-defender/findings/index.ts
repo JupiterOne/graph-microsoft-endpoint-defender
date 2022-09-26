@@ -14,9 +14,9 @@ export const findingsSpec: StepSpec<IntegrationConfig>[] = [
     ],
     relationships: [
       {
-        _type: 'microsoft_defender_machine_has_finding',
+        _type: 'microsoft_defender_machine_identified_finding',
         sourceType: 'microsoft_defender_machine',
-        _class: RelationshipClass.HAS,
+        _class: RelationshipClass.IDENTIFIED,
         targetType: 'microsoft_defender_finding',
       },
     ],

@@ -9,7 +9,7 @@ export const machineSpec: StepSpec<IntegrationConfig>[] = [
       {
         resourceName: 'Machine',
         _type: 'microsoft_defender_machine',
-        _class: ['Device'],
+        _class: ['HostAgent'],
       },
     ],
     relationships: [

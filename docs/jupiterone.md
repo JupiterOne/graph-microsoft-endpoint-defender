@@ -125,7 +125,7 @@ The following entities are created:
 | Account    | `microsoft_defender_account`    | `Account`       |
 | Finding    | `microsoft_defender_finding`    | `Finding`       |
 | Logon User | `microsoft_defender_logon_user` | `User`          |
-| Machine    | `microsoft_defender_machine`    | `Device`        |
+| Machine    | `microsoft_defender_machine`    | `HostAgent`     |
 | User       | `microsoft_defender_user`       | `User`          |
 
 ### Relationships

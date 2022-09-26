@@ -46,7 +46,7 @@ export const Entities: Record<
   MACHINE: {
     resourceName: 'Machine',
     _type: 'microsoft_defender_machine',
-    _class: ['Device'],
+    _class: ['HostAgent'],
   },
   LOGON_USER: {
     resourceName: 'Logon User',
