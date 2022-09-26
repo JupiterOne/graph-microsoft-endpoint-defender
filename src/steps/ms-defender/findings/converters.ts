@@ -96,7 +96,7 @@ export function createMachineFindingRelationship({
   vulnerabilityEntity: Entity;
 }): Relationship {
   return createDirectRelationship({
-    _class: RelationshipClass.HAS,
+    _class: RelationshipClass.IDENTIFIED,
     from: machineEntity,
     to: findingEntity,
   });

@@ -69,7 +69,7 @@ export const Relationships: Record<
   | 'ACCOUNT_HAS_MACHINE'
   | 'ACCOUNT_HAS_USER'
   | 'MACHINE_HAS_LOGON_USER'
-  | 'MACHINE_HAS_FINDING',
+  | 'MACHINE_IDENTIFIED_FINDING',
   StepRelationshipMetadata
 > = {
   ACCOUNT_HAS_MACHINE: {
@@ -90,10 +90,10 @@ export const Relationships: Record<
     _class: RelationshipClass.HAS,
     targetType: Entities.LOGON_USER._type,
   },
-  MACHINE_HAS_FINDING: {
-    _type: 'microsoft_defender_machine_has_finding',
+  MACHINE_IDENTIFIED_FINDING: {
+    _type: 'microsoft_defender_machine_identified_finding',
     sourceType: Entities.MACHINE._type,
-    _class: RelationshipClass.HAS,
+    _class: RelationshipClass.IDENTIFIED,
     targetType: Entities.FINDING._type,
   },
 };

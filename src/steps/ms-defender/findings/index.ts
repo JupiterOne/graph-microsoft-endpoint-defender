@@ -89,7 +89,7 @@ export const findingsSteps: Step<
     id: Steps.FETCH_FINDINGS.id,
     name: Steps.FETCH_FINDINGS.name,
     entities: [Entities.FINDING],
-    relationships: [Relationships.MACHINE_HAS_FINDING],
+    relationships: [Relationships.MACHINE_IDENTIFIED_FINDING],
     dependsOn: [Steps.FETCH_MACHINES.id],
     executionHandler: fetchFindings,
   },

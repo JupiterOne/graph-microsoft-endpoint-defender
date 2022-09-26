@@ -136,8 +136,8 @@ The following relationships are created:
 | ---------------------------- | --------------------- | ------------------------------- |
 | `microsoft_defender_account` | **HAS**               | `microsoft_defender_machine`    |
 | `microsoft_defender_account` | **HAS**               | `microsoft_defender_user`       |
-| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_finding`    |
 | `microsoft_defender_machine` | **HAS**               | `microsoft_defender_logon_user` |
+| `microsoft_defender_machine` | **IDENTIFIED**        | `microsoft_defender_finding`    |
 
 ### Mapped Relationships
 
