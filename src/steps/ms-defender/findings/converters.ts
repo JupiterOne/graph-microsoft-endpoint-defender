@@ -15,22 +15,6 @@ export function createFindingKey(id: string): string {
   return `${Entities.FINDING._type}:${id}`;
 }
 
-const SEVERITY_TO_NUMERIC_SEVERITY_MAP = new Map<string, number>([
-  ['low', 2],
-  ['medium', 5],
-  ['high', 7],
-  ['critical', 10],
-]);
-
-export function getNumericSeverityFromIssueSeverity(
-  issueSeverity: string,
-): number {
-  const numericSeverity = SEVERITY_TO_NUMERIC_SEVERITY_MAP.get(
-    issueSeverity.toLowerCase(),
-  );
-  return numericSeverity === undefined ? 0 : numericSeverity;
-}
-
 export function createFindingEntity(data: Finding): Entity {
   return createIntegrationEntity({
     entityData: {
@@ -54,7 +38,7 @@ export function createFindingEntity(data: Finding): Entity {
         blocking: false,
         production: false,
         public: data.publicExploit,
-        numericSeverity: getNumericSeverityFromIssueSeverity(data.severity),
+        numericSeverity: data.cvssV3,
       },
     },
   });
