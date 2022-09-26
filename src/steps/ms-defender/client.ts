@@ -43,4 +43,11 @@ export class DefenderClient extends GraphClient {
       callback,
     });
   }
+
+  // https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-by-id?view=o365-worldwide
+  public async fetchEndpointDetails(machineId: string): Promise<any> {
+    return this.callApi({
+      link: `${this.BASE_URL_API}/machines/${machineId}?`,
+    });
+  }
 }

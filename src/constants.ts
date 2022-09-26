@@ -13,7 +13,7 @@ export const Steps: Record<
   | 'FETCH_USERS'
   | 'FETCH_FINDINGS'
   | 'FINDING_CVE_RELATIONSHIP'
-  | 'MACHINE_DEVICE_RELATIONSHIP',
+  | 'FETCH_ENDPOINTS',
   { id: string; name: string }
 > = {
   FETCH_ACCOUNT: { id: 'fetch-account', name: 'Fetch Account' },
@@ -28,14 +28,14 @@ export const Steps: Record<
     id: 'build-finding-cve-relationship',
     name: 'Build Finding and CVE Relationship',
   },
-  MACHINE_DEVICE_RELATIONSHIP: {
-    id: 'build-machine-device-relationship',
-    name: 'Build Machine and Device Relationship',
+  FETCH_ENDPOINTS: {
+    id: 'fetch-endpoints',
+    name: 'Fetch Endpoints',
   },
 };
 
 export const Entities: Record<
-  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'FINDING',
+  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'FINDING' | 'ENDPOINT',
   StepEntityMetadata
 > = {
   ACCOUNT: {
@@ -63,13 +63,19 @@ export const Entities: Record<
     _type: 'microsoft_defender_finding',
     _class: ['Finding'],
   },
+  ENDPOINT: {
+    resourceName: 'Device/Machine/Host',
+    _type: 'user_endpoint',
+    _class: ['Device'],
+  },
 };
 
 export const Relationships: Record<
   | 'ACCOUNT_HAS_MACHINE'
   | 'ACCOUNT_HAS_USER'
   | 'MACHINE_HAS_LOGON_USER'
-  | 'MACHINE_IDENTIFIED_FINDING',
+  | 'MACHINE_IDENTIFIED_FINDING'
+  | 'MACHINE_MANAGES_ENDPOINT',
   StepRelationshipMetadata
 > = {
   ACCOUNT_HAS_MACHINE: {
@@ -95,6 +101,12 @@ export const Relationships: Record<
     sourceType: Entities.MACHINE._type,
     _class: RelationshipClass.IDENTIFIED,
     targetType: Entities.FINDING._type,
+  },
+  MACHINE_MANAGES_ENDPOINT: {
+    _type: 'microsoft_defender_machine_manages_user_endpoint',
+    sourceType: Entities.MACHINE._type,
+    _class: RelationshipClass.MANAGES,
+    targetType: Entities.ENDPOINT._type,
   },
 };
 

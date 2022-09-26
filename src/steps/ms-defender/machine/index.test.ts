@@ -19,3 +19,15 @@ test('#fetchMachines', async () => {
   expect(stepResult).toMatchStepMetadata(stepConfig);
   expect(stepResult).toMatchSnapshot();
 });
+
+test('#fetchEndpoints', async () => {
+  recording = setupProjectRecording({
+    directory: __dirname,
+    name: '#fetchEndpoints',
+  });
+
+  const stepConfig = buildStepTestConfigForStep(Steps.FETCH_ENDPOINTS.id);
+  const stepResult = await executeStepWithDependencies(stepConfig);
+  expect(stepResult).toMatchStepMetadata(stepConfig);
+  expect(stepResult).toMatchSnapshot();
+}, 5000000);

@@ -1,5 +1,6 @@
 import {
   Entity,
+  getRawData,
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
@@ -14,7 +15,10 @@ import {
 import {
   createMachineEntity,
   createAccountMachineRelationship,
+  createEndpointEntity,
+  createMachineEndpointRelationship,
 } from './converters';
+import { Machine } from '../../../types';
 
 export async function fetchMachines({
   logger,
@@ -38,6 +42,42 @@ export async function fetchMachines({
   });
 }
 
+export async function fetchEndpoint({
+  instance,
+  jobState,
+  logger,
+}: IntegrationStepContext): Promise<void> {
+  const graphClient = new DefenderClient(logger, instance.config);
+  await jobState.iterateEntities(
+    { _type: Entities.MACHINE._type },
+    async (machineEntity) => {
+      const machine = getRawData<Machine>(machineEntity);
+
+      if (!machine) {
+        logger.warn(
+          { _key: machineEntity._key },
+          'Could not get raw data for machine entity',
+        );
+        return;
+      }
+
+      const endpoint = await graphClient.fetchEndpointDetails(machine.id);
+      if (endpoint) {
+        const endpointEntity = await jobState.addEntity(
+          createEndpointEntity(endpoint),
+        );
+
+        await jobState.addRelationship(
+          createMachineEndpointRelationship({
+            machineEntity,
+            endpointEntity,
+          }),
+        );
+      }
+    },
+  );
+}
+
 export const machineSteps: Step<
   IntegrationStepExecutionContext<IntegrationConfig>
 >[] = [
@@ -48,5 +88,13 @@ export const machineSteps: Step<
     relationships: [Relationships.ACCOUNT_HAS_MACHINE],
     dependsOn: [Steps.FETCH_ACCOUNT.id],
     executionHandler: fetchMachines,
+  },
+  {
+    id: Steps.FETCH_ENDPOINTS.id,
+    name: Steps.FETCH_ENDPOINTS.name,
+    entities: [Entities.ENDPOINT],
+    relationships: [Relationships.MACHINE_MANAGES_ENDPOINT],
+    dependsOn: [Steps.FETCH_MACHINES.id],
+    executionHandler: fetchEndpoint,
   },
 ];
