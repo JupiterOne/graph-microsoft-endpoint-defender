@@ -1,4 +1,4 @@
-import { Finding, Machine, UserLogon } from '../../types';
+import { Vulnerability, Machine, UserLogon } from '../../types';
 import { GraphClient } from '../../ms-graph/client';
 
 export class DefenderClient extends GraphClient {
@@ -31,11 +31,11 @@ export class DefenderClient extends GraphClient {
   }
 
   // https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-discovered-vulnerabilities?view=o365-worldwide
-  public async iterateFindings(
+  public async iterateVulnerabilities(
     input: {
       machineId: string;
     },
-    callback: (finding: Finding) => void | Promise<void>,
+    callback: (vulnerability: Vulnerability) => void | Promise<void>,
   ): Promise<void> {
     const url = `${this.BASE_URL_API}/machines/${input.machineId}/vulnerabilities?`;
     return this.iterateResources({

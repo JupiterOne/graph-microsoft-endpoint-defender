@@ -11,8 +11,8 @@ export const Steps: Record<
   | 'FETCH_MACHINES'
   | 'FETCH_LOGON_USERS'
   | 'FETCH_USERS'
-  | 'FETCH_FINDINGS'
-  | 'FINDING_CVE_RELATIONSHIP'
+  | 'FETCH_VULNERABILITIES'
+  | 'VULNERABILITY_CVE_RELATIONSHIP'
   | 'FETCH_ENDPOINTS',
   { id: string; name: string }
 > = {
@@ -20,13 +20,13 @@ export const Steps: Record<
   FETCH_MACHINES: { id: 'fetch-machines', name: 'Fetch Machines' },
   FETCH_LOGON_USERS: { id: 'fetch-logon-users', name: 'Fetch Logon Users' },
   FETCH_USERS: { id: 'fetch-users', name: 'Fetch Users' },
-  FETCH_FINDINGS: {
-    id: 'fetch-findings',
-    name: 'Fetch Findings',
+  FETCH_VULNERABILITIES: {
+    id: 'fetch-vulnerabilities',
+    name: 'Fetch Vulnerabilities',
   },
-  FINDING_CVE_RELATIONSHIP: {
-    id: 'build-finding-cve-relationship',
-    name: 'Build Finding and CVE Relationship',
+  VULNERABILITY_CVE_RELATIONSHIP: {
+    id: 'build-vulnerability-cve-relationship',
+    name: 'Build Vulnerability and CVE Relationship',
   },
   FETCH_ENDPOINTS: {
     id: 'fetch-endpoints',
@@ -35,7 +35,7 @@ export const Steps: Record<
 };
 
 export const Entities: Record<
-  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'FINDING' | 'ENDPOINT',
+  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'VULNERABILITY' | 'ENDPOINT',
   StepEntityMetadata
 > = {
   ACCOUNT: {
@@ -58,9 +58,9 @@ export const Entities: Record<
     _type: 'microsoft_defender_user',
     _class: ['User'],
   },
-  FINDING: {
-    resourceName: 'Finding',
-    _type: 'microsoft_defender_finding',
+  VULNERABILITY: {
+    resourceName: 'Vulnerability',
+    _type: 'microsoft_defender_vulnerability',
     _class: ['Finding'],
   },
   ENDPOINT: {
@@ -74,7 +74,7 @@ export const Relationships: Record<
   | 'ACCOUNT_HAS_MACHINE'
   | 'ACCOUNT_HAS_USER'
   | 'MACHINE_HAS_LOGON_USER'
-  | 'MACHINE_IDENTIFIED_FINDING'
+  | 'MACHINE_IDENTIFIED_VULNERABILITY'
   | 'MACHINE_MANAGES_ENDPOINT',
   StepRelationshipMetadata
 > = {
@@ -96,11 +96,11 @@ export const Relationships: Record<
     _class: RelationshipClass.HAS,
     targetType: Entities.LOGON_USER._type,
   },
-  MACHINE_IDENTIFIED_FINDING: {
-    _type: 'microsoft_defender_machine_identified_finding',
+  MACHINE_IDENTIFIED_VULNERABILITY: {
+    _type: 'microsoft_defender_machine_identified_vulnerability',
     sourceType: Entities.MACHINE._type,
     _class: RelationshipClass.IDENTIFIED,
-    targetType: Entities.FINDING._type,
+    targetType: Entities.VULNERABILITY._type,
   },
   MACHINE_MANAGES_ENDPOINT: {
     _type: 'microsoft_defender_machine_manages_user_endpoint',
@@ -111,12 +111,12 @@ export const Relationships: Record<
 };
 
 export const MappedRelationships: Record<
-  'FINDING_IS_CVE',
+  'VULNERABILITY_IS_CVE',
   StepMappedRelationshipMetadata
 > = {
-  FINDING_IS_CVE: {
-    _type: 'microsoft_defender_finding_is_cve',
-    sourceType: Entities.FINDING._type,
+  VULNERABILITY_IS_CVE: {
+    _type: 'microsoft_defender_vulnerability_is_cve',
+    sourceType: Entities.VULNERABILITY._type,
     _class: RelationshipClass.IS,
     targetType: 'cve',
     direction: RelationshipDirection.FORWARD,

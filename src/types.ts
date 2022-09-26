@@ -58,7 +58,7 @@ export interface UserLogon {
   isOnlyNetworkUser: boolean | null;
 }
 
-export interface Finding {
+export interface Vulnerability {
   id: string;
   name: string;
   description: string;

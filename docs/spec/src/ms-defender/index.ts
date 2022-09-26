@@ -1,9 +1,9 @@
 import { machineSpec } from './machine';
-import { findingsSpec } from './findings';
+import { vulnerabilitiesSpec } from './vulnerabilities';
 import { logonUserSpec } from './logon-user';
 
 export const msDefenderSpec = [
   ...machineSpec,
-  ...findingsSpec,
+  ...vulnerabilitiesSpec,
   ...logonUserSpec,
 ];

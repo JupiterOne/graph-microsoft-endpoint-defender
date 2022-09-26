@@ -3,8 +3,9 @@ import {
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
+
 import { IntegrationConfig, IntegrationStepContext } from '../../../config';
-import { Finding, Machine } from '../../../types';
+import { Vulnerability, Machine } from '../../../types';
 import { DefenderClient } from '../client';
 import {
   Entities,
@@ -13,10 +14,10 @@ import {
   Steps,
 } from '../../../constants';
 import {
-  createFindingCveRelationship,
-  createFindingEntity,
-  createMachineFindingRelationship,
-  createFindingKey,
+  createVulnerabilityCveRelationship,
+  createVulnerabilityEntity,
+  createMachineVulnerabilityRelationship,
+  createVulnerabilityKey,
 } from './converters';
 
 export async function fetchFindings({
@@ -38,17 +39,17 @@ export async function fetchFindings({
         return;
       }
 
-      await graphClient.iterateFindings(
+      await graphClient.iterateVulnerabilities(
         { machineId: machine.id },
         async (finding) => {
-          const findingEntity = createFindingEntity(finding);
+          const findingEntity = createVulnerabilityEntity(finding);
 
-          if (!jobState.hasKey(createFindingKey(finding.id))) {
+          if (!jobState.hasKey(createVulnerabilityKey(finding.id))) {
             await jobState.addEntity(findingEntity);
           }
 
           await jobState.addRelationship(
-            createMachineFindingRelationship({
+            createMachineVulnerabilityRelationship({
               machineEntity,
               vulnerabilityEntity: findingEntity,
             }),
@@ -59,47 +60,47 @@ export async function fetchFindings({
   );
 }
 
-export async function buildFindingCveRelationship({
+export async function buildVulnerabilityCveRelationship({
   jobState,
   logger,
 }: IntegrationStepContext): Promise<void> {
   await jobState.iterateEntities(
-    { _type: Entities.FINDING._type },
-    async (findingEntity) => {
-      const finding = getRawData<Finding>(findingEntity);
+    { _type: Entities.VULNERABILITY._type },
+    async (vulnerabilityEntity) => {
+      const finding = getRawData<Vulnerability>(vulnerabilityEntity);
       if (!finding) {
         logger.warn(
-          { _key: findingEntity._key },
-          'Could not get raw data for finding entity',
+          { _key: vulnerabilityEntity._key },
+          'Could not get raw data for vulnerability entity',
         );
         return;
       }
 
       await jobState.addRelationship(
-        createFindingCveRelationship(findingEntity, finding),
+        createVulnerabilityCveRelationship(vulnerabilityEntity, finding),
       );
     },
   );
 }
 
-export const findingsSteps: Step<
+export const vulnerabilitiesSteps: Step<
   IntegrationStepExecutionContext<IntegrationConfig>
 >[] = [
   {
-    id: Steps.FETCH_FINDINGS.id,
-    name: Steps.FETCH_FINDINGS.name,
-    entities: [Entities.FINDING],
-    relationships: [Relationships.MACHINE_IDENTIFIED_FINDING],
+    id: Steps.FETCH_VULNERABILITIES.id,
+    name: Steps.FETCH_VULNERABILITIES.name,
+    entities: [Entities.VULNERABILITY],
+    relationships: [Relationships.MACHINE_IDENTIFIED_VULNERABILITY],
     dependsOn: [Steps.FETCH_MACHINES.id],
     executionHandler: fetchFindings,
   },
   {
-    id: Steps.FINDING_CVE_RELATIONSHIP.id,
-    name: Steps.FINDING_CVE_RELATIONSHIP.name,
+    id: Steps.VULNERABILITY_CVE_RELATIONSHIP.id,
+    name: Steps.VULNERABILITY_CVE_RELATIONSHIP.name,
     entities: [],
     relationships: [],
-    mappedRelationships: [MappedRelationships.FINDING_IS_CVE],
-    dependsOn: [Steps.FETCH_FINDINGS.id],
-    executionHandler: buildFindingCveRelationship,
+    mappedRelationships: [MappedRelationships.VULNERABILITY_IS_CVE],
+    dependsOn: [Steps.FETCH_VULNERABILITIES.id],
+    executionHandler: buildVulnerabilityCveRelationship,
   },
 ];

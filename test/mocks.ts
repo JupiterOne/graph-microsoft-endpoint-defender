@@ -1,6 +1,6 @@
 import { IntegrationInstance } from '@jupiterone/integration-sdk-core';
 import { Organization, User } from '@microsoft/microsoft-graph-types';
-import { Machine, UserLogon, Finding } from '../src/types';
+import { Machine, UserLogon, Vulnerability } from '../src/types';
 import { integrationConfig } from './config';
 
 export function getMockInstance(): IntegrationInstance {
@@ -210,7 +210,7 @@ export function getMockLogonUser(): UserLogon {
   };
 }
 
-export function getMockFinding(): Finding {
+export function getMockVulnerability(): Vulnerability {
   return {
     id: 'CVE-2022-34731',
     name: 'CVE-2022-34731',

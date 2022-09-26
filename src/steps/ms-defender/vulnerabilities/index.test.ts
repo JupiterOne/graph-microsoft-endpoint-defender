@@ -1,4 +1,5 @@
 import { executeStepWithDependencies } from '@jupiterone/integration-sdk-testing';
+
 import { Recording, setupProjectRecording } from '../../../../test/recording';
 import { buildStepTestConfigForStep } from '../../../../test/config';
 import { Steps } from '../../../constants';
@@ -9,26 +10,28 @@ afterEach(async () => {
   await recording.stop();
 });
 
-test('#fetchFindings', async () => {
+jest.setTimeout(50000000);
+
+test('#fetchVulnerabilities', async () => {
   recording = setupProjectRecording({
     directory: __dirname,
-    name: '#fetchFindings',
+    name: '#fetchVulnerabilities',
   });
 
-  const stepConfig = buildStepTestConfigForStep(Steps.FETCH_FINDINGS.id);
+  const stepConfig = buildStepTestConfigForStep(Steps.FETCH_VULNERABILITIES.id);
   const stepResult = await executeStepWithDependencies(stepConfig);
   expect(stepResult).toMatchStepMetadata(stepConfig);
   expect(stepResult).toMatchSnapshot();
 });
 
-test('#buildFindingCveRelationship', async () => {
+test('#buildVulnerabilityCveRelationship', async () => {
   recording = setupProjectRecording({
     directory: __dirname,
-    name: '#buildFindingCveRelationship',
+    name: '#buildVulnerabilityCveRelationship',
   });
 
   const stepConfig = buildStepTestConfigForStep(
-    Steps.FINDING_CVE_RELATIONSHIP.id,
+    Steps.VULNERABILITY_CVE_RELATIONSHIP.id,
   );
   const stepResult = await executeStepWithDependencies(stepConfig);
   expect(stepResult).toMatchSnapshot();
