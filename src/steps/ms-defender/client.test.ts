@@ -4,7 +4,7 @@ import {
 } from '@jupiterone/integration-sdk-testing';
 import { integrationConfig } from '../../../test/config';
 import { setupProjectRecording } from '../../../test/recording';
-import { Finding, Machine, UserLogon } from '../../types';
+import { Vulnerability, Machine, UserLogon } from '../../types';
 import { DefenderClient } from './client';
 
 // See test/README.md for details
@@ -76,9 +76,9 @@ test('iterateVulnerabilities', async () => {
     machines.push(machine);
   });
 
-  const vulnerabilities: Finding[] = [];
+  const vulnerabilities: Vulnerability[] = [];
   for (const { id: machineId } of machines) {
-    await client.iterateFindings({ machineId }, (vulnerability) => {
+    await client.iterateVulnerabilities({ machineId }, (vulnerability) => {
       vulnerabilities.push(vulnerability);
     });
   }

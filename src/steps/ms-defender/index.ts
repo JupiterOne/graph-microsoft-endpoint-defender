@@ -1,9 +1,9 @@
 import { machineSteps } from './machine';
-import { findingsSteps } from './findings';
+import { vulnerabilitiesSteps } from './vulnerabilities';
 import { logonUserSteps } from './logon-user';
 
 export const msDefenderSteps = [
   ...machineSteps,
-  ...findingsSteps,
+  ...vulnerabilitiesSteps,
   ...logonUserSteps,
 ];

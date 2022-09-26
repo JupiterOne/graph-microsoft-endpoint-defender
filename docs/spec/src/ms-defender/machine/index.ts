@@ -9,7 +9,7 @@ export const machineSpec: StepSpec<IntegrationConfig>[] = [
       {
         resourceName: 'Machine',
         _type: 'microsoft_defender_machine',
-        _class: ['Device'],
+        _class: ['HostAgent'],
       },
     ],
     relationships: [
@@ -21,6 +21,27 @@ export const machineSpec: StepSpec<IntegrationConfig>[] = [
       },
     ],
     dependsOn: ['fetch-account'],
+    implemented: true,
+  },
+  {
+    id: 'fetch-endpoints',
+    name: 'Fetch Endpoints',
+    entities: [
+      {
+        resourceName: 'Device/Machine/Host',
+        _type: 'user_endpoint',
+        _class: ['Device'],
+      },
+    ],
+    relationships: [
+      {
+        _type: 'microsoft_defender_machine_manages_user_endpoint',
+        sourceType: 'microsoft_defender_machine',
+        _class: RelationshipClass.MANAGES,
+        targetType: 'user_endpoint',
+      },
+    ],
+    dependsOn: ['fetch-machines'],
     implemented: true,
   },
 ];

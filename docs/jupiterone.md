@@ -120,32 +120,34 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources  | Entity `_type`                  | Entity `_class` |
-| ---------- | ------------------------------- | --------------- |
-| Account    | `microsoft_defender_account`    | `Account`       |
-| Finding    | `microsoft_defender_finding`    | `Finding`       |
-| Logon User | `microsoft_defender_logon_user` | `User`          |
-| Machine    | `microsoft_defender_machine`    | `Device`        |
-| User       | `microsoft_defender_user`       | `User`          |
+| Resources           | Entity `_type`                     | Entity `_class` |
+| ------------------- | ---------------------------------- | --------------- |
+| Account             | `microsoft_defender_account`       | `Account`       |
+| Device/Machine/Host | `user_endpoint`                    | `Device`        |
+| Logon User          | `microsoft_defender_logon_user`    | `User`          |
+| Machine             | `microsoft_defender_machine`       | `HostAgent`     |
+| User                | `microsoft_defender_user`          | `User`          |
+| Vulnerability       | `microsoft_defender_vulnerability` | `Finding`       |
 
 ### Relationships
 
 The following relationships are created:
 
-| Source Entity `_type`        | Relationship `_class` | Target Entity `_type`           |
-| ---------------------------- | --------------------- | ------------------------------- |
-| `microsoft_defender_account` | **HAS**               | `microsoft_defender_machine`    |
-| `microsoft_defender_account` | **HAS**               | `microsoft_defender_user`       |
-| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_finding`    |
-| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_logon_user` |
+| Source Entity `_type`        | Relationship `_class` | Target Entity `_type`              |
+| ---------------------------- | --------------------- | ---------------------------------- |
+| `microsoft_defender_account` | **HAS**               | `microsoft_defender_machine`       |
+| `microsoft_defender_account` | **HAS**               | `microsoft_defender_user`          |
+| `microsoft_defender_machine` | **HAS**               | `microsoft_defender_logon_user`    |
+| `microsoft_defender_machine` | **IDENTIFIED**        | `microsoft_defender_vulnerability` |
+| `microsoft_defender_machine` | **MANAGES**           | `user_endpoint`                    |
 
 ### Mapped Relationships
 
 The following mapped relationships are created:
 
-| Source Entity `_type`        | Relationship `_class` | Target Entity `_type` | Direction |
-| ---------------------------- | --------------------- | --------------------- | --------- |
-| `microsoft_defender_finding` | **IS**                | `*cve*`               | FORWARD   |
+| Source Entity `_type`              | Relationship `_class` | Target Entity `_type` | Direction |
+| ---------------------------------- | --------------------- | --------------------- | --------- |
+| `microsoft_defender_vulnerability` | **IS**                | `*cve*`               | FORWARD   |
 
 <!--
 ********************************************************************************

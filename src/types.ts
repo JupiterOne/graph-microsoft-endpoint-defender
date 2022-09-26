@@ -58,7 +58,7 @@ export interface UserLogon {
   isOnlyNetworkUser: boolean | null;
 }
 
-export interface Finding {
+export interface Vulnerability {
   id: string;
   name: string;
   description: string;
@@ -72,4 +72,46 @@ export interface Finding {
   exploitInKit: boolean;
   exploitTypes: string[];
   exploitUris: string[];
+}
+
+export interface Endpoint {
+  '@odata.context': string;
+  id: string;
+  computerDnsName: string;
+  firstSeen: string;
+  lastSeen: string;
+  osPlatform: string;
+  osVersion: string;
+  osProcessor: string;
+  version: string;
+  lastIpAddress: string;
+  lastExternalIpAddress: string;
+  agentVersion: string;
+  osBuild: number;
+  healthStatus: string;
+  deviceValue: string;
+  rbacGroupId: number;
+  rbacGroupName: string;
+  riskScore: string;
+  exposureLevel: string;
+  isAadJoined: boolean;
+  aadDeviceId: string;
+  machineTags: string[];
+  defenderAvStatus: string;
+  onboardingStatus: string;
+  osArchitecture: string;
+  managedBy: string;
+  managedByStatus: string;
+  ipAddresses: {
+    ipAddress: string;
+    macAddress: string;
+    type: string;
+    operationalStatus: string;
+  }[];
+  vmMetadata?: {
+    vmId: string;
+    cloudProvider: string;
+    resourceId: string;
+    subscriptionId: string;
+  };
 }

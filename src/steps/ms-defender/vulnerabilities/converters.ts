@@ -8,38 +8,22 @@ import {
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
 
-import { Finding } from '../../../types';
+import { Vulnerability } from '../../../types';
 import { Entities, MappedRelationships } from '../../../constants';
 
-export function createFindingKey(id: string): string {
-  return `${Entities.FINDING._type}:${id}`;
+export function createVulnerabilityKey(id: string): string {
+  return `${Entities.VULNERABILITY._type}:${id}`;
 }
 
-const SEVERITY_TO_NUMERIC_SEVERITY_MAP = new Map<string, number>([
-  ['low', 2],
-  ['medium', 5],
-  ['high', 7],
-  ['critical', 10],
-]);
-
-export function getNumericSeverityFromIssueSeverity(
-  issueSeverity: string,
-): number {
-  const numericSeverity = SEVERITY_TO_NUMERIC_SEVERITY_MAP.get(
-    issueSeverity.toLowerCase(),
-  );
-  return numericSeverity === undefined ? 0 : numericSeverity;
-}
-
-export function createFindingEntity(data: Finding): Entity {
+export function createVulnerabilityEntity(data: Vulnerability): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
       assign: {
         id: data.id,
-        _type: Entities.FINDING._type,
-        _class: Entities.FINDING._class,
-        _key: createFindingKey(data.id),
+        _type: Entities.VULNERABILITY._type,
+        _class: Entities.VULNERABILITY._class,
+        _key: createVulnerabilityKey(data.id),
         name: data.name,
         displayName: data.name,
         description: data.description,
@@ -54,24 +38,24 @@ export function createFindingEntity(data: Finding): Entity {
         blocking: false,
         production: false,
         public: data.publicExploit,
-        numericSeverity: getNumericSeverityFromIssueSeverity(data.severity),
+        numericSeverity: data.cvssV3,
       },
     },
   });
 }
 
-export function createFindingCveRelationship(
-  findingEntity: Entity,
-  cve: Finding,
+export function createVulnerabilityCveRelationship(
+  vulnerabilityEntity: Entity,
+  cve: Vulnerability,
 ): Relationship {
   const cveIdDisplay = cve.id.toUpperCase();
 
   return createMappedRelationship({
     _class: RelationshipClass.IS,
-    _type: MappedRelationships.FINDING_IS_CVE._type,
+    _type: MappedRelationships.VULNERABILITY_IS_CVE._type,
     _mapping: {
-      sourceEntityKey: findingEntity._key,
-      relationshipDirection: MappedRelationships.FINDING_IS_CVE.direction,
+      sourceEntityKey: vulnerabilityEntity._key,
+      relationshipDirection: MappedRelationships.VULNERABILITY_IS_CVE.direction,
       targetFilterKeys: [['_type', '_key']],
       skipTargetCreation: false,
       targetEntity: {
@@ -88,16 +72,16 @@ export function createFindingCveRelationship(
   });
 }
 
-export function createMachineFindingRelationship({
+export function createMachineVulnerabilityRelationship({
   machineEntity,
-  vulnerabilityEntity: findingEntity,
+  vulnerabilityEntity,
 }: {
   machineEntity: Entity;
   vulnerabilityEntity: Entity;
 }): Relationship {
   return createDirectRelationship({
-    _class: RelationshipClass.HAS,
+    _class: RelationshipClass.IDENTIFIED,
     from: machineEntity,
-    to: findingEntity,
+    to: vulnerabilityEntity,
   });
 }
