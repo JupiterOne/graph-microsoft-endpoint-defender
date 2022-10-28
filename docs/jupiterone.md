@@ -44,9 +44,53 @@ If you need help with this integration, please contact
 
 In the Azure portal:
 
-1. Create an App Registration
-2. Configure the required [API permissions](#api-permissions)
-3. Add a 2-year secret
+### Create a new app registration
+
+1. Navigate to
+   [App Registrations](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
+2. Click `New Registration`
+
+- Enter a name
+- Select the supported account type
+- Click `Register`
+
+### Add API permissions
+
+In your new app registration, go to **API Permissions** under **Manage** on the
+left side panel.
+
+- If your app has already been assigned the `User.Read` permission, remove it
+  using the context menu. It is not needed for the integration to run.
+  - If a warning appears saying "This scope is required for proper application
+    functionality.", it can be safely ignored.
+- Click `Add a permission`
+- Click `Microsoft Graph`
+- When presented with **What type of permissions does your application
+  require?**, select **Application permissions**.
+  - Add the `Organization.Read.All` permission
+  - Add the `Directory.Read.All` permission
+  - Press `Add permissions`
+- Now, click `Add a permission` again.
+- Under `APIs my organization uses` search **WindowsDefenderATP** and click the
+  result.
+- When presented with **What type of permissions does your application
+  require?**, select **Application permissions**
+  - Add the `Machine.Read.All` permission
+  - Add the `User.Read.All` permission
+  - Add the `Vulnerability.Read.All` permission
+  - Press `Add permission`
+- Now, `Grant admin consent` for the API permissions.
+
+### Add Client Secret
+
+In your app registration, click **Certificates & secrets**
+
+- Under **Client Secrets**, click `New client secret`
+  - Add a description for the secret
+  - Select a secret expiration that matches your needs for secret rotation
+  - Click `Add`
+- Copy the secret `Value` using the `Copy to Clipboard` icon. (Highlighting and
+  copying will not copy the full value)
 
 ### In JupiterOne
 
@@ -62,16 +106,14 @@ In the Azure portal:
   the integration instance.
 - Select a **Polling Interval** that you feel is sufficient for your monitoring
   needs. You may leave this as `DISABLED` and manually execute the integration.
-- Enter the **Client ID**, **Client Secret**, and **Tenant** generated for use
-  by JupiterOne.
+- Fill the **Client Secret** value in with the secret `Value` you copied
+  earlier.
+- Using data from you **App Registration's** Overview tab, fill the **Tenant**
+  (Directory (tenant) ID) and **Client ID** (Application (client) ID).
 
-4. Click **Create Configuration** once all values are provided.
+4. Click **Create** once all values are provided.
 
 ## API Permissions
-
-Need to setup API permissions under two containers (one for
-[azure account data](#microsoft-graph) and one for
-[defender account data](#windowsdefenderatp))
 
 ### Microsoft Graph
 
