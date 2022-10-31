@@ -34,16 +34,23 @@ export async function fetchLogonUsers({
       await graphClient.iterateLogonUsers(
         { machineId: machine.id },
         async (logonUser) => {
-          const logonUserEntity = await jobState.addEntity(
-            createLogonUserEntity(logonUser),
-          );
+          const entity = createLogonUserEntity(logonUser);
 
-          await jobState.addRelationship(
-            createMachineLogonUserRelationship({
-              machineEntity,
-              logonUserEntity,
-            }),
-          );
+          if (!jobState.hasKey(entity._key)) {
+            const logonUserEntity = await jobState.addEntity(entity);
+
+            await jobState.addRelationship(
+              createMachineLogonUserRelationship({
+                machineEntity,
+                logonUserEntity,
+              }),
+            );
+          } else {
+            logger.info(
+              { duplicateKey: entity._key },
+              `Found duplicate logon user entity.`,
+            );
+          }
         },
       );
     },
