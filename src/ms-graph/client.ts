@@ -13,6 +13,7 @@ import {
 import 'isomorphic-fetch';
 
 import { ClientConfig } from './types';
+import { retry } from '@lifeomic/attempt';
 
 export type QueryParams = string | { [key: string]: string | number };
 
@@ -95,7 +96,7 @@ export class GraphClient {
     let response: GraphClientResponse<T> | undefined;
     do {
       try {
-        response = await this.callApi<T>({
+        response = await this.callApiWithRetry<T>({
           link: nextLink,
           query,
         });
@@ -123,6 +124,33 @@ export class GraphClient {
         nextLink = undefined;
       }
     } while (nextLink);
+  }
+
+  /**
+   * Wraps callApi with retry logic.
+   * @param link
+   * @param query
+   * @protected
+   */
+  protected async callApiWithRetry<T>({
+    link,
+    query,
+  }: {
+    link: string;
+    query?: QueryParams;
+  }): Promise<GraphClientResponse<T> | undefined> {
+    return retry(() => this.callApi<T>({ link, query }), {
+      maxAttempts: 3,
+      delay: 30_000,
+      timeout: 180_000,
+      factor: 2,
+      handleError: (error, attemptContext) => {
+        this.logger.debug(
+          { error, attemptContext },
+          `Encountered an error, retrying.`,
+        );
+      },
+    });
   }
 
   protected async callApi<T>({
