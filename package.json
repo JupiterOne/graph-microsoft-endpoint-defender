@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-microsoft-endpoint-defender",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A JupiterOne Integration for Microsoft Defender for Endpoint",
   "license": "MPL-2.0",
   "main": "src/index.js",
