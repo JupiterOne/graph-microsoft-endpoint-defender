@@ -9,12 +9,15 @@ import {
 import { UserLogon } from '../../../types';
 import { Entities } from '../../../constants';
 
-export function createLogonUserEntity(data: UserLogon): Entity {
+export function createLogonUserEntity(
+  data: UserLogon,
+  machineId: string,
+): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
       assign: {
-        _key: `${Entities.LOGON_USER._type}:${data.id}`,
+        _key: `${Entities.LOGON_USER._type}:${data.id}:${machineId}`,
         _class: Entities.LOGON_USER._class,
         _type: Entities.LOGON_USER._type,
         id: data.id,

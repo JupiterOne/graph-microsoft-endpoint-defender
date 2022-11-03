@@ -34,7 +34,7 @@ export async function fetchLogonUsers({
       await graphClient.iterateLogonUsers(
         { machineId: machine.id },
         async (logonUser) => {
-          const entity = createLogonUserEntity(logonUser);
+          const entity = createLogonUserEntity(logonUser, machine.id);
 
           if (!jobState.hasKey(entity._key)) {
             const logonUserEntity = await jobState.addEntity(entity);

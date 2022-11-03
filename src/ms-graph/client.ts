@@ -145,9 +145,13 @@ export class GraphClient {
       timeout: 180_000,
       factor: 2,
       handleError: (error, attemptContext) => {
+        if (error.statusCode === 403) {
+          attemptContext.abort();
+        }
+
         this.logger.info(
-          { error, attemptContext },
-          `Encountered an error, retrying.`,
+          { error, attemptContext, link },
+          `Encountered an error.`,
         );
       },
     });
