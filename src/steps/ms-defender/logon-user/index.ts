@@ -46,9 +46,22 @@ export async function fetchLogonUsers({
               }),
             );
           } else {
-            logger.info(
-              { duplicateKey: entity._key },
-              `Found duplicate logon user entity.`,
+            const orgEntity = (await jobState.findEntity(entity._key))!;
+
+            logger.warn(
+              {
+                duplicateKey: entity._key,
+                id: entity.id === orgEntity.id,
+                name: entity.name === orgEntity.name,
+                domain: entity.domain === orgEntity.domain,
+                username: entity.username === orgEntity.username,
+                displayName: entity.displayName === orgEntity.displayName,
+                logonTypes: entity.logonTypes === orgEntity.logonTypes,
+                firstSeenOn: entity.firstSeenOn === orgEntity.firstSeenOn,
+                lastSeenOn: entity.lastSeenOn === orgEntity.lastSeenOn,
+                active: entity.active === orgEntity.active,
+              },
+              `Found duplicate logon user entity. Skipping creation.`,
             );
           }
         },
