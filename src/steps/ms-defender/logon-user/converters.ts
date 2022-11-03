@@ -9,10 +9,7 @@ import {
 import { UserLogon } from '../../../types';
 import { Entities } from '../../../constants';
 
-export function createLogonUserEntity(
-  data: UserLogon,
-  machineId: string,
-): Entity {
+export function createLogonUserEntity(data: UserLogon): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
