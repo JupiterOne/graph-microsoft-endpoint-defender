@@ -145,7 +145,7 @@ export class GraphClient {
       timeout: 180_000,
       factor: 2,
       handleError: (error, attemptContext) => {
-        this.logger.debug(
+        this.logger.info(
           { error, attemptContext },
           `Encountered an error, retrying.`,
         );
