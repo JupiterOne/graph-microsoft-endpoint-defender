@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.0.1 - 2022-11-03
+
+### Updated
+
+Introduced retry logic in the Microsoft GraphClient. Added duplicate key
+detection logic for the logon-user entity.
+
 ## 1.0.0 - 2022-09-26
 
 ### Added

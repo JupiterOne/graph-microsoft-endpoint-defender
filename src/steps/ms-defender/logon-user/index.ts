@@ -34,16 +34,36 @@ export async function fetchLogonUsers({
       await graphClient.iterateLogonUsers(
         { machineId: machine.id },
         async (logonUser) => {
-          const logonUserEntity = await jobState.addEntity(
-            createLogonUserEntity(logonUser),
-          );
+          const entity = createLogonUserEntity(logonUser);
 
-          await jobState.addRelationship(
-            createMachineLogonUserRelationship({
-              machineEntity,
-              logonUserEntity,
-            }),
-          );
+          if (!jobState.hasKey(entity._key)) {
+            const logonUserEntity = await jobState.addEntity(entity);
+
+            await jobState.addRelationship(
+              createMachineLogonUserRelationship({
+                machineEntity,
+                logonUserEntity,
+              }),
+            );
+          } else {
+            const orgEntity = (await jobState.findEntity(entity._key))!;
+
+            logger.warn(
+              {
+                duplicateKey: entity._key,
+                id: entity.id === orgEntity.id,
+                name: entity.name === orgEntity.name,
+                domain: entity.domain === orgEntity.domain,
+                username: entity.username === orgEntity.username,
+                displayName: entity.displayName === orgEntity.displayName,
+                logonTypes: entity.logonTypes === orgEntity.logonTypes,
+                firstSeenOn: entity.firstSeenOn === orgEntity.firstSeenOn,
+                lastSeenOn: entity.lastSeenOn === orgEntity.lastSeenOn,
+                active: entity.active === orgEntity.active,
+              },
+              `Found duplicate logon user entity. Skipping creation.`,
+            );
+          }
         },
       );
     },

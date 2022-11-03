@@ -17,6 +17,7 @@ export class DefenderClient extends GraphClient {
     });
   }
 
+  // Retrieves a collection of logged on users on a specific device.
   // https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
   public async iterateLogonUsers(
     input: {
@@ -46,7 +47,7 @@ export class DefenderClient extends GraphClient {
 
   // https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-by-id?view=o365-worldwide
   public async fetchEndpointDetails(machineId: string): Promise<any> {
-    return this.callApi({
+    return this.callApiWithRetry({
       link: `${this.BASE_URL_API}/machines/${machineId}?`,
     });
   }
