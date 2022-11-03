@@ -17,7 +17,7 @@ export function createLogonUserEntity(
     entityData: {
       source: data,
       assign: {
-        _key: `${Entities.LOGON_USER._type}:${data.id}:${machineId}`,
+        _key: `${Entities.LOGON_USER._type}:${data.id}`,
         _class: Entities.LOGON_USER._class,
         _type: Entities.LOGON_USER._type,
         id: data.id,
