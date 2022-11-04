@@ -28,6 +28,7 @@ interface GraphClientResponse<T> {
  * Batching requests: https://docs.microsoft.com/en-us/graph/json-batching
  */
 export class GraphClient {
+  private readonly TIMEOUT_RETRY_ATTEMPTS = 3;
   protected client: Client;
 
   constructor(
@@ -130,22 +131,26 @@ export class GraphClient {
    * Wraps callApi with retry logic.
    * @param link
    * @param query
+   * @param timeoutRetryAttempt
    * @protected
    */
-  protected async callApiWithRetry<T>({
-    link,
-    query,
-  }: {
-    link: string;
-    query?: QueryParams;
-  }): Promise<GraphClientResponse<T> | undefined> {
+  protected async callApiWithRetry<T>(
+    {
+      link,
+      query,
+    }: {
+      link: string;
+      query?: QueryParams;
+    },
+    timeoutRetryAttempt = 0,
+  ): Promise<GraphClientResponse<T> | undefined> {
     return retry(() => this.callApi<T>({ link, query }), {
       maxAttempts: 3,
       delay: 30_000,
-      timeout: 180_000,
+      timeout: 360_000,
       factor: 2,
       handleError: (error, attemptContext) => {
-        if (error.statusCode === 403) {
+        if ([404, 403, 401].includes(error.statusCode)) {
           attemptContext.abort();
         }
 
@@ -153,6 +158,35 @@ export class GraphClient {
           { error, attemptContext, link },
           `Encountered an error.`,
         );
+      },
+      handleTimeout: async (attemptContext) => {
+        if (timeoutRetryAttempt < this.TIMEOUT_RETRY_ATTEMPTS) {
+          this.logger.warn(
+            {
+              attemptContext,
+              timeoutRetryAttempt,
+              link,
+            },
+            'Hit a timeout, restarting request retry cycle.',
+          );
+
+          return this.callApiWithRetry(
+            {
+              link,
+              query,
+            },
+            ++timeoutRetryAttempt,
+          );
+        } else {
+          this.logger.warn(
+            {
+              attemptContext,
+              timeoutRetryAttempt,
+              link,
+            },
+            'Hit a timeout during the final attempt. Unable to collect data for this query.',
+          );
+        }
       },
     });
   }
