@@ -31,10 +31,18 @@ export async function fetchLogonUsers({
         return;
       }
 
+      const userByMachine = {};
+
       await graphClient.iterateLogonUsers(
         { machineId: machine.id },
         async (logonUser) => {
           const entity = createLogonUserEntity(logonUser);
+
+          // Are these duplicates on a single machine?
+          userByMachine[machine.id] = [
+            ...(userByMachine[machine.id] ?? []),
+            entity._key,
+          ];
 
           if (!jobState.hasKey(entity._key)) {
             const logonUserEntity = await jobState.addEntity(entity);
@@ -50,22 +58,27 @@ export async function fetchLogonUsers({
 
             logger.warn(
               {
-                duplicateKey: entity._key,
-                id: entity.id === orgEntity.id,
-                name: entity.name === orgEntity.name,
-                domain: entity.domain === orgEntity.domain,
-                username: entity.username === orgEntity.username,
-                displayName: entity.displayName === orgEntity.displayName,
-                logonTypes: entity.logonTypes === orgEntity.logonTypes,
-                firstSeenOn: entity.firstSeenOn === orgEntity.firstSeenOn,
-                lastSeenOn: entity.lastSeenOn === orgEntity.lastSeenOn,
-                active: entity.active === orgEntity.active,
+                dupProperties: {
+                  duplicateKey: entity._key,
+                  machineId: machine.id,
+                  id: entity.id === orgEntity.id,
+                  name: entity.name === orgEntity.name,
+                  domain: entity.domain === orgEntity.domain,
+                  username: entity.username === orgEntity.username,
+                  displayName: entity.displayName === orgEntity.displayName,
+                  logonTypes: entity.logonTypes === orgEntity.logonTypes,
+                  firstSeenOn: entity.firstSeenOn === orgEntity.firstSeenOn,
+                  lastSeenOn: entity.lastSeenOn === orgEntity.lastSeenOn,
+                  active: entity.active === orgEntity.active,
+                },
               },
               `Found duplicate logon user entity. Skipping creation.`,
             );
           }
         },
       );
+
+      logger.warn({ userByMachine }, 'User logons by machine.');
     },
   );
 }
