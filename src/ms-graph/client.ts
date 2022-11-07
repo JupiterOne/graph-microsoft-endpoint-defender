@@ -13,7 +13,7 @@ import {
 import 'isomorphic-fetch';
 
 import { ClientConfig } from './types';
-import { retry } from '@lifeomic/attempt';
+import { retry, sleep } from '@lifeomic/attempt';
 
 export type QueryParams = string | { [key: string]: string | number };
 
@@ -149,15 +149,26 @@ export class GraphClient {
       delay: 30_000,
       timeout: 360_000,
       factor: 2,
-      handleError: (error, attemptContext) => {
+      handleError: async (error, attemptContext) => {
         if ([404, 403, 401].includes(error.statusCode)) {
           attemptContext.abort();
         }
 
         this.logger.info(
-          { error, attemptContext, link },
+          { error: JSON.stringify(error), attemptContext, link },
           `Encountered an error.`,
         );
+
+        if (error.statusCode === 429) {
+          const retryAfterSeconds = error.response?.headers?.['Retry-After'];
+          this.logger.warn(
+            { header: error.response?.headers, retryAfterSeconds },
+            `Encountered 429, sleeping if Retry-After is specified`,
+          );
+          if (Number.isInteger(retryAfterSeconds)) {
+            await sleep(retryAfterSeconds * 1000);
+          }
+        }
       },
       handleTimeout: async (attemptContext) => {
         if (timeoutRetryAttempt < this.TIMEOUT_RETRY_ATTEMPTS) {

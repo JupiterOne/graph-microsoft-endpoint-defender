@@ -17,8 +17,12 @@ export class DefenderClient extends GraphClient {
     });
   }
 
-  // Retrieves a collection of logged on users on a specific device.
-  // https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
+  /**
+   * Retrieves a collection of logged on users on a specific machine.
+   * For a given device, a user is only returned one. Across multiple
+   * machines, the same user is returned multiple times.
+   * https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
+   */
   public async iterateLogonUsers(
     input: {
       machineId: string;

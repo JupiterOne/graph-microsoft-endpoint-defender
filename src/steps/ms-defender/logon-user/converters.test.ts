@@ -2,7 +2,9 @@ import { createLogonUserEntity } from './converters';
 import { getMockLogonUser } from '../../../../test/mocks';
 
 test('#createLogonUserEntity', () => {
-  expect(createLogonUserEntity(getMockLogonUser())).toMatchGraphObjectSchema({
+  expect(
+    createLogonUserEntity(getMockLogonUser(), 'machine123'),
+  ).toMatchGraphObjectSchema({
     _class: ['User'],
     schema: {
       properties: {
