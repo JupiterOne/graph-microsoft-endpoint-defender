@@ -9,6 +9,8 @@ import {
   AuthenticationProvider,
   AuthenticationProviderOptions,
   Client,
+  GraphError,
+  ResponseType,
 } from '@microsoft/microsoft-graph-client';
 import 'isomorphic-fetch';
 
@@ -16,6 +18,7 @@ import { ClientConfig } from './types';
 import { retry, sleep } from '@lifeomic/attempt';
 
 export type QueryParams = string | { [key: string]: string | number };
+type GraphErrorExtended = GraphError & { headers?: Headers };
 
 interface GraphClientResponse<T> {
   value: T[];
@@ -116,6 +119,7 @@ export class GraphClient {
           this.handleApiError(err, resourceUrl);
         }
       }
+
       if (response) {
         for (const value of response.value) {
           await callback(value);
@@ -149,7 +153,7 @@ export class GraphClient {
       delay: 30_000,
       timeout: 360_000,
       factor: 2,
-      handleError: async (error, attemptContext) => {
+      handleError: async (error: GraphErrorExtended, attemptContext) => {
         if ([404, 403, 401].includes(error.statusCode)) {
           attemptContext.abort();
         }
@@ -160,13 +164,16 @@ export class GraphClient {
         );
 
         if (error.statusCode === 429) {
-          const retryAfterSeconds = error.response?.headers?.['Retry-After'];
+          const retryAfterSeconds = error.headers?.get('Retry-After') ?? '1';
           this.logger.warn(
-            { header: error.response?.headers, retryAfterSeconds },
-            `Encountered 429, sleeping if Retry-After is specified`,
+            { headers: error.headers, retryAfterSeconds },
+            `Encountered 429, sleeping if Retry-After header is specified`,
           );
-          if (Number.isInteger(retryAfterSeconds)) {
-            await sleep(retryAfterSeconds * 1000);
+
+          const retry = Number.parseInt(retryAfterSeconds, 10);
+          if (!isNaN(retry)) {
+            this.logger.warn({ retryAfter: retry }, 'Sleeping now.');
+            await sleep(1000 * retry);
           }
         }
       },
@@ -214,9 +221,16 @@ export class GraphClient {
       api = api.query(query);
     }
 
-    const response = await api.get();
-    if (response) {
-      return response;
+    const rawResponse = await api.responseType(ResponseType.RAW).get();
+
+    if (rawResponse.ok) {
+      return await rawResponse.json();
+    } else {
+      const statusCode = rawResponse.status;
+      const gError: GraphErrorExtended = new GraphError(statusCode);
+      // Add headers to check Retry-After header.
+      gError.headers = rawResponse.headers;
+      throw gError;
     }
   }
 
