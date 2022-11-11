@@ -9,15 +9,16 @@ import {
   AuthenticationProvider,
   AuthenticationProviderOptions,
   Client,
+  GraphError,
   ResponseType,
 } from '@microsoft/microsoft-graph-client';
 import 'isomorphic-fetch';
 
 import { ClientConfig } from './types';
 import { retry, sleep } from '@lifeomic/attempt';
-import { GraphErrorExtended, GraphErrorHandler } from './GraphErrorHandler';
 
 export type QueryParams = string | { [key: string]: string | number };
+type GraphErrorExtended = GraphError & { headers?: Headers };
 
 interface GraphClientResponse<T> {
   value: T[];
@@ -165,12 +166,13 @@ export class GraphClient {
         if (error.statusCode === 429) {
           const retryAfterSeconds = error.headers?.get('Retry-After') ?? '1';
           this.logger.warn(
-            { header: error.headers, retryAfterSeconds },
+            { headers: error.headers, retryAfterSeconds },
             `Encountered 429, sleeping if Retry-After header is specified`,
           );
 
           const retry = Number.parseInt(retryAfterSeconds, 10);
           if (!isNaN(retry)) {
+            this.logger.warn({ retryAfter: retry }, 'Sleeping now.');
             await sleep(1000 * retry);
           }
         }
@@ -225,7 +227,10 @@ export class GraphClient {
       return await rawResponse.json();
     } else {
       const statusCode = rawResponse.status;
-      throw await GraphErrorHandler.getError(rawResponse, statusCode);
+      const gError: GraphErrorExtended = new GraphError(statusCode);
+      // Add headers to check Retry-After header.
+      gError.headers = rawResponse.headers;
+      throw gError;
     }
   }
 
