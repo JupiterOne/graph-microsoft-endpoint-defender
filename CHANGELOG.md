@@ -8,9 +8,15 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.0.5 - 2022-11-11
+
+## Fixed
+
+Fixed retry logic for 429s.
+
 ## 1.0.4 - 2022-11-07
 
-Improve retry logic for 429s. Removed duplicate key detection logic and change
+Improved retry logic for 429s. Removed duplicate key detection logic and change
 the Logon User entity key to guarantee uniqueness.
 
 ## 1.0.3 - 2022-11-03
