@@ -111,7 +111,7 @@ export class GraphClient {
           nextLink &&
           retries < 5
         ) {
-          // Retry a few times to handle sporatic timing issue with this sdk - https://github.com/OneDrive/onedrive-api-docs/issues/785
+          // Retry a few times to handle sporadic timing issue with this sdk - https://github.com/OneDrive/onedrive-api-docs/issues/785
           retries++;
           continue;
         } else {
@@ -154,7 +154,10 @@ export class GraphClient {
       timeout: 360_000,
       factor: 2,
       handleError: async (error: GraphErrorExtended, attemptContext) => {
-        if ([404, 403, 401].includes(error.statusCode)) {
+        // We should only abort on errors that aren't recoverable.  Some endpoints
+        // have peroidically returned 404 - Not Found errors and have had success
+        // on subsequent attempts.
+        if ([403, 401].includes(error.statusCode)) {
           attemptContext.abort();
         }
 
