@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.0.6 - 2023-01-30
+
+### Changed
+
+Now allowing 404 errors to be retried.
+
 ## 1.0.5 - 2022-11-11
 
 ## Fixed
