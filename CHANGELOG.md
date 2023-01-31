@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.0.7 - 2023-01-31
+
+### Changed
+
+Catching and combining machine endpoint API errors into a final single thrown
+error at the end of the step.
+
 ## 1.0.6 - 2023-01-30
 
 ### Changed
