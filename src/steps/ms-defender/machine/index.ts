@@ -1,6 +1,7 @@
 import {
   Entity,
   getRawData,
+  IntegrationError,
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
@@ -48,6 +49,8 @@ export async function fetchEndpoints({
   logger,
 }: IntegrationStepContext): Promise<void> {
   const graphClient = new DefenderClient(logger, instance.config);
+  let numFailedEndpointDetails: number = 0;
+  let numSuccessfulEndpointDetails: number = 0;
   await jobState.iterateEntities(
     { _type: Entities.MACHINE._type },
     async (machineEntity) => {
@@ -61,21 +64,38 @@ export async function fetchEndpoints({
         return;
       }
 
-      const endpoint = await graphClient.fetchEndpointDetails(machine.id);
-      if (endpoint) {
-        const endpointEntity = await jobState.addEntity(
-          createEndpointEntity(endpoint),
-        );
+      try {
+        const endpoint = await graphClient.fetchEndpointDetails(machine.id);
+        if (endpoint) {
+          const endpointEntity = await jobState.addEntity(
+            createEndpointEntity(endpoint),
+          );
 
-        await jobState.addRelationship(
-          createMachineEndpointRelationship({
-            machineEntity,
-            endpointEntity,
-          }),
+          await jobState.addRelationship(
+            createMachineEndpointRelationship({
+              machineEntity,
+              endpointEntity,
+            }),
+          );
+          numSuccessfulEndpointDetails++;
+        }
+      } catch (err) {
+        logger.warn(
+          { err },
+          `Could not get endpoint details for machine entity ${machine.id}`,
         );
+        numFailedEndpointDetails++;
       }
     },
   );
+
+  if (numFailedEndpointDetails > 0) {
+    // Should this be a user notification instead of an error?
+    throw new IntegrationError({
+      message: `Unable to fetch all machine endpoint details (success=${numSuccessfulEndpointDetails}, failed=${numFailedEndpointDetails})`,
+      code: 'ERROR_FETCH_ENDPOINT_DETAILS',
+    });
+  }
 }
 
 export const machineSteps: Step<
