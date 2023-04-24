@@ -26,12 +26,13 @@ export interface Machine {
   managedBy: string;
   managedByStatus: string;
   ipAddresses: IpAddress[];
-  vmMetadata: VmMetadata;
+  vmMetadata?: VmMetadata;
+  macAddress: macAddress[];
 }
 
 export interface IpAddress {
   ipAddress: string;
-  macAddress: string;
+  macAddress?: string;
   type: string;
   operationalStatus: string;
 }
