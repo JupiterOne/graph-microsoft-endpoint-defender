@@ -24,6 +24,13 @@ export function createMachineEntity(data: Machine): Entity {
         name: data.computerDnsName,
         computerDnsName: data.computerDnsName,
         displayName: data.computerDnsName as string,
+        rbacGroupId: data.rbacGroupId, // INT-7983
+        rbacGroupName: data.rbacGroupName, // INT-7983
+        machineTags: data.machineTags, // INT-7983
+        onboardingStatus: data.onboardingStatus, // INT-7983
+        ipAddresses: data.ipAddresses, // INT-7983
+        managedBy: data.managedBy, // INT-7983
+        managedByStatus: data.managedByStatus // INT-7983
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
