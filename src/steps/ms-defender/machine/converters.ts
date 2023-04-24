@@ -28,7 +28,6 @@ export function createMachineEntity(data: Machine): Entity {
         rbacGroupName: data.rbacGroupName, // INT-7983
         machineTags: data.machineTags, // INT-7983
         onboardingStatus: data.onboardingStatus, // INT-7983
-        macAddress: data.ipAddresses.macAddress, // INT-7983
         managedBy: data.managedBy, // INT-7983
         managedByStatus: data.managedByStatus, // INT-7983
         function: [

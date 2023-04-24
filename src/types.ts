@@ -27,7 +27,6 @@ export interface Machine {
   managedByStatus: string;
   ipAddresses: IpAddress[];
   vmMetadata?: VmMetadata;
-  macAddress: macAddress[];
 }
 
 export interface IpAddress {
