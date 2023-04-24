@@ -30,7 +30,7 @@ export function createMachineEntity(data: Machine): Entity {
         onboardingStatus: data.onboardingStatus, // INT-7983
         ipAddresses: data.ipAddresses, // INT-7983
         managedBy: data.managedBy, // INT-7983
-        managedByStatus: data.managedByStatus // INT-7983
+        managedByStatus: data.managedByStatus, // INT-7983
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
