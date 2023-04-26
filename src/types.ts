@@ -17,7 +17,7 @@ export interface Machine {
   lastExternalIpAddress: string;
   osBuild: number;
   rbacGroupId: number;
-  rbacGroupName: string;
+  rbacGroupName?: string;
   exposureLevel: string;
   isAadJoined: boolean;
   aadDeviceId: string | null;
