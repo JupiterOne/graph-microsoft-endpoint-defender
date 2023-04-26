@@ -35,7 +35,13 @@ export const Steps: Record<
 };
 
 export const Entities: Record<
-  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'VULNERABILITY' | 'ENDPOINT',
+  | 'ACCOUNT'
+  | 'MACHINE'
+  | 'LOGON_USER'
+  | 'USER'
+  | 'VULNERABILITY'
+  | 'ENDPOINT'
+  | 'IP_ADDRESS',
   StepEntityMetadata
 > = {
   ACCOUNT: {
@@ -68,6 +74,11 @@ export const Entities: Record<
     _type: 'user_endpoint',
     _class: ['Device'],
   },
+  IP_ADDRESS: {
+    resourceName: 'IP Address',
+    _type: 'microsoft_defender_ip',
+    _class: ['IpAddress'],
+  },
 };
 
 export const Relationships: Record<
@@ -75,7 +86,8 @@ export const Relationships: Record<
   | 'ACCOUNT_HAS_USER'
   | 'MACHINE_HAS_LOGON_USER'
   | 'MACHINE_IDENTIFIED_VULNERABILITY'
-  | 'MACHINE_MANAGES_ENDPOINT',
+  | 'MACHINE_MANAGES_ENDPOINT'
+  | 'MACHINE_HAS_IP_ADDRESS',
   StepRelationshipMetadata
 > = {
   ACCOUNT_HAS_MACHINE: {
@@ -107,6 +119,12 @@ export const Relationships: Record<
     sourceType: Entities.MACHINE._type,
     _class: RelationshipClass.MANAGES,
     targetType: Entities.ENDPOINT._type,
+  },
+  MACHINE_HAS_IP_ADDRESS: {
+    _type: 'microsoft_defender_machine_manages_user_endpoint',
+    sourceType: Entities.MACHINE._type,
+    _class: RelationshipClass.HAS,
+    targetType: Entities.IP_ADDRESS._type,
   },
 };
 
