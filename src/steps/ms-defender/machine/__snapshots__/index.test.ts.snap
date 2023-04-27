@@ -506,8 +506,8 @@ Object {
         "::1",
       ],
       "macAddress": Array [
-        "000D3ADD1C52",
-        "",
+        "00:0d:3a:dd:1c:52:",
+        "00:0D:3A:DD:1C:52:",
       ],
       "machineTags": Array [
         "evaluation",
@@ -609,8 +609,9 @@ Object {
         "::1",
       ],
       "macAddress": Array [
-        "6045BD8016FF",
-        "000000000000",
+        "60:45:bd:80:16:ff:",
+        "60:45:BD:80:16:FF:",
+        "00:00:00:00:00:00:",
       ],
       "machineTags": Array [
         "evaluation",
@@ -717,8 +718,8 @@ Object {
         "::1",
       ],
       "macAddress": Array [
-        "6045BD78564A",
-        "",
+        "60:45:bd:78:56:4a:",
+        "60:45:BD:78:56:4A:",
       ],
       "machineTags": Array [
         "evaluation",

@@ -8,9 +8,26 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { Endpoint, Machine } from '../../../types';
 import { Entities } from '../../../constants';
-import { uniq } from 'lodash';
+import { uniq, compact, flatMap } from 'lodash';
 
 export function createMachineEntity(data: Machine): Entity {
+  const formatMacAddress = (macAddress: string) => {
+    if (macAddress.length == 12) {
+      const formattedMacAddress = macAddress.replace(/(.{2})/g, '$1:');
+      return [
+        formattedMacAddress.toLowerCase(), // Lowercase to match the macAddress of aws_ami(s)..
+        formattedMacAddress.toUpperCase(), // Uppercase because that is the industry standard thus making J1QL easier.
+      ];
+    }
+    return macAddress;
+  };
+  const macAddress = uniq(
+    flatMap(
+      compact((data.ipAddresses ?? []).map((ip) => ip.macAddress)),
+      formatMacAddress,
+    ),
+  );
+
   return createIntegrationEntity({
     entityData: {
       source: data,
@@ -31,8 +48,10 @@ export function createMachineEntity(data: Machine): Entity {
         onboardingStatus: data.onboardingStatus,
         managedBy: data.managedBy,
         managedByStatus: data.managedByStatus,
-        ipAddress: uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
-        macAddress: uniq((data.ipAddresses ?? []).map((ip) => ip.macAddress)),
+        ipAddress: compact(
+          uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
+        ),
+        macAddress: macAddress,
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
