@@ -6,25 +6,9 @@ import {
   RelationshipClass,
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
-import { Endpoint, Machine, IpAddress } from '../../../types';
+import { Endpoint, Machine } from '../../../types';
 import { Entities } from '../../../constants';
-
-export function createIpAddressEntity(data: IpAddress): Entity {
-  return createIntegrationEntity({
-    entityData: {
-      source: data,
-      assign: {
-        _class: Entities.IP_ADDRESS._class,
-        _type: Entities.IP_ADDRESS._type,
-        _key: `${Entities.IP_ADDRESS._type}:${data.ipAddress}`,
-        ipAddress: data.ipAddress,
-        macAddress: data.macAddress,
-        type: data.type,
-        operationalStatus: data.operationalStatus,
-      },
-    },
-  });
-}
+import { uniq } from 'lodash';
 
 export function createMachineEntity(data: Machine): Entity {
   return createIntegrationEntity({
@@ -47,6 +31,8 @@ export function createMachineEntity(data: Machine): Entity {
         onboardingStatus: data.onboardingStatus,
         managedBy: data.managedBy,
         managedByStatus: data.managedByStatus,
+        ipAddress: uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
+        macAddress: uniq((data.ipAddresses ?? []).map((ip) => ip.macAddress)),
         function: [
           'endpoint-compliance',
           'endpoint-configuration',

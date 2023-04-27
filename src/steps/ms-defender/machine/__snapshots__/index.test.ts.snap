@@ -499,6 +499,16 @@ Object {
         "container-security",
       ],
       "id": "595967ce83eb04bfddedaa7f29c8d10142a5bd30",
+      "ipAddress": Array [
+        "10.1.1.196",
+        "fe80::b5b8:8c4a:400b:6144",
+        "127.0.0.1",
+        "::1",
+      ],
+      "macAddress": Array [
+        "000D3ADD1C52",
+        "",
+      ],
       "machineTags": Array [
         "evaluation",
       ],
@@ -592,6 +602,16 @@ Object {
         "container-security",
       ],
       "id": "614f81ab67349d2e017f7f8bee5764e1f4a6397d",
+      "ipAddress": Array [
+        "10.1.1.132",
+        "fe80::6245:bdff:fe80:16ff",
+        "127.0.0.1",
+        "::1",
+      ],
+      "macAddress": Array [
+        "6045BD8016FF",
+        "000000000000",
+      ],
       "machineTags": Array [
         "evaluation",
       ],
@@ -690,6 +710,16 @@ Object {
         "container-security",
       ],
       "id": "f39177bfecabebc12576671381d1f95c68492ae3",
+      "ipAddress": Array [
+        "10.1.1.68",
+        "fe80::addd:6e16:244c:acc3",
+        "127.0.0.1",
+        "::1",
+      ],
+      "macAddress": Array [
+        "6045BD78564A",
+        "",
+      ],
       "machineTags": Array [
         "evaluation",
       ],

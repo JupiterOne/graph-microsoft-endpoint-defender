@@ -25,13 +25,13 @@ export interface Machine {
   osArchitecture: string;
   managedBy: string;
   managedByStatus: string;
-  ipAddresses: IpAddress[];
+  ipAddresses?: IpAddress[];
   vmMetadata?: VmMetadata;
 }
 
 export interface IpAddress {
   ipAddress: string;
-  macAddress?: string;
+  macAddress: string;
   type: string;
   operationalStatus: string;
 }
