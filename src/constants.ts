@@ -35,13 +35,7 @@ export const Steps: Record<
 };
 
 export const Entities: Record<
-  | 'ACCOUNT'
-  | 'MACHINE'
-  | 'LOGON_USER'
-  | 'USER'
-  | 'VULNERABILITY'
-  | 'ENDPOINT'
-  | 'IP_ADDRESS',
+  'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'VULNERABILITY' | 'ENDPOINT',
   StepEntityMetadata
 > = {
   ACCOUNT: {
