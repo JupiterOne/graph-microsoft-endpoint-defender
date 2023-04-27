@@ -9,7 +9,6 @@ import {
 import { Endpoint, Machine, IpAddress } from '../../../types';
 import { Entities } from '../../../constants';
 
-// INT-7983
 export function createIpAddressEntity(data: IpAddress): Entity {
   return createIntegrationEntity({
     entityData: {
@@ -42,12 +41,12 @@ export function createMachineEntity(data: Machine): Entity {
         name: data.computerDnsName,
         computerDnsName: data.computerDnsName,
         displayName: data.computerDnsName as string,
-        rbacGroupId: data.rbacGroupId, // INT-7983
-        rbacGroupName: data.rbacGroupName, // INT-7983
-        machineTags: data.machineTags, // INT-7983
-        onboardingStatus: data.onboardingStatus, // INT-7983
-        managedBy: data.managedBy, // INT-7983
-        managedByStatus: data.managedByStatus, // INT-7983
+        rbacGroupId: data.rbacGroupId,
+        rbacGroupName: data.rbacGroupName,
+        machineTags: data.machineTags,
+        onboardingStatus: data.onboardingStatus,
+        managedBy: data.managedBy,
+        managedByStatus: data.managedByStatus,
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
