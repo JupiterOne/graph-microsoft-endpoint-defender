@@ -17,7 +17,7 @@ export interface Machine {
   lastExternalIpAddress: string;
   osBuild: number;
   rbacGroupId: number;
-  rbacGroupName: string;
+  rbacGroupName?: string;
   exposureLevel: string;
   isAadJoined: boolean;
   aadDeviceId: string | null;
@@ -25,8 +25,8 @@ export interface Machine {
   osArchitecture: string;
   managedBy: string;
   managedByStatus: string;
-  ipAddresses: IpAddress[];
-  vmMetadata: VmMetadata;
+  ipAddresses?: IpAddress[];
+  vmMetadata?: VmMetadata;
 }
 
 export interface IpAddress {

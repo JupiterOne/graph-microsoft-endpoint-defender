@@ -8,8 +8,25 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { Endpoint, Machine } from '../../../types';
 import { Entities } from '../../../constants';
+import { uniq, compact, flatMap } from 'lodash';
 
 export function createMachineEntity(data: Machine): Entity {
+  /**
+   * An input of ['6045BD8016FF', '000000000000'] would return ["60:45:bd:80:16:ff","60:45:BD:80:16:FF"]
+   */
+  const macAddress = uniq(
+    flatMap(
+      (data.ipAddresses ?? [])
+        .map((ip) => ip.macAddress)
+        .filter(isValidMacAddress),
+      formatValidMacAddress,
+    ),
+  ).filter((macAddress) => !macAddressesToFilter.includes(macAddress));
+
+  const ipAddress = compact(
+    uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
+  ).filter((ip) => !ipAddressesToFilter.includes(ip));
+
   return createIntegrationEntity({
     entityData: {
       source: data,
@@ -24,6 +41,14 @@ export function createMachineEntity(data: Machine): Entity {
         name: data.computerDnsName,
         computerDnsName: data.computerDnsName,
         displayName: data.computerDnsName as string,
+        rbacGroupId: data.rbacGroupId,
+        rbacGroupName: data.rbacGroupName,
+        machineTags: data.machineTags,
+        onboardingStatus: data.onboardingStatus,
+        managedBy: data.managedBy,
+        managedByStatus: data.managedByStatus,
+        ipAddress: ipAddress,
+        macAddress: macAddress,
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
@@ -116,3 +141,36 @@ export function createMachineEndpointRelationship({
     to: endpointEntity,
   });
 }
+
+/**
+ * Legal macAddresses
+ * "00:1B:44:11:3A:B7";
+ * "00:1b:44:11:3a:b7";
+ * "001B44113AB7";
+ * "00-1B-44-11-3A-B7";
+ */
+function isValidMacAddress(macAddress) {
+  const regex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$|^([0-9A-Fa-f]{12})$/;
+  return regex.test(macAddress);
+}
+
+/**
+ * Formats a valid macAddress to match the structure of '00:00:00:00:00:00'
+ */
+const formatValidMacAddress = (macAddress: string) => {
+  const formattedMacAddress = macAddress.replace(
+    /([0-9A-Fa-f]{2})(?=[0-9A-Fa-f]{2})/g,
+    '$1:',
+  );
+  return [
+    formattedMacAddress.toLowerCase(), // Lowercase to match the macAddress of aws_ami(s)..
+    formattedMacAddress.toUpperCase(), // Uppercase because that is the industry standard thus making J1QL easier.
+  ];
+};
+const macAddressesToFilter = [
+  '00:00:00:00:00:00', // default macAddress
+];
+const ipAddressesToFilter = [
+  '127.0.0.1', // localhost
+  '::1', // localhost
+];

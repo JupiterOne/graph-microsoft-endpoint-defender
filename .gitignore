@@ -7,3 +7,4 @@ dist/
 tsconfig.tsbuildinfo
 .npmrc
 .DS_STORE
+.idea
