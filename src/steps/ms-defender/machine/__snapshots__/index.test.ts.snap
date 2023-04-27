@@ -502,12 +502,10 @@ Object {
       "ipAddress": Array [
         "10.1.1.196",
         "fe80::b5b8:8c4a:400b:6144",
-        "127.0.0.1",
-        "::1",
       ],
       "macAddress": Array [
-        "00:0d:3a:dd:1c:52:",
-        "00:0D:3A:DD:1C:52:",
+        "00:0d:3a:dd:1c:52",
+        "00:0D:3A:DD:1C:52",
       ],
       "machineTags": Array [
         "evaluation",
@@ -605,13 +603,10 @@ Object {
       "ipAddress": Array [
         "10.1.1.132",
         "fe80::6245:bdff:fe80:16ff",
-        "127.0.0.1",
-        "::1",
       ],
       "macAddress": Array [
-        "60:45:bd:80:16:ff:",
-        "60:45:BD:80:16:FF:",
-        "00:00:00:00:00:00:",
+        "60:45:bd:80:16:ff",
+        "60:45:BD:80:16:FF",
       ],
       "machineTags": Array [
         "evaluation",
@@ -714,12 +709,10 @@ Object {
       "ipAddress": Array [
         "10.1.1.68",
         "fe80::addd:6e16:244c:acc3",
-        "127.0.0.1",
-        "::1",
       ],
       "macAddress": Array [
-        "60:45:bd:78:56:4a:",
-        "60:45:BD:78:56:4A:",
+        "60:45:bd:78:56:4a",
+        "60:45:BD:78:56:4A",
       ],
       "machineTags": Array [
         "evaluation",
