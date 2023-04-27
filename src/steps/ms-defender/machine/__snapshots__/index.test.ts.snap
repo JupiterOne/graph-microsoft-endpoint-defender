@@ -499,6 +499,8 @@ Object {
         "container-security",
       ],
       "id": "595967ce83eb04bfddedaa7f29c8d10142a5bd30",
+      "lastExternalIpAddress": "20.12.71.218",
+      "lastIpAddress": "10.1.1.196",
       "machineTags": Array [
         "evaluation",
       ],
@@ -592,6 +594,8 @@ Object {
         "container-security",
       ],
       "id": "614f81ab67349d2e017f7f8bee5764e1f4a6397d",
+      "lastExternalIpAddress": "20.122.85.11",
+      "lastIpAddress": "10.1.1.132",
       "machineTags": Array [
         "evaluation",
       ],
@@ -690,6 +694,8 @@ Object {
         "container-security",
       ],
       "id": "f39177bfecabebc12576671381d1f95c68492ae3",
+      "lastExternalIpAddress": "10.14.19.12",
+      "lastIpAddress": "10.1.1.68",
       "machineTags": Array [
         "evaluation",
       ],
