@@ -47,6 +47,8 @@ export function createMachineEntity(data: Machine): Entity {
         onboardingStatus: data.onboardingStatus,
         managedBy: data.managedBy,
         managedByStatus: data.managedByStatus,
+        lastIpAddress: data.lastIpAddress,
+        lastExternalIpAddress: data.lastExternalIpAddress,
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
