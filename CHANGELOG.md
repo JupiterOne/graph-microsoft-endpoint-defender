@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.1.0 - 2023-04-27
+
+### Changed
+
+Added support for macAddress, ipAddress and several other entitiy properties
+macAddress format parsing for consistency ipAddress filtering for localhost NICs
+
 ## 1.0.7 - 2023-01-31
 
 ### Changed
