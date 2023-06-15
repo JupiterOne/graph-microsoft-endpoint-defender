@@ -26,7 +26,6 @@ export function createMachineEntity(data: Machine): Entity {
   const ipAddress = compact(
     uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
   ).filter((ip) => !ipAddressesToFilter.includes(ip));
-
   return createIntegrationEntity({
     entityData: {
       source: data,
@@ -35,6 +34,8 @@ export function createMachineEntity(data: Machine): Entity {
         _type: Entities.MACHINE._type,
         _key: `${Entities.MACHINE._type}:${data.id}`,
         id: data.id,
+        firstSeenOn: parseTimePropertyValue(data.firstSeen),
+        lastSeenOn: parseTimePropertyValue(data.lastSeen),
         agentVersion: data.agentVersion,
         defenderAvStatus: data.defenderAvStatus,
         riskScore: data.riskScore,
@@ -63,6 +64,18 @@ export function createMachineEntity(data: Machine): Entity {
 }
 
 export function createEndpointEntity(data: Endpoint): Entity {
+  const macAddress = uniq(
+    flatMap(
+      (data.ipAddresses ?? [])
+        .map((ip) => ip.macAddress)
+        .filter(isValidMacAddress),
+      formatValidMacAddress,
+    ),
+  ).filter((macAddress) => !macAddressesToFilter.includes(macAddress));
+
+  const ipAddress = compact(
+    uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
+  ).filter((ip) => !ipAddressesToFilter.includes(ip));
   return createIntegrationEntity({
     entityData: {
       source: data,
@@ -105,10 +118,12 @@ export function createEndpointEntity(data: Endpoint): Entity {
           ? data.ipAddresses.map((ip) => ip.ipAddress)
           : [],
         category: 'endpoint',
-        make: 'unknown',
-        model: 'unknown',
-        serial: 'unknown',
-        deviceId: 'unknown',
+        ipAddress,
+        macAddress,
+        make: null,
+        model: null,
+        serial: null,
+        deviceId: null,
       },
     },
   });
