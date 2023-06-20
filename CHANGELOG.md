@@ -8,6 +8,18 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.3.0 - 2023-06-20
+
+### Added
+
+- `lastSeenOn` to HostAgent entities.
+- `ipAddress` and `macAddress` to Device entities.
+
+### Changed
+
+- `make`, `model`, `serial`, and `deviceId` on Device entities from "unknown" to
+  null.
+
 ## 1.1.0 - 2023-04-27
 
 ### Changed
