@@ -9,20 +9,21 @@ import {
 import { UserLogon } from '../../../types';
 import { Entities } from '../../../constants';
 
+export function createLogonUserEntityKey(data: UserLogon): string {
+  return `${Entities.LOGON_USER._type}:${data.id}`;
+}
+
 /**
  * Creates the Logon User entity.
  * @param data
  * @param machineId
  */
-export function createLogonUserEntity(
-  data: UserLogon,
-  machineId: string,
-): Entity {
+export function createLogonUserEntity(data: UserLogon): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
       assign: {
-        _key: `${Entities.LOGON_USER._type}:${data.id}:${machineId}`,
+        _key: createLogonUserEntityKey(data),
         _class: Entities.LOGON_USER._class,
         _type: Entities.LOGON_USER._type,
         id: data.id,

@@ -1,4 +1,5 @@
 import {
+  Entity,
   getRawData,
   IntegrationStepExecutionContext,
   Step,
@@ -8,6 +9,7 @@ import { DefenderClient } from '../client';
 import { Entities, Relationships, Steps } from '../../../constants';
 import {
   createLogonUserEntity,
+  createLogonUserEntityKey,
   createMachineLogonUserRelationship,
 } from './converters';
 import { Machine } from '../../../types';
@@ -34,9 +36,13 @@ export async function fetchLogonUsers({
       await graphClient.iterateLogonUsers(
         { machineId: machine.id },
         async (logonUser) => {
-          const logonUserEntity = await jobState.addEntity(
-            createLogonUserEntity(logonUser, machine.id),
-          );
+          const logonUserEntityKey = createLogonUserEntityKey(logonUser);
+          let logonUserEntity = await jobState.findEntity(logonUserEntityKey);
+          if (!logonUserEntity) {
+            logonUserEntity = await jobState.addEntity(
+              createLogonUserEntity(logonUser),
+            );
+          }
 
           await jobState.addRelationship(
             createMachineLogonUserRelationship({
