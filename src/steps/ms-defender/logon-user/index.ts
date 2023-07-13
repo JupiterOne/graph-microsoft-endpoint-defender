@@ -1,5 +1,4 @@
 import {
-  Entity,
   getRawData,
   IntegrationStepExecutionContext,
   Step,
