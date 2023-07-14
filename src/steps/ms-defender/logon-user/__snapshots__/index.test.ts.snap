@@ -8,7 +8,7 @@ Object {
       "_class": Array [
         "User",
       ],
-      "_key": "microsoft_defender_logon_user:testmachine1\\\\administrator1:f39177bfecabebc12576671381d1f95c68492ae3",
+      "_key": "microsoft_defender_logon_user:testmachine1\\\\administrator1",
       "_rawData": Array [
         Object {
           "name": "default",
@@ -45,14 +45,14 @@ Object {
     Object {
       "_class": "HAS",
       "_fromEntityKey": "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3",
-      "_key": "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3|has|microsoft_defender_logon_user:testmachine1\\\\administrator1:f39177bfecabebc12576671381d1f95c68492ae3",
-      "_toEntityKey": "microsoft_defender_logon_user:testmachine1\\\\administrator1:f39177bfecabebc12576671381d1f95c68492ae3",
+      "_key": "microsoft_defender_machine:f39177bfecabebc12576671381d1f95c68492ae3|has|microsoft_defender_logon_user:testmachine1\\\\administrator1",
+      "_toEntityKey": "microsoft_defender_logon_user:testmachine1\\\\administrator1",
       "_type": "microsoft_defender_machine_has_logon_user",
       "displayName": "HAS",
     },
   ],
   "encounteredEntityKeys": Set {
-    "microsoft_defender_logon_user:testmachine1\\\\administrator1:f39177bfecabebc12576671381d1f95c68492ae3",
+    "microsoft_defender_logon_user:testmachine1\\\\administrator1",
     "microsoft_defender_account:local-integration-instance",
     "microsoft_defender_machine:595967ce83eb04bfddedaa7f29c8d10142a5bd30",
     "microsoft_defender_machine:614f81ab67349d2e017f7f8bee5764e1f4a6397d",
