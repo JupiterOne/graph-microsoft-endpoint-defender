@@ -43,12 +43,14 @@ export async function fetchLogonUsers({
             );
           }
 
-          await jobState.addRelationship(
+          const machineLogonUserRelationship =
             createMachineLogonUserRelationship({
               machineEntity,
               logonUserEntity,
-            }),
-          );
+            });
+          if (!jobState.hasKey(machineLogonUserRelationship._key)) {
+            await jobState.addRelationship(machineLogonUserRelationship);
+          }
         },
       );
     },
