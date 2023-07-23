@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.3.2 - 2023-07-23
+
+### Changed
+
+- `name` on to microsoft_defender_machine and user_endpoint entities to default
+  to a name that includes the `managedBy` property if one is not provided.
+
 ## 1.3.1 - 2023-06-20
 
 ## 1.3.0 - 2023-06-20

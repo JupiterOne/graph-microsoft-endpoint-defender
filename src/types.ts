@@ -78,6 +78,7 @@ export interface Endpoint {
   '@odata.context': string;
   id: string;
   computerDnsName: string;
+  name: string;
   firstSeen: string;
   lastSeen: string;
   osPlatform: string;
