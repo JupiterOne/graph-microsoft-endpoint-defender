@@ -39,9 +39,13 @@ export function createMachineEntity(data: Machine): Entity {
         agentVersion: data.agentVersion,
         defenderAvStatus: data.defenderAvStatus,
         riskScore: data.riskScore,
-        name: data.computerDnsName,
+        name:
+          data.computerDnsName ||
+          `${data.managedBy || 'Unknown User'}'s Device`,
         computerDnsName: data.computerDnsName,
-        displayName: data.computerDnsName as string,
+        displayName:
+          data.computerDnsName ||
+          `${data.managedBy || 'Unknown User'}'s Device`,
         rbacGroupId: data.rbacGroupId,
         rbacGroupName: data.rbacGroupName,
         machineTags: data.machineTags,
@@ -84,7 +88,10 @@ export function createEndpointEntity(data: Endpoint): Entity {
         _type: Entities.ENDPOINT._type,
         _key: `${Entities.ENDPOINT._type}.${data.id}`,
         id: data.id,
-        name: data.computerDnsName,
+        name:
+          data.computerDnsName ||
+          data.name ||
+          `${data.managedBy || 'Unknown User'}'s Device`,
         computerDnsName: data.computerDnsName,
         firstSeenOn: parseTimePropertyValue(data.firstSeen),
         lastSeenOn: parseTimePropertyValue(data.lastSeen),
