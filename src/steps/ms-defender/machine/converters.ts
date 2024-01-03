@@ -54,6 +54,7 @@ export function createMachineEntity(data: Machine): Entity {
         managedByStatus: data.managedByStatus,
         ipAddress: ipAddress,
         macAddress: macAddress,
+        aadDeviceId: data.aadDeviceId,
         function: [
           'endpoint-compliance',
           'endpoint-configuration',
@@ -130,7 +131,7 @@ export function createEndpointEntity(data: Endpoint): Entity {
         make: null,
         model: null,
         serial: null,
-        deviceId: null,
+        deviceId: data.id,
       },
     },
   });

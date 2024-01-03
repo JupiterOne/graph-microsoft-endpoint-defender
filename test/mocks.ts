@@ -150,7 +150,7 @@ export function getMockMachine(): Machine {
     riskScore: 'High',
     exposureLevel: 'None',
     isAadJoined: false,
-    aadDeviceId: null,
+    aadDeviceId: '12345',
     machineTags: ['evaluation'],
     defenderAvStatus: 'Unknown',
     onboardingStatus: 'Onboarded',
