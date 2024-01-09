@@ -6,22 +6,12 @@ import {
   RelationshipClass,
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
-import { Endpoint, Machine } from '../../../types';
+import { Endpoint, IpAddress, Machine } from '../../../types';
 import { Entities } from '../../../constants';
 import { uniq, compact, flatMap } from 'lodash';
 
 export function createMachineEntity(data: Machine): Entity {
-  /**
-   * An input of ['6045BD8016FF', '000000000000'] would return ["60:45:bd:80:16:ff","60:45:BD:80:16:FF"]
-   */
-  const macAddress = uniq(
-    flatMap(
-      (data.ipAddresses ?? [])
-        .map((ip) => ip.macAddress)
-        .filter(isValidMacAddress),
-      formatValidMacAddress,
-    ),
-  ).filter((macAddress) => !macAddressesToFilter.includes(macAddress));
+  const macAddress = getValidMacAddresses(data);
 
   const ipAddress = compact(
     uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
@@ -69,14 +59,7 @@ export function createMachineEntity(data: Machine): Entity {
 }
 
 export function createEndpointEntity(data: Endpoint): Entity {
-  const macAddress = uniq(
-    flatMap(
-      (data.ipAddresses ?? [])
-        .map((ip) => ip.macAddress)
-        .filter(isValidMacAddress),
-      formatValidMacAddress,
-    ),
-  ).filter((macAddress) => !macAddressesToFilter.includes(macAddress));
+  const macAddress = getValidMacAddresses(data);
 
   const ipAddress = compact(
     uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
@@ -197,3 +180,28 @@ const ipAddressesToFilter = [
   '127.0.0.1', // localhost
   '::1', // localhost
 ];
+
+/**
+ * Filters and processes a list of IP addresses to extract valid MAC addresses.
+ *
+ * An input of ['6045BD8016FF', '000000000000'] would return ["60:45:bd:80:16:ff","60:45:BD:80:16:FF"]
+ */
+function getValidMacAddresses(data: {
+  ipAddresses?: IpAddress[];
+  lastIpAddress?: string;
+}): string[] {
+  return uniq(
+    flatMap(
+      (data.ipAddresses ?? [])
+        .filter(
+          (ip) =>
+            ip.ipAddress == data.lastIpAddress &&
+            ip.operationalStatus == 'Up' && // Ignore macAddresses that are inactive.
+            ip.type != 'SoftwareLoopback', // Used for localhost
+        )
+        .map((ip) => ip.macAddress)
+        .filter(isValidMacAddress),
+      formatValidMacAddress,
+    ),
+  ).filter((mac: string) => !macAddressesToFilter.includes(mac));
+}
