@@ -103,12 +103,7 @@ export interface Endpoint {
   osArchitecture: string;
   managedBy: string;
   managedByStatus: string;
-  ipAddresses: {
-    ipAddress: string;
-    macAddress: string;
-    type: string;
-    operationalStatus: string;
-  }[];
+  ipAddresses?: IpAddress[];
   vmMetadata?: {
     vmId: string;
     cloudProvider: string;
