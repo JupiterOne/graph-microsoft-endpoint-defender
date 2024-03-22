@@ -52,6 +52,7 @@
     "@jupiterone/integration-sdk-core": "^12.2.5",
     "@jupiterone/integration-sdk-dev-tools": "^12.2.5",
     "@jupiterone/integration-sdk-testing": "^12.2.5",
+    "@types/node": "^20.11.30",
     "auto": "^10.36.5"
   },
   "auto": {
