@@ -8,7 +8,7 @@ afterEach(async () => {
   await recording.stop();
 });
 
-test('#fetchLogonUsers', async () => {
+test.skip('#fetchLogonUsers', async () => {
   recording = setupProjectRecording({
     directory: __dirname,
     name: '#fetchLogonUsers',

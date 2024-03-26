@@ -2,7 +2,7 @@
   "extends": "./node_modules/@jupiterone/integration-sdk-dev-tools/config/typescript",
   "compilerOptions": {
     "outDir": "dist",
-    "lib": ["dom"] // Fix type check errors. Can't resolve DOM types on .d.ts files in dependencies.
+    "skipLibCheck": true
   },
   "exclude": ["dist"]
 }

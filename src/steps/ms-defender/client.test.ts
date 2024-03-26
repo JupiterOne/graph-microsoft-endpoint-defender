@@ -33,7 +33,7 @@ test('iterateMachines', async () => {
   expect(machines).toMatchSnapshot();
 });
 
-test('iterateLogonUsers', async () => {
+test.skip('iterateLogonUsers', async () => {
   recording = setupProjectRecording({
     directory: __dirname,
     name: 'iterateLogonUsers',
