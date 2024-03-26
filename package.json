@@ -40,10 +40,10 @@
     "postversion": "cp package.json ./dist/package.json"
   },
   "dependencies": {
-    "@azure/identity": "^2.1.0",
-    "@microsoft/microsoft-graph-client": "^3.0.7",
-    "@microsoft/microsoft-graph-types": "^1.10.0",
-    "isomorphic-fetch": "^3.0.0"
+    "@azure/identity": "^1.2.2",
+    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@microsoft/microsoft-graph-types": "^2.40.0",
+    "node-fetch": "2"
   },
   "peerDependencies": {
     "@jupiterone/integration-sdk-core": "^12.2.5"
@@ -53,7 +53,8 @@
     "@jupiterone/integration-sdk-dev-tools": "^12.2.5",
     "@jupiterone/integration-sdk-testing": "^12.2.5",
     "@types/node": "^20.11.30",
-    "auto": "^10.36.5"
+    "auto": "^10.36.5",
+    "@types/node-fetch": "^2.6.2"
   },
   "auto": {
     "plugins": [

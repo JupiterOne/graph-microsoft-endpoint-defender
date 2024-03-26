@@ -1,8 +1,10 @@
 import { Vulnerability, Machine, UserLogon } from '../../types';
 import { GraphClient } from '../../ms-graph/client';
+import { IntegrationLogger } from '@jupiterone/integration-sdk-core';
+import { ClientConfig } from '../../ms-graph/types';
 
 export class DefenderClient extends GraphClient {
-  constructor(logger, config) {
+  constructor(logger: IntegrationLogger, config: ClientConfig) {
     super(logger, { ...config, isDefenderApi: true });
   }
   BASE_URL_API: string = 'https://api.securitycenter.microsoft.com/api';

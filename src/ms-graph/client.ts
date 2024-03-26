@@ -6,16 +6,21 @@ import {
   IntegrationProviderAuthorizationError,
 } from '@jupiterone/integration-sdk-core';
 import {
+  AuthenticationHandler,
   AuthenticationProvider,
   AuthenticationProviderOptions,
   Client,
   GraphError,
-  ResponseType,
+  RedirectHandler,
+  RedirectHandlerOptions,
+  RetryHandler,
+  RetryHandlerOptions,
+  TelemetryHandler,
 } from '@microsoft/microsoft-graph-client';
-import 'isomorphic-fetch';
 
 import { ClientConfig } from './types';
 import { retry, sleep } from '@lifeomic/attempt';
+import { HTTPMessageHandler } from './middlewares/HTTPMessageHandler';
 
 export type QueryParams = string | { [key: string]: string | number };
 type GraphErrorExtended = GraphError & { headers?: Headers };
@@ -39,8 +44,27 @@ export class GraphClient {
     readonly config: ClientConfig,
   ) {
     this.client = Client.initWithMiddleware({
-      authProvider: new GraphAuthenticationProvider(config),
+      middleware: this.buildMiddleware(new GraphAuthenticationProvider(config)),
+      fetchOptions: {
+        timeout: 30000,
+      },
     });
+  }
+
+  private buildMiddleware(
+    authProvider: AuthenticationProvider,
+  ): AuthenticationHandler {
+    const authenticationHandler = new AuthenticationHandler(authProvider);
+    const retryHandler = new RetryHandler(new RetryHandlerOptions());
+    const telemetryHandler = new TelemetryHandler();
+    const httpMessageHandler = new HTTPMessageHandler();
+
+    authenticationHandler.setNext(retryHandler);
+    const redirectHandler = new RedirectHandler(new RedirectHandlerOptions());
+    retryHandler.setNext(redirectHandler);
+    redirectHandler.setNext(telemetryHandler);
+    telemetryHandler.setNext(httpMessageHandler);
+    return authenticationHandler;
   }
 
   public async verifyAuthentication(): Promise<void> {
@@ -224,16 +248,10 @@ export class GraphClient {
       api = api.query(query);
     }
 
-    const rawResponse = await api.responseType(ResponseType.RAW).get();
+    const response = await api.get();
 
-    if (rawResponse.ok) {
-      return await rawResponse.json();
-    } else {
-      const statusCode = rawResponse.status;
-      const gError: GraphErrorExtended = new GraphError(statusCode);
-      // Add headers to check Retry-After header.
-      gError.headers = rawResponse.headers;
-      throw gError;
+    if (response) {
+      return response;
     }
   }
 
