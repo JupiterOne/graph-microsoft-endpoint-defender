@@ -42,7 +42,7 @@
   "dependencies": {
     "@azure/identity": "^1.2.2",
     "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/microsoft-graph-types": "^2.40.0",
+    "@microsoft/microsoft-graph-types": "^2.24.0",
     "node-fetch": "2"
   },
   "peerDependencies": {
