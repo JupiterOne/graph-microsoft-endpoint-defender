@@ -195,7 +195,8 @@ function getValidMacAddresses(data: {
       (data.ipAddresses ?? [])
         .filter(
           (ip) =>
-            ip.ipAddress == data.lastIpAddress && ip.type != 'SoftwareLoopback', // Used for localhost
+            ip.ipAddress == data.lastIpAddress &&
+            (ip.type === null || ip.type != 'SoftwareLoopback'), // Used for localhost
         )
         .map((ip) => ip.macAddress)
         .filter(isValidMacAddress),
