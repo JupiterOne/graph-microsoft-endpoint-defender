@@ -109,7 +109,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.6.0.6",
       "lastSeenOn": 1706208356688,
       "macAddress": [
-        "00:0d:3a:9a:bb:3a",
         "00:0D:3A:9A:BB:3A",
       ],
       "machineTags": [],
@@ -238,7 +237,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.128.15.224",
       "lastSeenOn": 1701902822377,
       "macAddress": [
-        "42:01:0a:80:0f:e0",
         "42:01:0A:80:0F:E0",
       ],
       "machineTags": [],
@@ -391,7 +389,8 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.128.15.219",
       "lastSeenOn": 1711409279136,
       "macAddress": [
-        "42:01:0a:80:0f:db",
+        "02:D9:FC:17:FF:1E",
+        "02:42:F5:BB:D0:85",
         "42:01:0A:80:0F:DB",
       ],
       "machineTags": [],
@@ -520,7 +519,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.128.15.223",
       "lastSeenOn": 1711411488577,
       "macAddress": [
-        "42:01:0a:80:0f:df",
         "42:01:0A:80:0F:DF",
       ],
       "machineTags": [],
@@ -742,7 +740,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.6.0.6",
       "lastSeenOn": 1706206665859,
       "macAddress": [
-        "00:22:48:2c:26:8e",
         "00:22:48:2C:26:8E",
       ],
       "machineTags": [],
@@ -871,7 +868,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.6.0.8",
       "lastSeenOn": 1706282727089,
       "macAddress": [
-        "60:45:bd:d4:04:c5",
         "60:45:BD:D4:04:C5",
       ],
       "machineTags": [],
@@ -1000,7 +996,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.6.0.5",
       "lastSeenOn": 1706203914106,
       "macAddress": [
-        "60:45:bd:ee:34:02",
         "60:45:BD:EE:34:02",
       ],
       "machineTags": [],
@@ -1129,7 +1124,6 @@ exports[`#fetchEndpoints 1`] = `
       "lastIpAddress": "10.6.0.7",
       "lastSeenOn": 1706280795302,
       "macAddress": [
-        "00:22:48:1f:96:28",
         "00:22:48:1F:96:28",
       ],
       "machineTags": [],
@@ -1360,7 +1354,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1706208356688,
       "macAddress": [
-        "00:0d:3a:9a:bb:3a",
         "00:0D:3A:9A:BB:3A",
       ],
       "machineTags": [],
@@ -1469,7 +1462,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1701902822377,
       "macAddress": [
-        "42:01:0a:80:0f:e0",
         "42:01:0A:80:0F:E0",
       ],
       "machineTags": [],
@@ -1599,7 +1591,8 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1711409279136,
       "macAddress": [
-        "42:01:0a:80:0f:db",
+        "02:D9:FC:17:FF:1E",
+        "02:42:F5:BB:D0:85",
         "42:01:0A:80:0F:DB",
       ],
       "machineTags": [],
@@ -1708,7 +1701,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1711411488577,
       "macAddress": [
-        "42:01:0a:80:0f:df",
         "42:01:0A:80:0F:DF",
       ],
       "machineTags": [],
@@ -1895,7 +1887,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1706206665859,
       "macAddress": [
-        "00:22:48:2c:26:8e",
         "00:22:48:2C:26:8E",
       ],
       "machineTags": [],
@@ -2004,7 +1995,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1706282727089,
       "macAddress": [
-        "60:45:bd:d4:04:c5",
         "60:45:BD:D4:04:C5",
       ],
       "machineTags": [],
@@ -2113,7 +2103,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1706203914106,
       "macAddress": [
-        "60:45:bd:ee:34:02",
         "60:45:BD:EE:34:02",
       ],
       "machineTags": [],
@@ -2222,7 +2211,6 @@ exports[`#fetchMachines 1`] = `
       ],
       "lastSeenOn": 1706280795302,
       "macAddress": [
-        "00:22:48:1f:96:28",
         "00:22:48:1F:96:28",
       ],
       "machineTags": [],
