@@ -8,10 +8,10 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { Endpoint, IpAddress, Machine } from '../../../types';
 import { Entities } from '../../../constants';
-import { uniq, compact, flatMap } from 'lodash';
+import { uniq, compact } from 'lodash';
 
 export function createMachineEntity(data: Machine): Entity {
-  const macAddress = getValidMacAddresses(data);
+  const macAddress = extractUniquePublicMacAddresses(data.ipAddresses);
 
   const ipAddress = compact(
     uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
@@ -59,7 +59,7 @@ export function createMachineEntity(data: Machine): Entity {
 }
 
 export function createEndpointEntity(data: Endpoint): Entity {
-  const macAddress = getValidMacAddresses(data);
+  const macAddress = extractUniquePublicMacAddresses(data.ipAddresses);
 
   const ipAddress = compact(
     uniq((data.ipAddresses ?? []).map((ip) => ip.ipAddress)),
@@ -149,6 +149,43 @@ export function createMachineEndpointRelationship({
 }
 
 /**
+ * Extracts unique MAC addresses from a list of IP address objects, filtering out
+ * internal (private) IPs and ignoring SoftwareLoopback types.
+ *
+ * Private IP ranges:
+ * - 10.0.0.0 to 10.255.255.255
+ * - 172.16.0.0 to 172.31.255.255
+ * - 192.168.0.0 to 192.168.255.255
+ */
+export function extractUniquePublicMacAddresses(
+  ipAddresses?: IpAddress[],
+): string[] {
+  const uniqueMacAddresses = new Set<string>(); // Using a Set to ensure uniqueness
+
+  ipAddresses?.forEach(({ ipAddress, macAddress, type }) => {
+    // Ignore loopback addresses and entries without a MAC address
+    if (type === 'SoftwareLoopback' || macAddress === null) return;
+
+    // Check if the IP is a private IP and ignore MACs if they are
+    if (
+      /^10\./.test(ipAddress) || // Matches 10.x.x.x
+      /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(ipAddress) || // Matches 172.16.x.x to 172.31.x.x
+      /^192\.168\./.test(ipAddress) || // Matches 192.168.x.x
+      /^169\.254\./.test(ipAddress) // Matches 169.254.x.x (APIPA)
+    ) {
+      return;
+    }
+
+    uniqueMacAddresses.add(macAddress);
+  });
+
+  return Array.from(uniqueMacAddresses)
+    .filter(isValidMacAddress)
+    .map(formatValidMacAddress)
+    .filter((mac) => !macAddressesToFilter.includes(mac));
+}
+
+/**
  * Legal macAddresses
  * "00:1B:44:11:3A:B7";
  * "00:1b:44:11:3a:b7";
@@ -168,10 +205,7 @@ const formatValidMacAddress = (macAddress: string) => {
     /([0-9A-Fa-f]{2})(?=[0-9A-Fa-f]{2})/g,
     '$1:',
   );
-  return [
-    formattedMacAddress.toLowerCase(), // Lowercase to match the macAddress of aws_ami(s)..
-    formattedMacAddress.toUpperCase(), // Uppercase because that is the industry standard thus making J1QL easier.
-  ];
+  return formattedMacAddress.toUpperCase(); // Uppercase because that is the industry standard thus making J1QL easier.
 };
 const macAddressesToFilter = [
   '00:00:00:00:00:00', // default macAddress
@@ -180,26 +214,3 @@ const ipAddressesToFilter = [
   '127.0.0.1', // localhost
   '::1', // localhost
 ];
-
-/**
- * Filters and processes a list of IP addresses to extract valid MAC addresses.
- *
- * An input of ['6045BD8016FF', '000000000000'] would return ["60:45:bd:80:16:ff","60:45:BD:80:16:FF"]
- */
-function getValidMacAddresses(data: {
-  ipAddresses?: IpAddress[];
-  lastIpAddress?: string;
-}): string[] {
-  return uniq(
-    flatMap(
-      (data.ipAddresses ?? [])
-        .filter(
-          (ip) =>
-            ip.ipAddress == data.lastIpAddress && ip.type != 'SoftwareLoopback', // Used for localhost
-        )
-        .map((ip) => ip.macAddress)
-        .filter(isValidMacAddress),
-      formatValidMacAddress,
-    ),
-  ).filter((mac: string) => !macAddressesToFilter.includes(mac));
-}
