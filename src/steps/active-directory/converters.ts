@@ -8,6 +8,7 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { Organization, User } from '@microsoft/microsoft-graph-types';
 import { Entities } from '../../constants';
+import { assignAccount, assignUser } from '../../entities';
 
 export function createAccountEntityWithOrganization(
   instance: IntegrationInstance,
@@ -26,17 +27,16 @@ export function createAccountEntityWithOrganization(
       source: {
         organization,
       },
-      assign: {
-        _class: Entities.ACCOUNT._class,
+      assign: assignAccount({
         _key: `${Entities.ACCOUNT._type}:${instance.id}`,
-        _type: Entities.ACCOUNT._type,
         id: organization.id,
-        name: organization.displayName,
+        name: organization.displayName ?? instance.name,
         displayName: instance.name,
         organizationName: organization.displayName,
         defaultDomain,
         verifiedDomains,
-      },
+        vendor: 'Microsoft Defender',
+      }),
     },
   });
 }
@@ -45,13 +45,11 @@ export function createUserEntity(data: User): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
-      assign: {
-        _class: Entities.USER._class,
-        _type: Entities.USER._type,
+      assign: assignUser({
         _key: `${Entities.USER._type}:${data.id}`,
         id: data.id,
         name: data.displayName || '',
-        username: data.userPrincipalName,
+        username: data.userPrincipalName || '',
         businessPhones: data.businessPhones,
         displayName: data.displayName || '',
         givenName: data.givenName,
@@ -63,7 +61,7 @@ export function createUserEntity(data: User): Entity {
         surname: data.surname,
         userPrincipalName: data.userPrincipalName,
         active: true,
-      },
+      }),
     },
   });
 }

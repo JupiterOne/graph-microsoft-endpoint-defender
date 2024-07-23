@@ -4,20 +4,12 @@ import {
 } from './converters';
 import { getMockMachine } from '../../../../test/mocks';
 import { IpAddress } from '../../../types';
+import { MACHINE_ENTITY } from '../../../entities';
 
 test('#createMachineEntity', () => {
-  expect(createMachineEntity(getMockMachine())).toMatchGraphObjectSchema({
-    _class: ['HostAgent'],
-    schema: {
-      properties: {
-        _type: { const: 'microsoft_defender_machine' },
-        _rawData: {
-          type: 'array',
-          items: { type: 'object' },
-        },
-      },
-    },
-  });
+  expect(createMachineEntity(getMockMachine())).toMatchGraphObjectSchema(
+    MACHINE_ENTITY,
+  );
 });
 
 describe('extractUniquePublicMacAddresses Tests', () => {

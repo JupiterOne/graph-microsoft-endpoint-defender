@@ -8,6 +8,7 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { UserLogon } from '../../../types';
 import { Entities } from '../../../constants';
+import { assignLogonUser } from '../../../entities';
 
 export function createLogonUserEntityKey(data: UserLogon): string {
   return `${Entities.LOGON_USER._type}:${data.id}`;
@@ -22,10 +23,8 @@ export function createLogonUserEntity(data: UserLogon): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
-      assign: {
+      assign: assignLogonUser({
         _key: createLogonUserEntityKey(data),
-        _class: Entities.LOGON_USER._class,
-        _type: Entities.LOGON_USER._type,
         id: data.id,
         name: data.accountName,
         domain: data.accountDomain,
@@ -35,7 +34,7 @@ export function createLogonUserEntity(data: UserLogon): Entity {
         lastSeenOn: parseTimePropertyValue(data.lastSeen),
         logonTypes: data.logonTypes,
         active: true,
-      },
+      }),
     },
   });
 }

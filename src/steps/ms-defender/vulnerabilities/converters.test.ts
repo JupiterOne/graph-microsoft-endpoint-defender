@@ -1,19 +1,9 @@
 import { createVulnerabilityEntity } from './converters';
 import { getMockVulnerability } from '../../../../test/mocks';
+import { VULNERABILITY_ENTITY } from '../../../entities';
 
 test('#createVulnerabilityEntity', () => {
   expect(
     createVulnerabilityEntity(getMockVulnerability()),
-  ).toMatchGraphObjectSchema({
-    _class: ['Finding'],
-    schema: {
-      properties: {
-        _type: { const: 'microsoft_defender_vulnerability' },
-        _rawData: {
-          type: 'array',
-          items: { type: 'object' },
-        },
-      },
-    },
-  });
+  ).toMatchGraphObjectSchema(VULNERABILITY_ENTITY);
 });
