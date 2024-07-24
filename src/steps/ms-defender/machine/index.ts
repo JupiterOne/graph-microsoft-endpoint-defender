@@ -1,7 +1,6 @@
 import {
   Entity,
   getRawData,
-  IntegrationError,
   IntegrationStepExecutionContext,
   Step,
 } from '@jupiterone/integration-sdk-core';
@@ -33,13 +32,19 @@ export async function fetchMachines({
   )) as Entity;
 
   await graphClient.iterateMachines(async (machine) => {
-    const machineEntity = await jobState.addEntity(
-      createMachineEntity(machine),
-    );
+    const machineEntity = createMachineEntity(machine);
 
-    await jobState.addRelationship(
-      createAccountMachineRelationship({ accountEntity, machineEntity }),
-    );
+    if (jobState.hasKey(machineEntity._key)) return;
+
+    const accountMachineRelationship = createAccountMachineRelationship({
+      accountEntity,
+      machineEntity,
+    });
+
+    await Promise.all([
+      jobState.addEntity(machineEntity),
+      jobState.addRelationship(accountMachineRelationship),
+    ]);
   });
 }
 
@@ -90,8 +95,7 @@ export async function fetchEndpoints({
   );
 
   if (numFailedEndpointDetails > 0) {
-    // Should this be a user notification instead of an error?
-    throw new IntegrationError({
+    logger.warn({
       message: `Unable to fetch all machine endpoint details (success=${numSuccessfulEndpointDetails}, failed=${numFailedEndpointDetails})`,
       code: 'ERROR_FETCH_ENDPOINT_DETAILS',
     });
