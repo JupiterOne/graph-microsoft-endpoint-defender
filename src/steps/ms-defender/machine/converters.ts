@@ -9,6 +9,7 @@ import {
 import { Endpoint, IpAddress, Machine } from '../../../types';
 import { Entities } from '../../../constants';
 import { uniq, compact } from 'lodash';
+import { assignEndpoint, assignMachine } from '../../../entities';
 
 export function createMachineEntity(data: Machine): Entity {
   const macAddress = extractUniquePublicMacAddresses(data.ipAddresses);
@@ -19,13 +20,11 @@ export function createMachineEntity(data: Machine): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
-      assign: {
-        _class: Entities.MACHINE._class,
-        _type: Entities.MACHINE._type,
+      assign: assignMachine({
         _key: `${Entities.MACHINE._type}:${data.id}`,
         id: data.id,
         firstSeenOn: parseTimePropertyValue(data.firstSeen),
-        lastSeenOn: parseTimePropertyValue(data.lastSeen),
+        lastSeenOn: parseTimePropertyValue(data.lastSeen) ?? null,
         agentVersion: data.agentVersion,
         defenderAvStatus: data.defenderAvStatus,
         riskScore: data.riskScore,
@@ -53,7 +52,7 @@ export function createMachineEntity(data: Machine): Entity {
           'vulnerability-detection',
           'container-security',
         ],
-      },
+      }),
     },
   });
 }
@@ -67,9 +66,7 @@ export function createEndpointEntity(data: Endpoint): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
-      assign: {
-        _class: Entities.ENDPOINT._class,
-        _type: Entities.ENDPOINT._type,
+      assign: assignEndpoint({
         _key: `${Entities.ENDPOINT._type}.${data.id}`,
         id: data.id,
         name:
@@ -78,7 +75,7 @@ export function createEndpointEntity(data: Endpoint): Entity {
           `${data.managedBy || 'Unknown User'}'s Device`,
         computerDnsName: data.computerDnsName,
         firstSeenOn: parseTimePropertyValue(data.firstSeen),
-        lastSeenOn: parseTimePropertyValue(data.lastSeen),
+        lastSeenOn: parseTimePropertyValue(data.lastSeen) ?? null,
         osPlatform: data.osPlatform,
         osVersion: data.osVersion || undefined,
         osProcessor: data.osProcessor || undefined,
@@ -115,7 +112,7 @@ export function createEndpointEntity(data: Endpoint): Entity {
         model: null,
         serial: null,
         deviceId: data.id,
-      },
+      }),
     },
   });
 }

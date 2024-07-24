@@ -10,6 +10,7 @@ import {
 
 import { Vulnerability } from '../../../types';
 import { Entities, MappedRelationships } from '../../../constants';
+import { assignVulnerability } from '../../../entities';
 
 export function createVulnerabilityKey(id: string): string {
   return `${Entities.VULNERABILITY._type}:${id}`;
@@ -19,10 +20,8 @@ export function createVulnerabilityEntity(data: Vulnerability): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
-      assign: {
+      assign: assignVulnerability({
         id: data.id,
-        _type: Entities.VULNERABILITY._type,
-        _class: Entities.VULNERABILITY._class,
         _key: createVulnerabilityKey(data.id),
         name: data.name,
         displayName: data.name,
@@ -39,7 +38,7 @@ export function createVulnerabilityEntity(data: Vulnerability): Entity {
         production: false,
         public: data.publicExploit,
         numericSeverity: data.cvssV3,
-      },
+      }),
     },
   });
 }

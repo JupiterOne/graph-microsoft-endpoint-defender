@@ -75,6 +75,7 @@ exports[`#fetchAccount 1`] = `
       "id": "19ae0f99-6fc6-444b-bd54-97504efc66ad",
       "name": "JupiterOne Azure Integration Development",
       "organizationName": "JupiterOne Azure Integration Development",
+      "vendor": "Microsoft Defender",
       "verifiedDomains": [
         "j1AzureIntegrationDev.onmicrosoft.com",
       ],
@@ -153,6 +154,7 @@ exports[`#fetchAccount 1`] = `
       "id": "19ae0f99-6fc6-444b-bd54-97504efc66ad",
       "name": "JupiterOne Azure Integration Development",
       "organizationName": "JupiterOne Azure Integration Development",
+      "vendor": "Microsoft Defender",
       "verifiedDomains": [
         "j1AzureIntegrationDev.onmicrosoft.com",
       ],

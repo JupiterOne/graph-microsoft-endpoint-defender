@@ -7,6 +7,7 @@ import {
   getMockOrganization,
   getMockUser,
 } from '../../../test/mocks';
+import { ACCOUNT_ENTITY, USER_ENTITY } from '../../entities';
 
 test('#createAccountEntityWithOrganization', () => {
   expect(
@@ -14,31 +15,9 @@ test('#createAccountEntityWithOrganization', () => {
       getMockInstance(),
       getMockOrganization(),
     ),
-  ).toMatchGraphObjectSchema({
-    _class: ['Account'],
-    schema: {
-      properties: {
-        _type: { const: 'microsoft_defender_account' },
-        _rawData: {
-          type: 'array',
-          items: { type: 'object' },
-        },
-      },
-    },
-  });
+  ).toMatchGraphObjectSchema(ACCOUNT_ENTITY);
 });
 
 test('#createUserEntity', () => {
-  expect(createUserEntity(getMockUser())).toMatchGraphObjectSchema({
-    _class: ['User'],
-    schema: {
-      properties: {
-        _type: { const: 'microsoft_defender_user' },
-        _rawData: {
-          type: 'array',
-          items: { type: 'object' },
-        },
-      },
-    },
-  });
+  expect(createUserEntity(getMockUser())).toMatchGraphObjectSchema(USER_ENTITY);
 });

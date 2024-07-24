@@ -5,6 +5,14 @@ import {
   StepMappedRelationshipMetadata,
   StepRelationshipMetadata,
 } from '@jupiterone/integration-sdk-core';
+import {
+  ACCOUNT_ENTITY,
+  ENDPOINT_ENTITY,
+  LOGON_USER_ENTITY,
+  MACHINE_ENTITY,
+  USER_ENTITY,
+  VULNERABILITY_ENTITY,
+} from './entities';
 
 export const Steps: Record<
   | 'FETCH_ACCOUNT'
@@ -38,36 +46,12 @@ export const Entities: Record<
   'ACCOUNT' | 'MACHINE' | 'LOGON_USER' | 'USER' | 'VULNERABILITY' | 'ENDPOINT',
   StepEntityMetadata
 > = {
-  ACCOUNT: {
-    resourceName: 'Account',
-    _type: 'microsoft_defender_account',
-    _class: ['Account'],
-  },
-  MACHINE: {
-    resourceName: 'Machine',
-    _type: 'microsoft_defender_machine',
-    _class: ['HostAgent'],
-  },
-  LOGON_USER: {
-    resourceName: 'Logon User',
-    _type: 'microsoft_defender_logon_user',
-    _class: ['User'],
-  },
-  USER: {
-    resourceName: 'User',
-    _type: 'microsoft_defender_user',
-    _class: ['User'],
-  },
-  VULNERABILITY: {
-    resourceName: 'Vulnerability',
-    _type: 'microsoft_defender_vulnerability',
-    _class: ['Finding'],
-  },
-  ENDPOINT: {
-    resourceName: 'Device/Machine/Host',
-    _type: 'user_endpoint',
-    _class: ['Device'],
-  },
+  ACCOUNT: ACCOUNT_ENTITY,
+  MACHINE: MACHINE_ENTITY,
+  LOGON_USER: LOGON_USER_ENTITY,
+  USER: USER_ENTITY,
+  VULNERABILITY: VULNERABILITY_ENTITY,
+  ENDPOINT: ENDPOINT_ENTITY,
 };
 
 export const Relationships: Record<

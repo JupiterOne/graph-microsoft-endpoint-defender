@@ -45,13 +45,10 @@
     "@microsoft/microsoft-graph-types": "^2.24.0",
     "node-fetch": "2"
   },
-  "peerDependencies": {
-    "@jupiterone/integration-sdk-core": "^12.2.5"
-  },
   "devDependencies": {
-    "@jupiterone/integration-sdk-core": "^12.2.5",
-    "@jupiterone/integration-sdk-dev-tools": "^12.2.5",
-    "@jupiterone/integration-sdk-testing": "^12.2.5",
+    "@jupiterone/integration-sdk-core": "^13.2.0",
+    "@jupiterone/integration-sdk-dev-tools": "^13.2.0",
+    "@jupiterone/integration-sdk-testing": "^13.2.0",
     "@types/node": "^20.11.30",
     "auto": "^10.36.5",
     "@types/node-fetch": "^2.6.2"
