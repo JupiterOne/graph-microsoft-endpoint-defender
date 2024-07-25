@@ -73,7 +73,7 @@ export async function fetchEndpoints({
         const endpoint = await graphClient.fetchEndpointDetails(machine.id);
         if (endpoint) {
           const endpointEntity = createEndpointEntity(endpoint);
-          
+
           if (jobState.hasKey(endpoint._key)) return;
 
           await jobState.addEntity(endpointEntity);
