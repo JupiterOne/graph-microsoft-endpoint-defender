@@ -86,3 +86,24 @@ test('iterateVulnerabilities', async () => {
   expect(vulnerabilities.length).toBeGreaterThan(0);
   expect(vulnerabilities).toMatchSnapshot();
 });
+
+test('iterateMachinesPagination', async () => {
+  recording = setupProjectRecording({
+    directory: __dirname,
+    name: 'iterateMachines_pagination',
+  });
+
+  const client = new DefenderClient(
+    createMockIntegrationLogger(),
+    integrationConfig,
+  );
+  let spy = jest.spyOn(client as any, 'callApiWithRetry')
+  const machines: Machine[] = [];
+  await client.iterateMachines((machine) => {
+    machines.push(machine);
+  }, 1);
+
+  expect(machines.length).toBeGreaterThan(0);
+  expect(machines).toMatchSnapshot();
+  expect(spy.mock.calls).toHaveLength(machines.length + 1)
+},500_000);
