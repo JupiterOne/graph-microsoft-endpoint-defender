@@ -97,7 +97,7 @@ test('iterateMachinesPagination', async () => {
     createMockIntegrationLogger(),
     integrationConfig,
   );
-  let spy = jest.spyOn(client as any, 'callApiWithRetry')
+  let spy = jest.spyOn(client as any, 'callApiWithRetry');
   const machines: Machine[] = [];
   await client.iterateMachines((machine) => {
     machines.push(machine);
@@ -105,5 +105,5 @@ test('iterateMachinesPagination', async () => {
 
   expect(machines.length).toBeGreaterThan(0);
   expect(machines).toMatchSnapshot();
-  expect(spy.mock.calls).toHaveLength(machines.length + 1)
-},500_000);
+  expect(spy.mock.calls).toHaveLength(machines.length + 1);
+}, 500_000);
