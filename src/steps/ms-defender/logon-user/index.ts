@@ -36,12 +36,12 @@ export async function fetchLogonUsers({
         { machineId: machine.id },
         async (logonUser) => {
           const logonUserEntityKey = createLogonUserEntityKey(logonUser);
-          let logonUserEntity = await jobState.findEntity(logonUserEntityKey);
-          if (!logonUserEntity) {
-            logonUserEntity = await jobState.addEntity(
-              createLogonUserEntity(logonUser),
-            );
-          }
+
+          if (jobState.hasKey(logonUserEntityKey)) return;
+
+          const logonUserEntity = await jobState.addEntity(
+            createLogonUserEntity(logonUser),
+          );
 
           const machineLogonUserRelationship =
             createMachineLogonUserRelationship({

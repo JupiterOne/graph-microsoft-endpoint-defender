@@ -25,7 +25,7 @@ import { HTTPMessageHandler } from './middlewares/HTTPMessageHandler';
 export type QueryParams = string | { [key: string]: string | number };
 type GraphErrorExtended = GraphError & { headers?: Headers };
 
-interface GraphClientResponse<T> {
+export interface GraphClientResponse<T> {
   value: T[];
   '@odata.nextLink'?: string;
 }
