@@ -3,7 +3,7 @@ import { GraphClient, GraphClientResponse } from '../../ms-graph/client';
 import { IntegrationLogger } from '@jupiterone/integration-sdk-core';
 import { ClientConfig } from '../../ms-graph/types';
 
-const ITEMS_PER_PAGE = 200;
+const ITEMS_PER_PAGE = 500;
 export class DefenderClient extends GraphClient {
   constructor(logger: IntegrationLogger, config: ClientConfig) {
     super(logger, { ...config, isDefenderApi: true });
@@ -68,7 +68,7 @@ export class DefenderClient extends GraphClient {
   private async iterateSecurityResource<T>({
     resourceUrl,
     callback,
-    limit = 50,
+    limit = ITEMS_PER_PAGE,
   }: {
     resourceUrl: string;
     callback: (item: T) => void | Promise<void>;

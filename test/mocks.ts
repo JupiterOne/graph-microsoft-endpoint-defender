@@ -137,6 +137,7 @@ export function getMockMachine(): Machine {
     lastSeen: '2022-05-19T08:38:59.1749659Z',
     osPlatform: 'Windows10',
     osVersion: null,
+    name: 'machineName',
     osProcessor: 'x64',
     version: '21H1',
     lastIpAddress: '10.1.1.68',

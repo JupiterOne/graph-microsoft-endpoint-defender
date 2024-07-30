@@ -13,7 +13,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123032.19864.0",
             "computerDnsName": "VM1.oipfwnijg2hexlv4f1mw1ugjgg.bx.internal.cloudapp.net",
@@ -141,7 +140,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123102.3.0",
             "computerDnsName": "gaston-ivm-test.us-central1-a.c.j1-gc-integration-dev-v3.internal",
@@ -269,7 +267,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.124012.1.0",
             "computerDnsName": "sonarqube.us-central1-a.c.j1-gc-integration-dev-v3.internal",
@@ -423,7 +420,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123062.10.0",
             "computerDnsName": "instance-1.us-central1-a.c.j1-gc-integration-dev-v3.internal",
@@ -551,7 +547,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "10.8560.20348.1906",
             "computerDnsName": "int-cmdc01.contoso.com",
@@ -644,7 +639,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123032.19864.0",
             "computerDnsName": "gonzalo.oipfwnijg2hexlv4f1mw1ugjgg.bx.internal.cloudapp.net",
@@ -772,7 +766,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123032.19864.0",
             "computerDnsName": "VMfromsharedimage.oipfwnijg2hexlv4f1mw1ugjgg.bx.internal.cloudapp.net",
@@ -900,7 +893,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123032.19864.0",
             "computerDnsName": "fromImage.oipfwnijg2hexlv4f1mw1ugjgg.bx.internal.cloudapp.net",
@@ -1028,7 +1020,6 @@ exports[`#fetchEndpoints 1`] = `
         {
           "name": "default",
           "rawData": {
-            "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines/$entity",
             "aadDeviceId": null,
             "agentVersion": "30.123032.19864.0",
             "computerDnsName": "VMFromImage.oipfwnijg2hexlv4f1mw1ugjgg.bx.internal.cloudapp.net",
