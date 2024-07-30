@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-microsoft-endpoint-defender",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "description": "A JupiterOne Integration for Microsoft Defender for Endpoint",
   "repository": {
     "type": "git",
