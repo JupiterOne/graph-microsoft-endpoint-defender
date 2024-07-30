@@ -6,7 +6,7 @@ import {
   RelationshipClass,
   parseTimePropertyValue,
 } from '@jupiterone/integration-sdk-core';
-import { Endpoint, IpAddress, Machine } from '../../../types';
+import { IpAddress, Machine } from '../../../types';
 import { Entities } from '../../../constants';
 import { uniq, compact } from 'lodash';
 import { assignEndpoint, assignMachine } from '../../../entities';
@@ -57,7 +57,7 @@ export function createMachineEntity(data: Machine): Entity {
   });
 }
 
-export function createEndpointEntity(data: Endpoint): Entity {
+export function createEndpointEntity(data: Machine): Entity {
   const macAddress = extractUniquePublicMacAddresses(data.ipAddresses);
 
   const ipAddress = compact(

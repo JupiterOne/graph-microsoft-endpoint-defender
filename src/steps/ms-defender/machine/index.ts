@@ -53,7 +53,6 @@ export async function fetchEndpoints({
   jobState,
   logger,
 }: IntegrationStepContext): Promise<void> {
-  const graphClient = new DefenderClient(logger, instance.config);
   let numFailedEndpointDetails: number = 0;
   let numSuccessfulEndpointDetails: number = 0;
   await jobState.iterateEntities(
@@ -70,11 +69,9 @@ export async function fetchEndpoints({
       }
 
       try {
-        const endpoint = await graphClient.fetchEndpointDetails(machine.id);
-        if (endpoint) {
-          const endpointEntity = createEndpointEntity(endpoint);
+          const endpointEntity = createEndpointEntity(machine);
 
-          if (jobState.hasKey(endpoint._key)) return;
+          if (jobState.hasKey(endpointEntity._key)) return;
 
           await jobState.addEntity(endpointEntity);
 
@@ -85,11 +82,10 @@ export async function fetchEndpoints({
             }),
           );
           numSuccessfulEndpointDetails++;
-        }
       } catch (err) {
         logger.warn(
-          { err },
-          `Could not get endpoint details for machine entity ${machine.id}`,
+          { err , machineId:  machine.id},
+          `Could not create endpoint entity`,
         );
         numFailedEndpointDetails++;
       }
@@ -98,7 +94,7 @@ export async function fetchEndpoints({
 
   if (numFailedEndpointDetails > 0) {
     logger.warn({
-      message: `Unable to fetch all machine endpoint details (success=${numSuccessfulEndpointDetails}, failed=${numFailedEndpointDetails})`,
+      message: `Unable to create all machine endpoint details (success=${numSuccessfulEndpointDetails}, failed=${numFailedEndpointDetails})`,
       code: 'ERROR_FETCH_ENDPOINT_DETAILS',
     });
   }
