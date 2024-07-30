@@ -69,22 +69,22 @@ export async function fetchEndpoints({
       }
 
       try {
-          const endpointEntity = createEndpointEntity(machine);
+        const endpointEntity = createEndpointEntity(machine);
 
-          if (jobState.hasKey(endpointEntity._key)) return;
+        if (jobState.hasKey(endpointEntity._key)) return;
 
-          await jobState.addEntity(endpointEntity);
+        await jobState.addEntity(endpointEntity);
 
-          await jobState.addRelationship(
-            createMachineEndpointRelationship({
-              machineEntity,
-              endpointEntity,
-            }),
-          );
-          numSuccessfulEndpointDetails++;
+        await jobState.addRelationship(
+          createMachineEndpointRelationship({
+            machineEntity,
+            endpointEntity,
+          }),
+        );
+        numSuccessfulEndpointDetails++;
       } catch (err) {
         logger.warn(
-          { err , machineId:  machine.id},
+          { err, machineId: machine.id },
           `Could not create endpoint entity`,
         );
         numFailedEndpointDetails++;
