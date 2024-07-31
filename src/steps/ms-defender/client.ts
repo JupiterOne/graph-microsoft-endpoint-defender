@@ -3,7 +3,7 @@ import { GraphClient, GraphClientResponse } from '../../ms-graph/client';
 import { IntegrationLogger } from '@jupiterone/integration-sdk-core';
 import { ClientConfig } from '../../ms-graph/types';
 
-const ITEMS_PER_PAGE = 500;
+const ITEMS_PER_PAGE = 750;
 export class DefenderClient extends GraphClient {
   constructor(logger: IntegrationLogger, config: ClientConfig) {
     super(logger, { ...config, isDefenderApi: true });

@@ -17,7 +17,6 @@ import {
   createVulnerabilityCveRelationship,
   createVulnerabilityEntity,
   createMachineVulnerabilityRelationship,
-  createVulnerabilityKey,
 } from './converters';
 
 export async function fetchFindings({
@@ -44,10 +43,9 @@ export async function fetchFindings({
         async (finding) => {
           const findingEntity = createVulnerabilityEntity(finding);
 
-          if (!jobState.hasKey(createVulnerabilityKey(finding.id))) {
-            await jobState.addEntity(findingEntity);
-          }
+          if (jobState.hasKey(findingEntity._key)) return;
 
+          await jobState.addEntity(findingEntity);
           await jobState.addRelationship(
             createMachineVulnerabilityRelationship({
               machineEntity,
