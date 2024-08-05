@@ -174,14 +174,12 @@ export class GraphClient {
   ): Promise<GraphClientResponse<T> | undefined> {
     return retry(() => this.callApi<T>({ link, query }), {
       maxAttempts: 3,
-      delay: 30_000,
+      delay: 15_000,
       timeout: 360_000,
       factor: 2,
       handleError: async (error: GraphErrorExtended, attemptContext) => {
-        // We should only abort on errors that aren't recoverable.  Some endpoints
-        // have peroidically returned 404 - Not Found errors and have had success
-        // on subsequent attempts.
-        if ([403, 401].includes(error.statusCode)) {
+        // Retrying 404 is expensive, for resources we are not sure exist. Stop retrying.
+        if ([404, 403, 401].includes(error.statusCode)) {
           attemptContext.abort();
         }
 
