@@ -5,7 +5,12 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { IntegrationConfig, IntegrationStepContext } from '../../../config';
 import { DefenderClient } from '../client';
-import { Entities, INGESTION_SOURCE_IDS, Relationships, Steps } from '../../../constants';
+import {
+  Entities,
+  INGESTION_SOURCE_IDS,
+  Relationships,
+  Steps,
+} from '../../../constants';
 import {
   createLogonUserEntity,
   createLogonUserEntityKey,
