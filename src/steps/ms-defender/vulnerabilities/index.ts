@@ -9,6 +9,7 @@ import { Vulnerability, Machine } from '../../../types';
 import { DefenderClient } from '../client';
 import {
   Entities,
+  INGESTION_SOURCE_IDS,
   MappedRelationships,
   Relationships,
   Steps,
@@ -90,6 +91,7 @@ export const vulnerabilitiesSteps: Step<
     entities: [Entities.VULNERABILITY],
     relationships: [Relationships.MACHINE_IDENTIFIED_VULNERABILITY],
     dependsOn: [Steps.FETCH_MACHINES.id],
+    ingestionSourceId: INGESTION_SOURCE_IDS.VULNERABILITIES,
     executionHandler: fetchFindings,
   },
   {

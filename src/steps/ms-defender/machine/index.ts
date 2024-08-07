@@ -9,6 +9,7 @@ import { DefenderClient } from '../client';
 import {
   ACCOUNT_ENTITY_KEY,
   Entities,
+  INGESTION_SOURCE_IDS,
   Relationships,
   Steps,
 } from '../../../constants';
@@ -109,6 +110,7 @@ export const machineSteps: Step<
     entities: [Entities.MACHINE],
     relationships: [Relationships.ACCOUNT_HAS_MACHINE],
     dependsOn: [Steps.FETCH_ACCOUNT.id],
+    ingestionSourceId: INGESTION_SOURCE_IDS.MACHINES,
     executionHandler: fetchMachines,
   },
   {
