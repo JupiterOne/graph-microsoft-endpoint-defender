@@ -5,7 +5,12 @@ import {
 } from '@jupiterone/integration-sdk-core';
 import { IntegrationConfig, IntegrationStepContext } from '../../../config';
 import { DefenderClient } from '../client';
-import { Entities, Relationships, Steps } from '../../../constants';
+import {
+  Entities,
+  INGESTION_SOURCE_IDS,
+  Relationships,
+  Steps,
+} from '../../../constants';
 import {
   createLogonUserEntity,
   createLogonUserEntityKey,
@@ -66,6 +71,7 @@ export const logonUserSteps: Step<
     entities: [Entities.LOGON_USER],
     relationships: [Relationships.MACHINE_HAS_LOGON_USER],
     dependsOn: [Steps.FETCH_MACHINES.id],
+    ingestionSourceId: INGESTION_SOURCE_IDS.LOGON_USERS,
     executionHandler: fetchLogonUsers,
   },
 ];

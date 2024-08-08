@@ -14,6 +14,13 @@ import {
   VULNERABILITY_ENTITY,
 } from './entities';
 
+export const INGESTION_SOURCE_IDS = {
+  USERS: 'users',
+  MACHINES: 'machines',
+  LOGON_USERS: 'logon_users',
+  VULNERABILITIES: 'vulnerabilities',
+};
+
 export const Steps: Record<
   | 'FETCH_ACCOUNT'
   | 'FETCH_MACHINES'

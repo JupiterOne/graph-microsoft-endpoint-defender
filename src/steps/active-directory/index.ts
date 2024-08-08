@@ -7,6 +7,7 @@ import { IntegrationConfig, IntegrationStepContext } from '../../config';
 import {
   ACCOUNT_ENTITY_KEY,
   Entities,
+  INGESTION_SOURCE_IDS,
   Relationships,
   Steps,
 } from '../../constants';
@@ -69,6 +70,7 @@ export const activeDirectorySteps: Step<
     entities: [Entities.USER],
     relationships: [Relationships.ACCOUNT_HAS_USER],
     dependsOn: [Steps.FETCH_ACCOUNT.id],
+    ingestionSourceId: INGESTION_SOURCE_IDS.USERS,
     executionHandler: fetchUsers,
   },
 ];
