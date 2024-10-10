@@ -25,7 +25,7 @@ describe('verifyAuthentication', () => {
     });
 
     await expect(client.verifyAuthentication()).rejects.toThrow(
-      'Provider authentication failed at /organization: -1 AuthenticationError',
+      'Provider authentication failed at /organization: -1 AuthenticationRequiredError',
     );
   });
 
@@ -43,7 +43,7 @@ describe('verifyAuthentication', () => {
     });
 
     await expect(client.verifyAuthentication()).rejects.toThrow(
-      'Provider authentication failed at /organization: -1 AuthenticationError',
+      'Provider authentication failed at /organization: -1 AuthenticationRequiredError',
     );
   });
 });
